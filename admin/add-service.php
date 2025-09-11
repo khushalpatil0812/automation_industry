@@ -17,54 +17,42 @@ $message = '';
 
 // Handle form submission
 if ($_POST) {
-    $title = trim($_POST['title']);
-    $category_id = $_POST['category_id'];
-    $description = trim($_POST['description']);
-    $features = trim($_POST['features']);
-    
-    // Handle file upload
-    $image_path = '';
-    if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
-        $upload_dir = '../uploads/services/';
-        if (!is_dir($upload_dir)) {
-            mkdir($upload_dir, 0755, true);
-        }
-        
-        $file_extension = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
-        $filename = uniqid() . '.' . $file_extension;
-        $upload_path = $upload_dir . $filename;
-        
-        if (move_uploaded_file($_FILES['image']['tmp_name'], $upload_path)) {
-            $image_path = 'uploads/services/' . $filename;
-        }
-    }
-    
-    if ($service->createService($title, $category_id, $description, $image_path, $features)) {
-    header('Location: manage-services.php');
-    exit;
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
+    $title = trim($_POST['title'] ?? '');
+    $category_id = $_POST['category_id'] ?? '';
+    $description = trim($_POST['description'] ?? '');
+    $features = trim($_POST['features'] ?? '');
+
+    if (empty($title) || empty($category_id) || empty($description)) {
+        $message = '<div class="error-message">Please fill in all required fields.</div>';
     } else {
-        $message = '<div class="error-message">Error adding service.</div>';
+        // Handle file upload
+        $image_path = '';
+        if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+            $upload_dir = '../uploads/services/';
+            if (!is_dir($upload_dir)) {
+                mkdir($upload_dir, 0755, true);
+            }
+            $file_extension = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+            $filename = uniqid() . '.' . $file_extension;
+            $upload_path = $upload_dir . $filename;
+            if (move_uploaded_file($_FILES['image']['tmp_name'], $upload_path)) {
+                $image_path = 'uploads/services/' . $filename;
+            }
+        }
+        if ($service->createService($title, $category_id, $description, $image_path, $features)) {
+            header('Location: manage-services.php');
+            exit;
+        } else {
+            $message = '<div class="error-message">Error adding service. Please check your inputs and database connection.</div>';
+        }
     }
 }
 
 $categories = $category->getAllCategories();
 
-// Handle quick add category
-if (isset($_POST['quick_add_category'])) {
-    $new_cat_name = trim($_POST['new_category_name'] ?? '');
-    $new_cat_desc = trim($_POST['new_category_desc'] ?? '');
-    $new_cat_icon = trim($_POST['new_category_icon'] ?? '');
-    if ($new_cat_name) {
-        if ($category->createCategory($new_cat_name, $new_cat_desc, $new_cat_icon)) {
-            $message = '<div class="success-message">Category added successfully!</div>';
-            $categories = $category->getAllCategories(); // Refresh list
-        } else {
-            $message = '<div class="error-message">Error adding category.</div>';
-        }
-    } else {
-        $message = '<div class="error-message">Category name is required.</div>';
-    }
-}
+
 ?>
 
 <?php include 'includes/admin-header.php'; ?>
@@ -94,14 +82,7 @@ if (isset($_POST['quick_add_category'])) {
                             <option value="<?php echo $cat['id']; ?>"><?php echo htmlspecialchars($cat['name']); ?></option>
                             <?php endforeach; ?>
                         </select>
-                        <div style="margin-top:1rem;">
-                            <form method="POST" style="display:flex;gap:0.5rem;flex-wrap:wrap;align-items:center;">
-                                <input type="text" name="new_category_name" placeholder="New category name" required style="padding:0.3rem;">
-                                <input type="text" name="new_category_desc" placeholder="Description" style="padding:0.3rem;">
-                                <input type="text" name="new_category_icon" placeholder="Icon (optional)" style="padding:0.3rem;">
-                                <button type="submit" name="quick_add_category" class="btn btn-sm btn-secondary">Add Category</button>
-                            </form>
-                        </div>
+
                     </div>
                     
                     <div class="form-group full-width">

@@ -34,7 +34,7 @@ class Service {
      * @return array|false
      */
     public function getServiceById($id) {
-        $query = "SELECT * FROM " . $this->table . " WHERE id = ?";
+        $query = "SELECT s.*, c.name as category_name FROM " . $this->table . " s LEFT JOIN categories c ON s.category_id = c.id WHERE s.id = ?";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $id);
         $stmt->execute();

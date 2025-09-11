@@ -56,7 +56,7 @@ include 'includes/header.php';
                                      alt="<?php echo htmlspecialchars($service_item['title']); ?>">
                             </div>
                             <div class="service-content">
-                                <div class="service-category"><?php echo htmlspecialchars($service_item['category']); ?></div>
+                                <!-- <div class="service-category">php echo htmlspecialchars($service_item['id']); ?></div> -->
                                 <h3 class="service-title"><?php echo htmlspecialchars($service_item['title']); ?></h3>
                                 <p class="service-description"><?php echo htmlspecialchars(substr($service_item['description'], 0, 120)) . '...'; ?></p>
                             </div>

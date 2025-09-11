@@ -64,7 +64,7 @@ $categories = $category->getAllCategories();
 
     <!-- Category Management Section -->
     <div class="card">
-        <div class="card-header">
+            <div class="card-header">
             <h2>Manage Categories</h2>
         </div>
         <div class="card-body">
@@ -118,7 +118,7 @@ $categories = $category->getAllCategories();
                     </div>
                     <div class="service-content">
                         <h3><?php echo htmlspecialchars($svc['title']); ?></h3>
-                        <p class="service-category"><strong>Category:</strong> <?php echo htmlspecialchars($svc['category_name'] ?? 'No Category'); ?></p>
+                        <p class="service-category"><strong>Category:</strong> <?php echo htmlspecialchars($svc['title'] ?? 'No Category'); ?></p>
                         <p class="service-description"><?php echo substr(htmlspecialchars($svc['description']), 0, 100) . '...'; ?></p>
                         <div class="service-actions">
                             <a href="edit-service.php?id=<?php echo $svc['id']; ?>" class="btn btn-sm btn-secondary">Edit</a>

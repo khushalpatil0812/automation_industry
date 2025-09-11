@@ -81,7 +81,7 @@ include 'includes/admin-header.php';
                         <?php foreach (array_slice($services, 0, 5) as $service_item): ?>
                             <tr>
                                 <td><?php echo htmlspecialchars($service_item['title']); ?></td>
-                                <td><span class="category-badge"><?php echo htmlspecialchars($service_item['category']); ?></span></td>
+                                <td><span class="category-badge"><?php echo htmlspecialchars($service_item['category_id']); ?></span></td>
                                 <td><?php echo date('M j, Y', strtotime($service_item['created_at'])); ?></td>
                                 <td>
                                     <a href="edit-service.php?id=<?php echo $service_item['id']; ?>" class="btn-small">Edit</a>

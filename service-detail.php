@@ -33,11 +33,11 @@ include 'includes/header.php';
             <div class="breadcrumb">
                 <a href="index.php">Home</a> > 
                 <a href="services.php">Services</a> > 
-                <span><?php echo htmlspecialchars($service['title']); ?></span>
+                <span><?php echo htmlspecialchars($service['category_name'] ?? 'No Category'); ?></span>
             </div>
             <div class="service-hero-content">
                 <div class="service-hero-text">
-                    <div class="service-category-badge"><?php echo htmlspecialchars($service['category']); ?></div>
+                    <div class="service-category-badge"><?php echo htmlspecialchars($service['category_name'] ?? 'No Category'); ?></div>
                     <h1><?php echo htmlspecialchars($service['title']); ?></h1>
                     <p class="service-hero-description"><?php echo htmlspecialchars($service['description']); ?></p>
                     <div class="service-hero-buttons">
@@ -46,7 +46,7 @@ include 'includes/header.php';
                     </div>
                 </div>
                 <div class="service-hero-image">
-                    <img src="<?php echo htmlspecialchars($service['image']); ?>" 
+                    <img src="<?php echo htmlspecialchars($service['image'] ?? ''); ?>" 
                          alt="<?php echo htmlspecialchars($service['title']); ?>">
                 </div>
             </div>
