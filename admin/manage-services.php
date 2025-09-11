@@ -5,13 +5,13 @@ require_once '../classes/Admin.php';
 require_once '../classes/Service.php';
 require_once '../classes/Category.php';
 
-$admin = new Admin($pdo);
+$admin = new Admin();
 if (!$admin->isLoggedIn()) {
     header('Location: index.php');
     exit;
 }
 
-$service = new Service($pdo);
+$service = new Service();
 $category = new Category($pdo);
 $message = '';
 
@@ -25,24 +25,28 @@ if (isset($_POST['delete_service'])) {
     }
 }
 
-// Get filter parameters
-$category_filter = isset($_GET['category']) ? $_GET['category'] : '';
-$search = isset($_GET['search']) ? $_GET['search'] : '';
-
-// Get services based on filters
-if ($category_filter) {
-    $services = $service->getServicesByCategory($category_filter);
-} else {
-    $services = $service->getAllServices();
+// Handle add/delete category
+if (isset($_POST['add_category'])) {
+    $name = trim($_POST['new_category_name']);
+    $desc = trim($_POST['new_category_desc']);
+    $icon = trim($_POST['new_category_icon']);
+    if ($category->createCategory($name, $desc, $icon)) {
+        $message = '<div class="alert alert-success">Category added successfully!</div>';
+    } else {
+        $message = '<div class="alert alert-error">Error adding category.</div>';
+    }
+}
+if (isset($_POST['delete_category'])) {
+    $id = $_POST['category_id'];
+    if ($category->deleteCategory($id)) {
+        $message = '<div class="alert alert-success">Category deleted successfully!</div>';
+    } else {
+        $message = '<div class="alert alert-error">Error deleting category.</div>';
+    }
 }
 
-// Apply search filter if provided
-if ($search) {
-    $services = array_filter($services, function($s) use ($search) {
-        return stripos($s['title'], $search) !== false || stripos($s['description'], $search) !== false;
-    });
-}
-
+// Get all services and categories
+$services = $service->getAllServices();
 $categories = $category->getAllCategories();
 ?>
 
@@ -58,34 +62,45 @@ $categories = $category->getAllCategories();
 
     <?php echo $message; ?>
 
-    <!-- Filters -->
+    <!-- Category Management Section -->
     <div class="card">
+        <div class="card-header">
+            <h2>Manage Categories</h2>
+        </div>
         <div class="card-body">
-            <form method="GET" class="filters-form">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="category">Filter by Category</label>
-                        <select id="category" name="category">
-                            <option value="">All Categories</option>
-                            <?php foreach ($categories as $cat): ?>
-                            <option value="<?php echo $cat['id']; ?>" <?php echo $category_filter == $cat['id'] ? 'selected' : ''; ?>>
-                                <?php echo htmlspecialchars($cat['name']); ?>
-                            </option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="search">Search Services</label>
-                        <input type="text" id="search" name="search" value="<?php echo htmlspecialchars($search); ?>" placeholder="Search by title or description">
-                    </div>
-                    
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-secondary">Filter</button>
-                        <a href="manage-services.php" class="btn btn-outline">Clear</a>
-                    </div>
-                </div>
+            <form method="POST" class="form-inline" style="display:flex;gap:1rem;flex-wrap:wrap;align-items:center;">
+                <input type="text" name="new_category_name" placeholder="New category name" required style="padding:0.3rem;">
+                <input type="text" name="new_category_desc" placeholder="Description" style="padding:0.3rem;">
+                <input type="text" name="new_category_icon" placeholder="Icon (optional)" style="padding:0.3rem;">
+                <button type="submit" name="add_category" class="btn btn-sm btn-primary">Add Category</button>
             </form>
+            <div style="margin-top:1rem;">
+                <table class="table" style="width:100%;">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Icon</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($categories as $cat): ?>
+                        <tr>
+                            <td><?php echo htmlspecialchars($cat['name']); ?></td>
+                            <td><?php echo htmlspecialchars($cat['description']); ?></td>
+                            <td><?php echo htmlspecialchars($cat['icon']); ?></td>
+                            <td>
+                                <form method="POST" style="display:inline;" onsubmit="return confirm('Delete this category?')">
+                                    <input type="hidden" name="category_id" value="<?php echo $cat['id']; ?>">
+                                    <button type="submit" name="delete_category" class="btn btn-sm btn-danger">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 
@@ -103,7 +118,7 @@ $categories = $category->getAllCategories();
                     </div>
                     <div class="service-content">
                         <h3><?php echo htmlspecialchars($svc['title']); ?></h3>
-                        <p class="service-category"><?php echo htmlspecialchars($svc['category_name'] ?? 'No Category'); ?></p>
+                        <p class="service-category"><strong>Category:</strong> <?php echo htmlspecialchars($svc['category_name'] ?? 'No Category'); ?></p>
                         <p class="service-description"><?php echo substr(htmlspecialchars($svc['description']), 0, 100) . '...'; ?></p>
                         <div class="service-actions">
                             <a href="edit-service.php?id=<?php echo $svc['id']; ?>" class="btn btn-sm btn-secondary">Edit</a>
@@ -125,5 +140,145 @@ $categories = $category->getAllCategories();
         </div>
     </div>
 </div>
+<style>
+.admin-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+.content-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+.header-actions .btn {
+    padding: 0.5rem 1.2rem;
+    font-size: 1rem;
+    border-radius: 4px;
+}
+.card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    margin-bottom: 2rem;
+    border: 1px solid #eee;
+}
+.card-header {
+    border-bottom: 1px solid #eee;
+    padding: 1rem 1.5rem;
+    background: #f8f9fa;
+}
+.card-body {
+    padding: 1.5rem;
+}
+.filters-form .form-row {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+}
+.service-item {
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    display: flex;
+    gap: 1.2rem;
+    padding: 1.2rem;
+    align-items: flex-start;
+    border: 1px solid #e5e5e5;
+}
+.service-image img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+.service-content {
+    flex: 1;
+}
+.service-category {
+    font-size: 0.95rem;
+    color: #888;
+    margin-bottom: 0.5rem;
+}
+.service-description {
+    font-size: 1rem;
+    margin-bottom: 0.8rem;
+}
+.service-actions {
+    display: flex;
+    gap: 0.7rem;
+}
+.btn {
+    background: #007bff;
+    color: #fff;
+    border: none;
+    padding: 0.4rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s;
+    text-decoration: none;
+    font-size: 0.98rem;
+}
+.btn:hover {
+    background: #0056b3;
+}
+.btn-secondary {
+    background: #6c757d;
+}
+.btn-secondary:hover {
+    background: #495057;
+}
+.btn-danger {
+    background: #dc3545;
+}
+.btn-danger:hover {
+    background: #a71d2a;
+}
+.btn-outline {
+    background: #fff;
+    color: #007bff;
+    border: 1px solid #007bff;
+}
+.btn-outline:hover {
+    background: #e6f0ff;
+}
+.btn-sm {
+    font-size: 0.92rem;
+    padding: 0.3rem 0.7rem;
+}
+.empty-state {
+    text-align: center;
+    color: #888;
+    padding: 2rem 0;
+}
+.alert {
+    padding: 0.8rem 1.2rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+}
+.alert-success {
+    background: #e6f9e6;
+    color: #2e7d32;
+    border: 1px solid #b2dfdb;
+}
+.alert-error {
+    background: #fdecea;
+    color: #c62828;
+    border: 1px solid #f5c6cb;
+}
+</style>
 
 <?php include 'includes/admin-footer.php'; ?>

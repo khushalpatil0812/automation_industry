@@ -4,6 +4,9 @@ require_once __DIR__ . '/../config/database.php';
 
 class Admin {
     private $conn;
+    public function getConnection() {
+        return $this->conn;
+    }
     private $table = 'admin_users';
 
     public function __construct() {

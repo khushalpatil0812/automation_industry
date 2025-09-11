@@ -10,11 +10,17 @@ if (!$service_id) {
     exit;
 }
 
-$service = $service_class->getServiceById($service_id);
 
-if (!$service) {
+
+$service = $service_class->getServiceById($service_id);
+if (!is_array($service) || !$service) {
     header('Location: services.php');
     exit;
+}
+// Parse features string into array
+$service_features = [];
+if (!empty($service['features'])) {
+    $service_features = preg_split('/\r?\n/', $service['features']);
 }
 
 $page_title = $service['title'];
@@ -51,26 +57,18 @@ include 'includes/header.php';
         <div class="container">
             <h2>Key Features</h2>
             <div class="features-grid">
-                <div class="feature-item">
-                    <div class="feature-icon">✨</div>
-                    <h3>Professional Quality</h3>
-                    <p>High-quality deliverables that meet industry standards and exceed expectations.</p>
-                </div>
-                <div class="feature-item">
-                    <div class="feature-icon">🚀</div>
-                    <h3>Fast Implementation</h3>
-                    <p>Quick project turnaround with efficient processes and dedicated team support.</p>
-                </div>
-                <div class="feature-item">
-                    <div class="feature-icon">🎯</div>
-                    <h3>Targeted Solutions</h3>
-                    <p>Customized approaches tailored to your specific business needs and objectives.</p>
-                </div>
-                <div class="feature-item">
-                    <div class="feature-icon">📈</div>
-                    <h3>Measurable Results</h3>
-                    <p>Clear metrics and KPIs to track success and return on investment.</p>
-                </div>
+                <?php if (!empty($service_features)): ?>
+                    <?php foreach ($service_features as $feature): ?>
+                        <div class="feature-item">
+                            <div class="feature-icon">✔️</div>
+                            <p><?php echo htmlspecialchars($feature); ?></p>
+                        </div>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <div class="feature-item">
+                        <p>No features listed for this service.</p>
+                    </div>
+                <?php endif; ?>
             </div>
         </div>
     </section>

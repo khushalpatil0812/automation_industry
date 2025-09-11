@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         try {
             $query = "INSERT INTO admin_users (username, password, email, is_active) VALUES (?, ?, ?, 1)";
-            $stmt = $admin->conn->prepare($query);
+            $stmt = $admin->getConnection()->prepare($query);
             if ($stmt->execute([$username, $hashed_password, $email])) {
                 $success = true;
             } else {

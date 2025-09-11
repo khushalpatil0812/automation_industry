@@ -47,6 +47,23 @@ if ($_POST) {
 }
 
 $categories = $category->getAllCategories();
+
+// Handle quick add category
+if (isset($_POST['quick_add_category'])) {
+    $new_cat_name = trim($_POST['new_category_name'] ?? '');
+    $new_cat_desc = trim($_POST['new_category_desc'] ?? '');
+    $new_cat_icon = trim($_POST['new_category_icon'] ?? '');
+    if ($new_cat_name) {
+        if ($category->createCategory($new_cat_name, $new_cat_desc, $new_cat_icon)) {
+            $message = '<div class="success-message">Category added successfully!</div>';
+            $categories = $category->getAllCategories(); // Refresh list
+        } else {
+            $message = '<div class="error-message">Error adding category.</div>';
+        }
+    } else {
+        $message = '<div class="error-message">Category name is required.</div>';
+    }
+}
 ?>
 
 <?php include 'includes/admin-header.php'; ?>
@@ -76,6 +93,14 @@ $categories = $category->getAllCategories();
                             <option value="<?php echo $cat['id']; ?>"><?php echo htmlspecialchars($cat['name']); ?></option>
                             <?php endforeach; ?>
                         </select>
+                        <div style="margin-top:1rem;">
+                            <form method="POST" style="display:flex;gap:0.5rem;flex-wrap:wrap;align-items:center;">
+                                <input type="text" name="new_category_name" placeholder="New category name" required style="padding:0.3rem;">
+                                <input type="text" name="new_category_desc" placeholder="Description" style="padding:0.3rem;">
+                                <input type="text" name="new_category_icon" placeholder="Icon (optional)" style="padding:0.3rem;">
+                                <button type="submit" name="quick_add_category" class="btn btn-sm btn-secondary">Add Category</button>
+                            </form>
+                        </div>
                     </div>
                     
                     <div class="form-group full-width">
