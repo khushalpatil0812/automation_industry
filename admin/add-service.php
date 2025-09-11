@@ -40,7 +40,8 @@ if ($_POST) {
     }
     
     if ($service->createService($title, $category_id, $description, $image_path, $features)) {
-        $message = '<div class="success-message">Service added successfully!</div>';
+    header('Location: manage-services.php');
+    exit;
     } else {
         $message = '<div class="error-message">Error adding service.</div>';
     }

@@ -28,6 +28,11 @@ class Service {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    /**
+     * Get a service by ID
+     * @param int $id
+     * @return array|false
+     */
     public function getServiceById($id) {
         $query = "SELECT * FROM " . $this->table . " WHERE id = ?";
         $stmt = $this->conn->prepare($query);
