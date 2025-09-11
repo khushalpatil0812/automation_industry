@@ -3,6 +3,18 @@ require_once __DIR__ . '/../config/config.php';
 require_once __DIR__ . '/../config/database.php';
 
 class Admin {
+    /**
+     * Create a new admin user
+     * @param string $username
+     * @param string $hashed_password
+     * @param string $email
+     * @return bool
+     */
+    public function createAdmin($username, $hashed_password, $email) {
+        $query = "INSERT INTO " . $this->table . " (username, password, email, is_active) VALUES (?, ?, ?, 1)";
+        $stmt = $this->conn->prepare($query);
+        return $stmt->execute([$username, $hashed_password, $email]);
+    }
     private $conn;
     public function getConnection() {
         return $this->conn;

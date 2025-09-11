@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'] ?? '';
     $confirm_password = $_POST['confirm_password'] ?? '';
     $email = trim($_POST['email'] ?? '');
-    
+
     if (empty($username) || empty($password) || empty($email)) {
         $error = 'All fields are required';
     } elseif ($password !== $confirm_password) {
@@ -26,13 +26,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif (strlen($password) < 6) {
         $error = 'Password must be at least 6 characters';
     } else {
-        // Create admin user
+        // Create admin user using method
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-        
         try {
-            $query = "INSERT INTO admin_users (username, password, email, is_active) VALUES (?, ?, ?, 1)";
-            $stmt = $admin->getConnection()->prepare($query);
-            if ($stmt->execute([$username, $hashed_password, $email])) {
+            if ($admin->createAdmin($username, $hashed_password, $email)) {
                 $success = true;
             } else {
                 $error = 'Failed to create admin user';
