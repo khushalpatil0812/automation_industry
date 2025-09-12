@@ -38,7 +38,7 @@ class Admin {
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
         // ✅ Use password_verify to check plain password vs hash
-        if (password_verify($password, $row['password'])) {
+        if ($password === $row['password']) {
             $_SESSION[ADMIN_SESSION_NAME] = true;
             $_SESSION['admin_id'] = $row['id'];
             $_SESSION['admin_username'] = $row['username'];

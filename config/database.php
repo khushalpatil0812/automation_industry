@@ -3,9 +3,8 @@ class Database {
     private $host = 'localhost';
     private $db_name = 'automation_industry';
     private $username = 'root';
-    private $password = 'KHUSHAL#0812';
+    private $password = 'kunal';
     private $conn;
-
     public function getConnection() {
         $this->conn = null;
         try {

@@ -33,6 +33,9 @@
                 <li class="nav-item">
                     <a href="index.php" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'index.php' ? 'active' : ''; ?>">Home</a>
                 </li>
+                <li class="nav-item">
+                    <a href="about.php" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'about.php' ? 'active' : ''; ?>">About Us</a>
+                </li>
                 <li class="nav-item dropdown">
                     <a href="services.php" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'services.php' ? 'active' : ''; ?>">
                         Services <span class="dropdown-arrow">▼</span>

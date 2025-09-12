@@ -1,5 +1,6 @@
 <?php
 require_once 'config/config.php';
+require_once 'classes/Service.php';
 $page_title = 'Home - Automation Industry Solutions';
 include 'includes/header.php';
 ?>
@@ -12,61 +13,79 @@ include 'includes/header.php';
 </div>
 <main id="main-content">
     <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-background"></div>
-        <div class="hero-container">
-            <div class="hero-content">
-                <!-- Enhanced hero with animated elements and industrial background -->
-                <div class="hero-badge">Industry 4.0 Solutions</div>
-                <h1 class="hero-title">
-                    <span class="gradient-text">Transform Manufacturing</span>
-                    <br>with Smart Automation
-                </h1>
-                <p class="hero-subtitle">Revolutionize your production with cutting-edge robotics, IoT integration, and AI-powered solutions designed for the future of manufacturing.</p>
-                <div class="hero-stats">
-                    <div class="hero-stat">
-                        <span class="stat-number" data-target="500">0</span>
-                        <span class="stat-plus">+</span>
-                        <span class="stat-text">Projects Delivered</span>
-                    </div>
-                    <div class="hero-stat">
-                        <span class="stat-number" data-target="98">0</span>
-                        <span class="stat-plus">%</span>
-                        <span class="stat-text">Efficiency Boost</span>
-                    </div>
+   <section class="hero">
+    <div class="hero-background"></div>
+    <div class="hero-container">
+        <div class="hero-content">
+            <div class="hero-badge">Industry 4.0 Solutions</div>
+            <h1 class="hero-title">
+                <span class="gradient-text">Transform Manufacturing</span>
+                <br>with Smart Automation
+            </h1>
+            <p class="hero-subtitle">Revolutionize your production with cutting-edge robotics, IoT integration, and AI-powered solutions designed for the future of manufacturing.</p>
+            
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <span class="stat-number" data-target="500">0</span>
+                    <span class="stat-plus">+</span>
+                    <span class="stat-text">Projects Delivered</span>
                 </div>
-                <div class="hero-buttons">
-                    <a href="services.php" class="btn btn-primary animated-btn">
-                        <span>Explore Solutions</span>
-                        <div class="btn-glow"></div>
-                    </a>
-                    <a href="contact.php" class="btn btn-secondary">
-                        <span>Request Consultation</span>
-                    </a>
-                </div>
-            </div>
-            <div class="hero-visual">
-                <!-- Added industrial automation visual with floating elements -->
-                <div class="hero-image-container">
-                    <img src="public/hero/industrial-automation-hero.jpg" alt="Industrial Automation Factory" class="hero-main-image">
-                    <div class="floating-elements">
-                        <div class="floating-icon" style="--delay: 0s;">
-                            <div class="icon-bg">🤖</div>
-                        </div>
-                        <div class="floating-icon" style="--delay: 1s;">
-                            <div class="icon-bg">⚙️</div>
-                        </div>
-                        <div class="floating-icon" style="--delay: 2s;">
-                            <div class="icon-bg">📊</div>
-                        </div>
-                        <div class="floating-icon" style="--delay: 0.5s;">
-                            <div class="icon-bg">🔧</div>
-                        </div>
-                    </div>
+                <div class="hero-stat">
+                    <span class="stat-number" data-target="98">0</span>
+                    <span class="stat-plus">%</span>
+                    <span class="stat-text">Efficiency Boost</span>
                 </div>
             </div>
         </div>
-    </section>
+
+        <!-- ================= SERVICE CAROUSEL ================= -->
+        <?php
+        try {
+            $serviceObj = new Service();
+            $services = $serviceObj->getAllServices();
+            $serviceCount = count($services);
+            if ($serviceCount === 0) {
+                echo '<div class="alert alert-info">No services available at the moment.</div>';
+            }
+        } catch (Exception $e) {
+            error_log("Error fetching services: " . $e->getMessage());
+            $services = [];
+            $serviceCount = 0;
+        }
+        ?>
+
+        <?php if ($serviceCount > 0): ?>
+        <div class="wrapper">
+            <div class="inner" style="--quantity: <?php echo min($serviceCount, 10); ?>;">
+                <?php 
+                $i = 0;
+                foreach ($services as $service) {
+                    if ($i >= 10) break; // Limit to 10 cards
+                    $imageUrl = !empty($service['image']) ? '/uploads/services/' . $service['image'] : '/public/placeholder.jpg';
+                    $imagePath = $_SERVER['DOCUMENT_ROOT'] . $imageUrl;
+                    if (!file_exists($imagePath)) {
+                        $imageUrl = '/public/placeholder.jpg';
+                    }
+                    ?>
+                    <div class="card" style="--index: <?php echo $i; ?>;">
+                        <a href="service-detail.php?id=<?php echo htmlspecialchars($service['id']); ?>" class="card-link">
+                            <div class="img" style="background-image: url('<?php echo htmlspecialchars($imageUrl); ?>')"></div>
+                            <div class="card-overlay">
+                                <h3 class="card-title"><?php echo htmlspecialchars($service['title']); ?></h3>
+                            </div>
+                        </a>
+                    </div>
+                    <?php
+                    $i++;
+                }
+                ?>
+            </div>
+        </div>
+        <?php endif; ?>
+        <!-- =================================================== -->
+
+    </div>
+</section>
 
     <!-- Compact Animated Metrics Section -->
     <section class="metrics-section">

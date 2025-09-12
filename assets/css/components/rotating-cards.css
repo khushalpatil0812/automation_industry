@@ -1,0 +1,87 @@
+.wrapper {
+  display: grid;
+  place-items: center;
+  min-height: 400px;
+  width: 100%;
+  position: relative;
+  perspective: 1000px;
+}
+
+.inner {
+  transform-style: preserve-3d;
+  animation: rotate 15s infinite linear;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.card {
+  position: absolute;
+  width: 250px;
+  height: 350px;
+  border-radius: 20px;
+  transform-origin: center;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s;
+  cursor: pointer;
+  background: rgba(var(--color-card), 0.1);
+  backdrop-filter: blur(3px);
+  border: 1px solid rgba(var(--color-card), 0.2);
+}
+
+.card:hover {
+  transform: translateZ(20px) scale(1.1);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+.card .img {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.3s;
+}
+
+.card:hover .img {
+  transform: scale(1.05);
+}
+
+@keyframes rotate {
+  from {
+    transform: rotateY(0deg) rotateX(20deg);
+  }
+  to {
+    transform: rotateY(360deg) rotateX(20deg);
+  }
+}
+
+.card-link {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  text-decoration: none;
+}
+
+.card-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+  padding: 20px;
+  color: white;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.card:hover .card-overlay {
+  opacity: 1;
+}
+
+.card-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+}

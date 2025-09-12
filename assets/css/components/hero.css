@@ -2,12 +2,14 @@
 
 .hero {
   background: linear-gradient(135deg, var(--secondary-teal) 0%, var(--neutral-50) 100%);
-  padding: 6rem 0;
+  padding: 2rem 0;
   position: relative;
   overflow: hidden;
-  min-height: 80vh;
+  height: calc(100vh - 70px);
+  max-height: calc(100vh - 70px);
   display: flex;
   align-items: center;
+  box-sizing: border-box;
 }
 
 .hero-background {
@@ -36,13 +38,22 @@
 }
 
 .hero-container {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 0 1rem;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 4rem;
+  gap: 2rem;
   align-items: center;
+  height: 100%;
+  min-height: 0;
+}
+
+/* Ensure the wrapper takes full height in the hero container */
+.hero-container .wrapper {
+  height: 90vh;
+  margin-right: -2rem;
+  transform: scale(1.1);
 }
 
 .hero-content {
@@ -221,6 +232,67 @@
   color: var(--white);
 }
 
+.wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.inner {
+  --w: 100px;
+  --h: 150px;
+  --translateZ: calc((var(--w) + var(--h)) + 0px);
+  --rotateX: -15deg;
+  --perspective: 1000px;
+  position: absolute;
+  width: var(--w);
+  height: var(--h);
+  top: 25%;
+  left: calc(50% - (var(--w) / 2) - 2.5px);
+  z-index: 2;
+  transform-style: preserve-3d;
+  transform: perspective(var(--perspective));
+  animation: rotating 20s linear infinite; /* */
+}
+@keyframes rotating {
+  from {
+    transform: perspective(var(--perspective)) rotateX(var(--rotateX))
+      rotateY(0);
+  }
+  to {
+    transform: perspective(var(--perspective)) rotateX(var(--rotateX))
+      rotateY(1turn);
+  }
+}
+
+.card {
+  position: absolute;
+  border: 2px solid rgba(var(--color-card));
+  border-radius: 12px;
+  overflow: hidden;
+  inset: 0;
+  transform: rotateY(calc((360deg / var(--quantity)) * var(--index)))
+    translateZ(var(--translateZ));
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #0000
+    radial-gradient(
+      circle,
+      rgba(var(--color-card), 0.2) 0%,
+      rgba(var(--color-card), 0.6) 80%,
+      rgba(var(--color-card), 0.9) 100%
+    );
+}
+
 @keyframes floatIcon {
   0%, 100% {
     transform: translateY(0px) rotate(0deg);
@@ -244,8 +316,9 @@
 /* Responsive Hero */
 @media (max-width: 768px) {
   .hero {
-    padding: 4rem 0;
-    min-height: 60vh;
+    height: auto;
+    min-height: calc(100vh - 70px);
+    padding: 2rem 0;
   }
   
   .hero-container {
@@ -272,6 +345,12 @@
 }
 
 @media (max-width: 480px) {
+  .hero {
+    height: auto;
+    min-height: calc(100vh - 70px);
+    padding: 1rem 0;
+  }
+  
   .hero-title {
     font-size: 2rem;
   }
