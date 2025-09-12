@@ -10,20 +10,20 @@ if (!$service_id) {
     exit;
 }
 
+$service_data = $service_class->getServiceById($service_id);
 
-
-$service = $service_class->getServiceById($service_id);
-if (!is_array($service) || !$service) {
+if (!$service_data || !is_array($service_data)) {
     header('Location: services.php');
     exit;
 }
+
 // Parse features string into array
 $service_features = [];
-if (!empty($service['features'])) {
-    $service_features = preg_split('/\r?\n/', $service['features']);
+if (!empty($service_data['features'])) {
+    $service_features = preg_split('/\r?\n/', $service_data['features']);
 }
 
-$page_title = $service['title'];
+$page_title = $service_data['title'];
 include 'includes/header.php';
 ?>
 
@@ -33,21 +33,21 @@ include 'includes/header.php';
             <div class="breadcrumb">
                 <a href="index.php">Home</a> > 
                 <a href="services.php">Services</a> > 
-                <span><?php echo htmlspecialchars($service['category_name'] ?? 'No Category'); ?></span>
+                <span><?php echo htmlspecialchars($service_data['category_name'] ?? 'No Category'); ?></span>
             </div>
             <div class="service-hero-content">
                 <div class="service-hero-text">
-                    <div class="service-category-badge"><?php echo htmlspecialchars($service['category_name'] ?? 'No Category'); ?></div>
-                    <h1><?php echo htmlspecialchars($service['title']); ?></h1>
-                    <p class="service-hero-description"><?php echo htmlspecialchars($service['description']); ?></p>
+                    <div class="service-category-badge"><?php echo htmlspecialchars($service_data['category_name'] ?? 'No Category'); ?></div>
+                    <h1><?php echo htmlspecialchars($service_data['title']); ?></h1>
+                    <p class="service-hero-description"><?php echo htmlspecialchars($service_data['description']); ?></p>
                     <div class="service-hero-buttons">
                         <a href="contact.php" class="btn btn-primary">Get Started</a>
                         <a href="services.php" class="btn btn-secondary">Back to Services</a>
                     </div>
                 </div>
                 <div class="service-hero-image">
-                    <img src="<?php echo htmlspecialchars($service['image'] ?? ''); ?>" 
-                         alt="<?php echo htmlspecialchars($service['title']); ?>">
+                    <img src="<?php echo htmlspecialchars($service_data['image'] ?? ''); ?>" 
+                         alt="<?php echo htmlspecialchars($service_data['title']); ?>">
                 </div>
             </div>
         </div>

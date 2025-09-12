@@ -1,4 +1,4 @@
-/* Professional Automation Industry Website Styles */
+Professional Automation Industry Website Styles
 :root {
   --primary-teal: #0d9488;
   --primary-teal-light: #14b8a6;
@@ -983,6 +983,191 @@ body {
   font-size: 0.875rem;
   opacity: 0.8;
   line-height: 1.4;
+}
+
+/* Enhanced Compact Metrics Section */
+.metrics-section {
+  padding: 3rem 0;
+  background: linear-gradient(135deg, var(--neutral-50) 0%, var(--secondary-teal) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.metrics-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="rgba(13, 148, 136, 0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23dots)"/></svg>');
+  opacity: 0.6;
+}
+
+.metrics-wrapper {
+  position: relative;
+  z-index: 2;
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.metric-card.modern {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid var(--neutral-200);
+  position: relative;
+  overflow: hidden;
+}
+
+.metric-card.modern::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--gradient-teal);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.metric-card.modern:hover::before {
+  transform: scaleX(1);
+}
+
+.metric-card.modern:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 40px rgba(13, 148, 136, 0.15);
+  border-color: var(--primary-teal-light);
+}
+
+.metric-card.modern .metric-icon {
+  margin-bottom: 1rem;
+  font-size: 2rem;
+  animation: none;
+}
+
+.metric-card.modern .icon-bg {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  background: var(--gradient-teal);
+  border-radius: 50%;
+  font-size: 1.5rem;
+  margin: 0 auto;
+  box-shadow: 0 4px 15px rgba(13, 148, 136, 0.3);
+  transition: all 0.3s ease;
+  animation: iconFloat 4s ease-in-out infinite;
+}
+
+@keyframes iconFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.metric-card.modern:hover .icon-bg {
+  transform: scale(1.1) rotate(5deg) translateY(-5px);
+  box-shadow: 0 6px 25px rgba(13, 148, 136, 0.4);
+  animation-play-state: paused;
+}
+
+.metric-card.modern .metric-content {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.metric-card.modern .metric-number {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--primary-teal);
+  text-shadow: none;
+  line-height: 1;
+  transition: all 0.3s ease;
+}
+
+.metric-card.modern:hover .metric-number {
+  color: var(--primary-teal-dark);
+  transform: scale(1.05);
+}
+
+.metric-card.modern .metric-suffix {
+  font-size: 1.5rem;
+  color: var(--primary-teal-light);
+  font-weight: 700;
+}
+
+.metric-card.modern .metric-label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--neutral-800);
+  margin-bottom: 0.25rem;
+}
+
+.metric-card.modern .metric-description {
+  font-size: 0.8rem;
+  color: var(--neutral-600);
+  opacity: 1;
+  line-height: 1.2;
+}
+
+/* Responsive adjustments for compact metrics */
+@media (max-width: 768px) {
+  .metrics-section {
+    padding: 2rem 0;
+  }
+  
+  .metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  
+  .metric-card.modern {
+    padding: 1.25rem;
+  }
+  
+  .metric-card.modern .icon-bg {
+    width: 50px;
+    height: 50px;
+    font-size: 1.25rem;
+  }
+  
+  .metric-card.modern .metric-number {
+    font-size: 2rem;
+  }
+  
+  .metric-card.modern .metric-suffix {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .metrics-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .metric-card.modern {
+    padding: 1rem;
+  }
 }
 
 /* Contact */

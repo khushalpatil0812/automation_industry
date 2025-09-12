@@ -1,14 +1,14 @@
 <?php
 // Site configuration
-define('SITE_URL', 'http://localhost/business-website');
-define('ADMIN_URL', 'http://localhost/business-website/admin');
+define('SITE_URL', 'http://localhost/automation_industry');
+define('ADMIN_URL', 'http://localhost/automation_industry/admin');
 define('UPLOAD_PATH', 'uploads/services/');
 
 // Database configuration
 define('DB_HOST', 'localhost');
 define('DB_NAME', 'automation_industry');
 define('DB_USER', 'root');
-define('DB_PASS', 'KHUSHAL#0812');
+define('DB_PASS', 'kunal');
 
 // Admin session configuration
 define('ADMIN_SESSION_NAME', 'admin_logged_in');

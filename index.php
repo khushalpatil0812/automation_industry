@@ -4,7 +4,7 @@ $page_title = 'Home - Automation Industry Solutions';
 include 'includes/header.php';
 ?>
 
-<main>
+<main id="main-content">
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-background"></div>
@@ -62,36 +62,58 @@ include 'includes/header.php';
         </div>
     </section>
 
-    <!-- Animated Metrics Section -->
+    <!-- Compact Animated Metrics Section -->
     <section class="metrics-section">
         <div class="container">
-            <div class="metrics-grid">
-                <div class="metric-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="metric-icon">🏭</div>
-                    <div class="metric-number" data-target="500">0</div>
-                    <div class="metric-label">Automated Systems</div>
-                    <div class="metric-description">Successfully deployed across industries</div>
-                </div>
-                <div class="metric-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="metric-icon">📈</div>
-                    <div class="metric-number" data-target="98">0</div>
-                    <div class="metric-suffix">%</div>
-                    <div class="metric-label">Efficiency Increase</div>
-                    <div class="metric-description">Average productivity improvement</div>
-                </div>
-                <div class="metric-card" data-aos="fade-up" data-aos-delay="300">
-                    <div class="metric-icon">🤝</div>
-                    <div class="metric-number" data-target="150">0</div>
-                    <div class="metric-suffix">+</div>
-                    <div class="metric-label">Industry Partners</div>
-                    <div class="metric-description">Trusted by leading manufacturers</div>
-                </div>
-                <div class="metric-card" data-aos="fade-up" data-aos-delay="400">
-                    <div class="metric-icon">🏆</div>
-                    <div class="metric-number" data-target="15">0</div>
-                    <div class="metric-suffix">+</div>
-                    <div class="metric-label">Years Experience</div>
-                    <div class="metric-description">Proven track record in automation</div>
+            <div class="metrics-wrapper">
+                <div class="metrics-grid">
+                    <div class="metric-card modern" data-aos="fade-up" data-aos-delay="100">
+                        <div class="metric-icon">
+                            <span class="icon-bg">🏭</span>
+                        </div>
+                        <div class="metric-content">
+                            <div class="metric-number" data-target="500">0</div>
+                            <div class="metric-suffix">+</div>
+                        </div>
+                        <div class="metric-label">Automated Systems</div>
+                        <div class="metric-description">Successfully deployed</div>
+                    </div>
+                    
+                    <div class="metric-card modern" data-aos="fade-up" data-aos-delay="200">
+                        <div class="metric-icon">
+                            <span class="icon-bg">📈</span>
+                        </div>
+                        <div class="metric-content">
+                            <div class="metric-number" data-target="98">0</div>
+                            <div class="metric-suffix">%</div>
+                        </div>
+                        <div class="metric-label">Efficiency Increase</div>
+                        <div class="metric-description">Average improvement</div>
+                    </div>
+                    
+                    <div class="metric-card modern" data-aos="fade-up" data-aos-delay="300">
+                        <div class="metric-icon">
+                            <span class="icon-bg">🤝</span>
+                        </div>
+                        <div class="metric-content">
+                            <div class="metric-number" data-target="150">0</div>
+                            <div class="metric-suffix">+</div>
+                        </div>
+                        <div class="metric-label">Industry Partners</div>
+                        <div class="metric-description">Trusted manufacturers</div>
+                    </div>
+                    
+                    <div class="metric-card modern" data-aos="fade-up" data-aos-delay="400">
+                        <div class="metric-icon">
+                            <span class="icon-bg">🏆</span>
+                        </div>
+                        <div class="metric-content">
+                            <div class="metric-number" data-target="15">0</div>
+                            <div class="metric-suffix">+</div>
+                        </div>
+                        <div class="metric-label">Years Experience</div>
+                        <div class="metric-description">Proven track record</div>
+                    </div>
                 </div>
             </div>
         </div>

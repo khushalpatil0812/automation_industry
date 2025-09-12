@@ -1,0 +1,8 @@
+# Protect log files from web access
+<Files "*">
+    Order allow,deny
+    Deny from all
+</Files>
+
+# Prevent directory browsing
+Options -Indexes

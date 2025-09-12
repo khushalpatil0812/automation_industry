@@ -27,6 +27,35 @@
         </div>
     </footer>
 
-    <script src="assets/js/script.js"></script>
+    <!-- Back to top button -->
+    <button class="back-to-top" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- External JavaScript libraries -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <!-- Modular JavaScript components -->
+    <script src="assets/js/utils/helpers.js"></script>
+    <script src="assets/js/components/navigation.js"></script>
+    <script src="assets/js/components/forms.js"></script>
+    <script src="assets/js/components/animations.js"></script>
+    
+    <!-- Main application script -->
+    <script src="assets/js/main.js"></script>
+    
+    <!-- Initialize AOS -->
+    <script>
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true,
+            offset: 50
+        });
+    </script>
+    
+    <!-- Legacy script (can be removed after migration) -->
+    <!-- <script src="assets/js/script.js"></script> -->
+    
 </body>
 </html>

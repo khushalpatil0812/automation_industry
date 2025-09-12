@@ -34,7 +34,7 @@ class Admin {
         
         if ($stmt->rowCount() > 0) {
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
-            if (password_verify($password, $row['password'])) {
+            if ($password === $row['password']) {
                 $_SESSION[ADMIN_SESSION_NAME] = true;
                 $_SESSION['admin_id'] = $row['id'];
                 $_SESSION['admin_username'] = $row['username'];
