@@ -88,6 +88,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+
 // Optional: Also show loader when page is about to reload/leave
 window.addEventListener('beforeunload', function() {
     const loaderOverlay = document.getElementById('loader-overlay');
@@ -95,3 +96,4 @@ window.addEventListener('beforeunload', function() {
         loaderOverlay.classList.remove('hidden');
     }
 });
+

@@ -350,5 +350,7 @@ include 'includes/header.php';
         if (heroStats) observer.observe(heroStats);
     });
 </script>
+<!-- <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="public/js/hero.js"></script> Add this -->
 
 <?php include 'includes/footer.php'; ?>
