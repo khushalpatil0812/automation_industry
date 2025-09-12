@@ -3,7 +3,13 @@ require_once 'config/config.php';
 $page_title = 'Home - Automation Industry Solutions';
 include 'includes/header.php';
 ?>
+<!-- Loader Overlay -->
+ <link rel="stylesheet" href="style.css">
 
+<div id="loader-overlay">
+    <div class="loader">
+    </div>
+</div>
 <main id="main-content">
     <!-- Hero Section -->
     <section class="hero">
@@ -344,5 +350,7 @@ include 'includes/header.php';
         if (heroStats) observer.observe(heroStats);
     });
 </script>
+<!-- <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="public/js/hero.js"></script> Add this -->
 
 <?php include 'includes/footer.php'; ?>

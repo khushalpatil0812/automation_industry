@@ -56,6 +56,7 @@
     
     <!-- Legacy script (can be removed after migration) -->
     <!-- <script src="assets/js/script.js"></script> -->
+<script src="public/js/hero.js"></script>
     
 </body>
 </html>

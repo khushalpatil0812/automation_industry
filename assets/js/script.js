@@ -70,3 +70,30 @@ document.addEventListener("DOMContentLoaded", () => {
     observer.observe(card)
   })
 })
+
+// Show loader when page starts loading
+document.addEventListener('DOMContentLoaded', function() {
+    // Show the loader
+    const loaderOverlay = document.getElementById('loader-overlay');
+    if (loaderOverlay) {
+        // Hide loader after 2 seconds
+        setTimeout(function() {
+            loaderOverlay.classList.add('hidden');
+            
+            // Optional: Remove from DOM after fade out
+            setTimeout(function() {
+                loaderOverlay.remove();
+            }, 500); // Match this with CSS transition time
+        }, 2000); // 2 seconds
+    }
+});
+
+
+// Optional: Also show loader when page is about to reload/leave
+window.addEventListener('beforeunload', function() {
+    const loaderOverlay = document.getElementById('loader-overlay');
+    if (loaderOverlay && !loaderOverlay.classList.contains('hidden')) {
+        loaderOverlay.classList.remove('hidden');
+    }
+});
+

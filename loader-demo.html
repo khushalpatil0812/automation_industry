@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loader Demo</title>
+    <style>
+    .loader {
+      width: 48px;
+      height: 48px;
+      background: #353535;
+      display: block;
+      margin: 20px auto;
+      position: relative;
+      box-sizing: border-box;
+      animation: rotationBack 1s ease-in-out infinite reverse;
+    }
+    .loader::before {
+      content: '';
+      box-sizing: border-box;
+      left: 0;
+      top: 0;
+      transform: rotate(45deg);
+      position: absolute;
+      width: 48px;
+      height: 48px;
+      background: #2e2e2e;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+    }
+    .loader::after {
+      content: '';
+      box-sizing: border-box;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      background: rgb(0, 0, 0);
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+    }
+    @keyframes rotationBack {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(-360deg); }
+    }
+    </style>
+</head>
+<body>
+    <div id="page-loader" class="loader"></div>
+    <div id="main-content" style="display:none;text-align:center;">
+        <h1>Welcome to Loader Demo</h1>
+        <p>This content appears after 1 second.</p>
+    </div>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var loader = document.getElementById('page-loader');
+      var mainContent = document.getElementById('main-content');
+      setTimeout(function() {
+        loader.style.display = 'none';
+        mainContent.style.display = '';
+      }, 1000);
+    });
+    </script>
+</body>
+</html>
