@@ -27,23 +27,28 @@ class Admin {
     }
 
     public function login($username, $password) {
-        $query = "SELECT id, username, password FROM " . $this->table . " WHERE username = ? AND is_active = 1";
-        $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(1, $username);
-        $stmt->execute();
-        
-        if ($stmt->rowCount() > 0) {
-            $row = $stmt->fetch(PDO::FETCH_ASSOC);
-            if ($password === $row['password']) {
-                $_SESSION[ADMIN_SESSION_NAME] = true;
-                $_SESSION['admin_id'] = $row['id'];
-                $_SESSION['admin_username'] = $row['username'];
-                $_SESSION['login_time'] = time();
-                return true;
-            }
+    $query = "SELECT id, username, password 
+              FROM " . $this->table . " 
+              WHERE username = ? AND is_active = 1";
+    $stmt = $this->conn->prepare($query);
+    $stmt->bindParam(1, $username);
+    $stmt->execute();
+    
+    if ($stmt->rowCount() > 0) {
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        // ✅ Use password_verify to check plain password vs hash
+        if (password_verify($password, $row['password'])) {
+            $_SESSION[ADMIN_SESSION_NAME] = true;
+            $_SESSION['admin_id'] = $row['id'];
+            $_SESSION['admin_username'] = $row['username'];
+            $_SESSION['login_time'] = time();
+            return true;
         }
-        return false;
     }
+    return false;
+}
+
 
     public function isLoggedIn() {
         if (isset($_SESSION[ADMIN_SESSION_NAME]) && $_SESSION[ADMIN_SESSION_NAME] === true) {

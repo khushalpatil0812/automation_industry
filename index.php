@@ -3,7 +3,13 @@ require_once 'config/config.php';
 $page_title = 'Home - Automation Industry Solutions';
 include 'includes/header.php';
 ?>
+<!-- Loader Overlay -->
+ <link rel="stylesheet" href="style.css">
 
+<div id="loader-overlay">
+    <div class="loader">
+    </div>
+</div>
 <main id="main-content">
     <!-- Hero Section -->
     <section class="hero">

@@ -12,57 +12,12 @@
     <!-- Main CSS - imports all modular components -->
     <link rel="stylesheet" href="assets/css/main.css">
     
-    <!-- Legacy CSS for compatibility (can be removed after migration) -->
-    <!-- <link rel="stylesheet" href="assets/css/style.css"> -->
-    
     <!-- External libraries -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    
-    <!-- Page loader (to prevent flash of unstyled content) -->
-    <style>
-        .page-loader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #0d9488 0%, #1e40af 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            opacity: 1;
-            visibility: visible;
-            transition: all 0.5s ease;
-        }
-        
-        .page-loader.hidden {
-            opacity: 0;
-            visibility: hidden;
-        }
-        
-        .page-loader .spinner {
-            width: 50px;
-            height: 50px;
-            border: 4px solid rgba(255, 255, 255, 0.3);
-            border-top: 4px solid white;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-    </style>
 </head>
 <body>
-    <!-- Page loader -->
-    <!-- <div class="page-loader">
-        <div class="spinner"></div>
-    </div>
-     -->
+
     <!-- Scroll progress indicator -->
     <div class="scroll-indicator"></div>
     
