@@ -42,7 +42,7 @@ include 'includes/header.php';
             <div class="hero-visual">
                 <!-- Added industrial automation visual with floating elements -->
                 <div class="hero-image-container">
-                    <img src="public/industrial-automation-hero.jpg" alt="Industrial Automation Factory" class="hero-main-image">
+                    <img src="public/hero/industrial-automation-hero.jpg" alt="Industrial Automation Factory" class="hero-main-image">
                     <div class="floating-elements">
                         <div class="floating-icon" style="--delay: 0s;">
                             <div class="icon-bg">🤖</div>
@@ -195,7 +195,7 @@ include 'includes/header.php';
             <div class="services-preview-grid">
                 <div class="service-preview-card" data-aos="fade-up" data-aos-delay="100">
                     <div class="service-image">
-                        <img src="public/robotics-arm.jpg" alt="Industrial Automation">
+                        <img src="public/services/Manufacturing_automation.jpg" alt="Industrial Manufacturing Automation">
                         <div class="service-overlay"></div>
                     </div>
                     <div class="service-content">
@@ -214,7 +214,7 @@ include 'includes/header.php';
                 </div>
                 <div class="service-preview-card" data-aos="fade-up" data-aos-delay="200">
                     <div class="service-image">
-                        <img src="public/iot-sensors.jpg" alt="Robotics Solutions">
+                        <img src="public/services/robotics-arm.jpg" alt="Advanced Robotics Solutions">
                         <div class="service-overlay"></div>
                     </div>
                     <div class="service-content">
@@ -233,7 +233,7 @@ include 'includes/header.php';
                 </div>
                 <div class="service-preview-card" data-aos="fade-up" data-aos-delay="300">
                     <div class="service-image">
-                        <img src="public/ai-analytics.jpg" alt="IoT Integration">
+                        <img src="public/services/HMI.jpg" alt="IoT Integration and HMI Systems">
                         <div class="service-overlay"></div>
                     </div>
                     <div class="service-content">
