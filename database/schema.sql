@@ -43,30 +43,6 @@ CREATE TABLE admin_users (
     last_login TIMESTAMP NULL
 );
 
--- Seed data for categories
-INSERT INTO categories (name, description, icon) VALUES
-('Web Development', 'Custom websites and web applications', 'code'),
-('Mobile Apps', 'iOS and Android mobile applications', 'smartphone'),
-('Digital Marketing', 'SEO, social media, and online marketing', 'trending-up'),
-('Consulting', 'Business and technology consulting services', 'users'),
-('E-commerce', 'Online stores and payment solutions', 'shopping-cart'),
-('Cloud Services', 'Cloud hosting and infrastructure', 'cloud');
-
--- Seed data for services
-INSERT INTO services (title, category_id, description, image) VALUES
-('Custom Web Development', 1, 'Build responsive, modern websites tailored to your business needs with cutting-edge technologies and best practices.', '/modern-web-development.png'),
-('E-commerce Solutions', 1, 'Complete online store development with payment integration, inventory management, and customer analytics.', '/placeholder.svg?height=300&width=400'),
-('Mobile App Development', 2, 'Native and cross-platform mobile applications for iOS and Android with seamless user experiences.', '/mobile-app-development.png'),
-('Progressive Web Apps', 2, 'Fast, reliable web applications that work offline and provide native app-like experiences.', '/placeholder.svg?height=300&width=400'),
-('SEO Optimization', 3, 'Improve your search engine rankings and drive organic traffic with comprehensive SEO strategies.', '/digital-marketing-dashboard.png'),
-('Social Media Marketing', 3, 'Engage your audience and build brand awareness through strategic social media campaigns.', '/placeholder.svg?height=300&width=400'),
-('Business Strategy Consulting', 4, 'Strategic planning and business analysis to help you make informed decisions and achieve growth.', '/placeholder.svg?height=300&width=400'),
-('Digital Transformation', 4, 'Guide your business through digital transformation with technology adoption and process optimization.', '/placeholder.svg?height=300&width=400'),
-('Cloud Infrastructure', 6, 'Scalable cloud solutions for hosting, storage, and application deployment with enterprise-grade security.', '/placeholder.svg?height=300&width=400'),
-('Database Design', 6, 'Efficient database architecture and optimization for high-performance applications and data analytics.', '/placeholder.svg?height=300&width=400'),
-('Brand Identity Design', NULL, 'Complete brand identity packages including logos, color schemes, typography, and brand guidelines.', '/placeholder.svg?height=300&width=400'),
-('Social Media Management', 3, 'Strategic social media campaigns and content management to build brand awareness and engagement.', '/placeholder.svg?height=300&width=400');
-
 -- Insert default admin user (password: admin123)
 INSERT INTO admin_users (username, password, email) VALUES 
 ('admin', 'kunal', 'admin@automation-industry.com');
