@@ -15,27 +15,7 @@ include 'includes/header.php';
     </section>
 
     <!-- Vision Mission Section -->
-    <section class="vision-mission">
-        <div class="container">
-            <div class="vm-cards">
-                <div class="vm-card vision" data-aos="fade-right">
-                    <div class="card-3d-effect">
-                        <div class="icon-3d">👁️</div>
-                        <h2>Our Vision</h2>
-                        <p>To revolutionize industrial automation by creating intelligent, sustainable, and human-centric solutions that empower manufacturers to achieve unprecedented levels of efficiency and innovation.</p>
-                    </div>
-                </div>
-                <div class="vm-card mission" data-aos="fade-left">
-                    <div class="card-3d-effect">
-                        <div class="icon-3d">🎯</div>
-                        <h2>Our Mission</h2>
-                        <p>To deliver cutting-edge automation solutions that transform manufacturing processes, enhance productivity, and create safer workplaces while promoting environmental sustainability.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
+    
     <!-- Company Story Section -->
     <section class="company-story">
         <div class="container">

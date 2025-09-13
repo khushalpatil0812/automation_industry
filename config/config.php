@@ -8,7 +8,7 @@ define('UPLOAD_PATH', 'uploads/services/');
 define('DB_HOST', 'localhost');
 define('DB_NAME', 'automation_industry');
 define('DB_USER', 'root');
-define('DB_PASS', 'KHUSHAL#0812');
+define('DB_PASS', 'kunal');
 
 // Admin session configuration
 define('ADMIN_SESSION_NAME', 'admin_logged_in');
