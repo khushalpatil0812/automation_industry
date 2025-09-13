@@ -1,69 +1,95 @@
-.wrapper {
-  display: grid;
-  place-items: center;
-  min-height: 400px;
-  width: 100%;
-  position: relative;
-  perspective: 1000px;
-}
+/* ================= HERO EARTH-LIKE ORBIT CAROUSEL ================= */
 
-.inner {
-  transform-style: preserve-3d;
-  animation: rotate 15s infinite linear;
+/* Wrapper container */
+.wrapper {
   width: 100%;
   height: 100%;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1200px; /* Slightly increased for depth */
+  overflow: hidden;
+  text-align: center;
 }
 
+/* Inner rotating container (orbit path) */
+.inner {
+  --w: 250px; /* card width */
+  --h: 350px; /* card height */
+  --translateZ: 400px; /* orbit radius */
+  --rotateX: 23.5deg; /* Earth's axial tilt */
+  --perspective: 1200px;
+
+  position: absolute;
+  width: var(--w);
+  height: var(--h);
+  top: 50%;
+  left: 50%;
+  transform-style: preserve-3d;
+  transform: perspective(var(--perspective)) rotateX(var(--rotateX));
+  animation: orbit 30s linear infinite; /* slower orbit like planets */
+  transform-origin: center;
+}
+
+/* Cards orbiting Earth */
 .card {
   position: absolute;
-  width: 250px;
-  height: 350px;
-  border-radius: 20px;
-  transform-origin: center;
+  width: var(--w);
+  height: var(--h);
+  border-radius: 12px;
+  border: 2px solid rgba(var(--color-card), 0.3);
   overflow: hidden;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  transition: transform 0.3s;
+  inset: 0;
   cursor: pointer;
+
+  /* Circular orbit */
+  transform: rotateY(calc((360deg / var(--quantity)) * var(--index))) 
+             translateZ(var(--translateZ)) 
+             rotateY(calc(-1 * (360deg / var(--quantity)) * var(--index))); /* keep upright */
+
+  transition: transform 0.3s;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
   background: rgba(var(--color-card), 0.1);
   backdrop-filter: blur(3px);
-  border: 1px solid rgba(var(--color-card), 0.2);
 }
 
+/* Hover effect */
 .card:hover {
-  transform: translateZ(20px) scale(1.1);
+  transform: translateZ(20px) scale(1.05);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
 }
 
-.card .img {
+/* Card image */
+.img {
   width: 100%;
   height: 100%;
+  object-fit: cover;
   background-size: cover;
   background-position: center;
   transition: transform 0.3s;
+  background: radial-gradient(
+    circle,
+    rgba(var(--color-card), 0.2) 0%,
+    rgba(var(--color-card), 0.6) 80%,
+    rgba(var(--color-card), 0.9) 100%
+  );
 }
 
 .card:hover .img {
   transform: scale(1.05);
 }
 
-@keyframes rotate {
-  from {
-    transform: rotateY(0deg) rotateX(20deg);
-  }
-  to {
-    transform: rotateY(360deg) rotateX(20deg);
-  }
-}
-
+/* Card link overlay */
 .card-link {
   display: block;
   width: 100%;
   height: 100%;
-  position: relative;
   text-decoration: none;
+  position: relative;
 }
 
+/* Card overlay with title */
 .card-overlay {
   position: absolute;
   bottom: 0;
@@ -84,4 +110,14 @@
   font-size: 1.2rem;
   font-weight: bold;
   margin-bottom: 5px;
+}
+
+/* Orbit keyframes (Earth-like orbit) */
+@keyframes orbit {
+  from {
+    transform: perspective(var(--perspective)) rotateX(var(--rotateX)) rotateY(0deg);
+  }
+  to {
+    transform: perspective(var(--perspective)) rotateX(var(--rotateX)) rotateY(360deg);
+  }
 }

@@ -373,3 +373,17 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* ================= FULL-PAGE SECTIONS ================= */
+.section,
+.features,
+.services-preview,
+.metrics-section,
+.cta {
+  height: 100vh;        /* full viewport height */
+  min-height: 100vh;    /* ensures minimum height */
+  display: flex;
+
+  justify-content: center; /* vertically center content */
+  align-items: center;     /* horizontally center content */
+}
