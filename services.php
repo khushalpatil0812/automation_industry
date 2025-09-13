@@ -12,7 +12,7 @@ $selected_category = isset($_GET['category']) ? $_GET['category'] : '';
 if ($selected_category) {
     $services = $service->getServicesByCategory($selected_category);
 } else {
-    $services = $service->getAllServices();
+    $services = $service->getActiveServices();
 }
 
 // Get active categories
