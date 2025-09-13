@@ -6,46 +6,44 @@ include 'includes/header.php';
 
 <main id="main-content">
     <!-- Hero Section with Parallax -->
-    <section class="about-hero">
-        <div class="parallax-background" style="background-image: url('public/services/industrial-automation-hero.jpg');"</div>
+    <section class="about-hero full-page">
+        <div class="parallax-background" style="background-image: url('public/hero/industrial-automation-hero.jpg');"></div>
         <div class="about-hero-content">
             <div class="about-badge">Our Journey</div>
             <h1 class="about-title">Pioneering the Future of <br><span class="gradient-text">Industrial Automation</span></h1>
         </div>
-    </section>
-
-    <!-- Vision Mission Section -->
-    
-    <!-- Company Story Section -->
-    <section class="company-story">
-        <div class="container">
-            <div class="story-grid">
-                <div class="story-content" data-aos="fade-right">
-                    <span class="section-badge">Our Story</span>
-                    <h2>15+ Years of Innovation</h2>
-                    <p>Founded in 2010, our journey began with a vision to revolutionize industrial automation. What started as a small team of passionate engineers has grown into a global leader in automation solutions.</p>
-                    <div class="milestone-cards">
-                        <div class="milestone-card">
-                            <div class="year">2010</div>
-                            <div class="milestone">Company Founded</div>
-                        </div>
-                        <div class="milestone-card">
-                            <div class="year">2015</div>
-                            <div class="milestone">Global Expansion</div>
-                        </div>
-                        <div class="milestone-card">
-                            <div class="year">2020</div>
-                            <div class="milestone">Industry 4.0 Pioneer</div>
-                        </div>
-                        <div class="milestone-card">
-                            <div class="year">2025</div>
-                            <div class="milestone">AI Integration</div>
+        
+        <!-- Company Story Section -->
+        <div class="company-story-overlay">
+            <div class="container">
+                <div class="story-grid">
+                    <div class="story-content" data-aos="fade-right">
+                        <span class="section-badge">Our Story</span>
+                        <h2>15+ Years of Innovation</h2>
+                        <p>Founded in 2010, our journey began with a vision to revolutionize industrial automation. What started as a small team of passionate engineers has grown into a global leader in automation solutions.</p>
+                        <div class="milestone-cards">
+                            <div class="milestone-card">
+                                <div class="year">2010</div>
+                                <div class="milestone">Company Founded</div>
+                            </div>
+                            <div class="milestone-card">
+                                <div class="year">2015</div>
+                                <div class="milestone">Global Expansion</div>
+                            </div>
+                            <div class="milestone-card">
+                                <div class="year">2020</div>
+                                <div class="milestone">Industry 4.0 Pioneer</div>
+                            </div>
+                            <div class="milestone-card">
+                                <div class="year">2025</div>
+                                <div class="milestone">AI Integration</div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="story-image" data-aos="fade-left">
-                    <div class="floating-image-container">
-                        <img src="public/services/Manufacturing_automation.jpg" alt="Our journey in automation">
+                    <div class="story-image" data-aos="fade-left">
+                        <div class="floating-image-container">
+                            <img src="public/services/Manufacturing_automation.jpg" alt="Our journey in automation">
+                        </div>
                     </div>
                 </div>
             </div>
