@@ -12,6 +12,7 @@ if (!$service_id) {
 
 $service_data = $service_class->getServiceById($service_id);
 
+// Redirect if service is inactive or not found
 if (!$service_data || !is_array($service_data)) {
     header('Location: services.php');
     exit;
@@ -28,6 +29,8 @@ include 'includes/header.php';
 ?>
 
 <main>
+
+    <!-- 1️⃣ Service Hero Section -->
     <section class="service-detail-hero">
         <div class="container">
             <div class="breadcrumb">
@@ -35,7 +38,15 @@ include 'includes/header.php';
                 <a href="services.php">Services</a> > 
                 <span><?php echo htmlspecialchars($service_data['category_name'] ?? 'No Category'); ?></span>
             </div>
-            <div class="service-hero-content">
+
+            <div class="service-hero-flex">
+                <!-- Left: Image -->
+                <div class="service-hero-image">
+                    <img src="<?php echo htmlspecialchars($service_data['image'] ?? ''); ?>" 
+                         alt="<?php echo htmlspecialchars($service_data['title']); ?>">
+                </div>
+
+                <!-- Right: Text -->
                 <div class="service-hero-text">
                     <div class="service-category-badge"><?php echo htmlspecialchars($service_data['category_name'] ?? 'No Category'); ?></div>
                     <h1><?php echo htmlspecialchars($service_data['title']); ?></h1>
@@ -45,14 +56,11 @@ include 'includes/header.php';
                         <a href="services.php" class="btn btn-secondary">Back to Services</a>
                     </div>
                 </div>
-                <div class="service-hero-image">
-                    <img src="<?php echo htmlspecialchars($service_data['image'] ?? ''); ?>" 
-                         alt="<?php echo htmlspecialchars($service_data['title']); ?>">
-                </div>
             </div>
         </div>
     </section>
 
+    <!-- 2️⃣ Key Features Section -->
     <section class="service-features">
         <div class="container">
             <h2>Key Features</h2>
@@ -73,6 +81,7 @@ include 'includes/header.php';
         </div>
     </section>
 
+    <!-- 3️⃣ CTA Section -->
     <section class="service-cta">
         <div class="container">
             <div class="cta-content">
@@ -82,6 +91,7 @@ include 'includes/header.php';
             </div>
         </div>
     </section>
+
 </main>
 
 <?php include 'includes/footer.php'; ?>

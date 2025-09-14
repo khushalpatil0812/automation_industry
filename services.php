@@ -8,13 +8,14 @@ $service = new Service();
 // Get category filter
 $selected_category = isset($_GET['category']) ? $_GET['category'] : '';
 
-// Get services based on category
+// Get services based on category (only active ones)
 if ($selected_category) {
     $services = $service->getServicesByCategory($selected_category);
 } else {
-    $services = $service->getAllServices();
+    $services = $service->getActiveServices();
 }
 
+// Get active categories
 $categories = $service->getCategories();
 
 include 'includes/header.php';
@@ -76,7 +77,57 @@ include 'includes/header.php';
         flex-shrink: 0;
     }
 }
+
+/* Services Grid */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.service-card {
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.service-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.service-image img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.service-content {
+    padding: 1rem;
+}
+
+.service-title {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.service-description {
+    font-size: 0.95rem;
+    color: #666;
+}
+
+.no-services {
+    text-align: center;
+    padding: 2rem;
+    font-size: 1.1rem;
+    color: #888;
+}
 </style>
+
     <section class="page-header">
         <div class="container">
             <h1>Our Services</h1>
@@ -112,9 +163,10 @@ include 'includes/header.php';
                                      alt="<?php echo htmlspecialchars($service_item['title']); ?>">
                             </div>
                             <div class="service-content">
-                                <!-- <div class="service-category">php echo htmlspecialchars($service_item['id']); ?></div> -->
                                 <h3 class="service-title"><?php echo htmlspecialchars($service_item['title']); ?></h3>
-                                <p class="service-description"><?php echo htmlspecialchars(substr($service_item['description'], 0, 120)) . '...'; ?></p>
+                                <p class="service-description">
+                                    <?php echo htmlspecialchars(substr($service_item['description'], 0, 120)) . '...'; ?>
+                                </p>
                             </div>
                         </div>
                     <?php endforeach; ?>
