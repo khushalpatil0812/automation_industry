@@ -1,23 +1,22 @@
 /* Main CSS File - Imports all modular components */
 
 /* 1. CSS Variables and Base Styles */
-@import url('./utils/variables.css');
+@import url("./utils/variables.css");
 
 /* 2. Utility Classes */
-@import url('./utils/utilities.css');
-@import url('./utils/responsive.css');
+@import url("./utils/utilities.css");
+@import url("./utils/responsive.css");
 
 /* 3. Component Styles */
-@import url('./components/navigation.css');
-@import url('./components/buttons.css');
-@import url('./components/cards.css');
-@import url('./components/hero.css');
-@import url('./components/rotating-cards.css');
-@import url('./components/sections.css');
-@import url('./components/forms.css');
-@import url('./components/footer.css');
-@import url('./components/about.css');
-@import url('./components/contact.css');
+@import url("./components/navigation.css");
+@import url("./components/buttons.css");
+@import url("./components/cards-professional.css");
+@import url("./components/hero.css");
+@import url("./components/sections.css");
+@import url("./components/forms.css");
+@import url("./components/footer.css");
+@import url("./components/about.css");
+@import url("./components/contact.css");
 
 /* 4. Page-specific styles can be added here or in separate page files */
 /* @import url('./pages/index.css'); */
@@ -38,7 +37,9 @@
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* Page Loader */
@@ -105,24 +106,6 @@ button:focus,
 a:focus {
   outline: 2px solid var(--primary-teal);
   outline-offset: 2px;
-}
-
-/* Skip link for accessibility */
-.skip-link {
-  position: absolute;
-  top: -40px;
-  left: 6px;
-  background: var(--primary-teal);
-  color: var(--white);
-  padding: 8px;
-  text-decoration: none;
-  border-radius: 4px;
-  z-index: 10000;
-  transition: top 0.3s;
-}
-
-.skip-link:focus {
-  top: 6px;
 }
 
 /* High contrast border for better accessibility */

@@ -21,9 +21,6 @@
     <!-- Scroll progress indicator -->
     <div class="scroll-indicator"></div>
     
-    <!-- Skip link for accessibility -->
-    <a href="#main-content" class="skip-link">Skip to main content</a>
-    
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo">

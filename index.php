@@ -6,81 +6,29 @@ include 'includes/header.php';
 ?>
 <main id="main-content">
     <!-- Hero Section -->
-   <section class="hero">
-    <div class="hero-background"></div>
-    <div class="hero-container">
-        <div class="hero-content">
-            <div class="hero-badge">Industry 4.0 Solutions</div>
-            <h1 class="hero-title">
-                <span class="gradient-text">Transform Manufacturing</span>
-                <br>with Smart Automation
-            </h1>
-            <p class="hero-subtitle">Revolutionize your production with cutting-edge robotics, IoT integration, and AI-powered solutions designed for the future of manufacturing.</p>
-            
-            <div class="hero-stats">
-                <div class="hero-stat">
-                    <span class="stat-number" data-target="500">0</span>
-                    <span class="stat-plus">+</span>
-                    <span class="stat-text">Projects Delivered</span>
-                </div>
-                <div class="hero-stat">
-                    <span class="stat-number" data-target="98">0</span>
-                    <span class="stat-plus">%</span>
-                    <span class="stat-text">Efficiency Boost</span>
+    <section class="hero">
+        <div class="hero-background"></div>
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-badge">Industry 4.0 Solutions</div>
+                <h1 class="hero-title">
+                    <span class="gradient-text">Transform Manufacturing</span>
+                    <br>with Smart Automation
+                </h1>
+                <p class="hero-subtitle">Revolutionize your production with cutting-edge robotics, IoT integration, and AI-powered solutions designed for the future of manufacturing.</p>
+                
+                <div class="hero-cta-buttons">
+                    <a href="contact.php" class="btn btn-primary animated-btn">
+                        <span>Get Started Today</span>
+                        <div class="btn-glow"></div>
+                    </a>
+                    <a href="services.php" class="btn btn-outline">
+                        <span>Explore Services</span>
+                    </a>
                 </div>
             </div>
         </div>
-
-        
-
-        <!-- ================= SERVICE CAROUSEL ================= -->
-        <?php
-        try {
-            $serviceObj = new Service();
-            $services = $serviceObj->getAllServices();
-            $serviceCount = count($services);
-            if ($serviceCount === 0) {
-                echo '<div class="alert alert-info">No services available at the moment.</div>';
-            }
-        } catch (Exception $e) {
-            error_log("Error fetching services: " . $e->getMessage());
-            $services = [];
-            $serviceCount = 0;
-        }
-        ?>
-
-        <?php if ($serviceCount > 0): ?>
-        <div class="wrapper">
-            <div class="inner" style="--quantity: <?php echo min($serviceCount, 10); ?>;">
-                <?php 
-                $i = 0;
-                foreach ($services as $service) {
-                    if ($i >= 10) break; // Limit to 10 cards
-                    $imageUrl = !empty($service['image']) ? '/uploads/services/' . $service['image'] : '/public/placeholder.jpg';
-                    $imagePath = $_SERVER['DOCUMENT_ROOT'] . $imageUrl;
-                    if (!file_exists($imagePath)) {
-                        $imageUrl = '/public/placeholder.jpg';
-                    }
-                    ?>
-                    <div class="card" style="--index: <?php echo $i; ?>;">
-                        <a href="service-detail.php?id=<?php echo htmlspecialchars($service['id']); ?>" class="card-link">
-                            <div class="img" style="background-image: url('<?php echo htmlspecialchars($imageUrl); ?>')"></div>
-                            <div class="card-overlay">
-                                <h3 class="card-title"><?php echo htmlspecialchars($service['title']); ?></h3>
-                            </div>
-                        </a>
-                    </div>
-                    <?php
-                    $i++;
-                }
-                ?>
-            </div>
-        </div>
-        <?php endif; ?>
-        <!-- =================================================== -->
-
-    </div>
-</section>
+    </section>
 
     <!-- Compact Animated Metrics Section -->
     <section class="metrics-section">
@@ -204,13 +152,13 @@ include 'includes/header.php';
         </div>
     </section>
 
-    <!-- Enhanced Services Preview -->
+    <!-- Professional Services Preview -->
     <section class="services-preview">
         <div class="container">
             <div class="section-header" data-aos="fade-up">
-                <span class="section-badge">Our Expertise</span>
-                <h2 class="section-title">Comprehensive Automation Services</h2>
-                <p class="section-subtitle">From concept to implementation, we deliver end-to-end automation solutions</p>
+                <span class="section-badge">Our Solutions</span>
+                <h2 class="section-title">Industrial Automation Expertise</h2>
+                <p class="section-subtitle">Comprehensive automation solutions tailored to your industry needs</p>
             </div>
             <div class="services-preview-grid">
                 <div class="service-preview-card" data-aos="fade-up" data-aos-delay="100">
@@ -221,14 +169,14 @@ include 'includes/header.php';
                     <div class="service-content">
                         <div class="service-icon">🏭</div>
                         <h3>Industrial Automation</h3>
-                        <p>Complete factory automation solutions including PLC programming, SCADA systems, and process control for enhanced productivity.</p>
+                        <p>Complete factory automation solutions with PLC programming, SCADA systems, and advanced process control.</p>
                         <div class="service-features">
                             <span class="feature-tag">PLC Programming</span>
                             <span class="feature-tag">SCADA Systems</span>
                             <span class="feature-tag">Process Control</span>
                         </div>
-                        <a href="services.php?category=industrial-automation" class="service-link">
-                            Explore Solutions <span class="arrow">→</span>
+                        <a href="services.php" class="service-link">
+                            Learn More <span class="arrow">→</span>
                         </a>
                     </div>
                 </div>
@@ -240,33 +188,33 @@ include 'includes/header.php';
                     <div class="service-content">
                         <div class="service-icon">🤖</div>
                         <h3>Robotics Solutions</h3>
-                        <p>Advanced robotic systems for assembly, welding, painting, and material handling with precision and reliability.</p>
+                        <p>Advanced robotic systems for assembly, welding, and material handling with precision control.</p>
                         <div class="service-features">
                             <span class="feature-tag">6-Axis Robots</span>
                             <span class="feature-tag">Collaborative Robots</span>
                             <span class="feature-tag">Vision Systems</span>
                         </div>
-                        <a href="services.php?category=robotics" class="service-link">
-                            Explore Solutions <span class="arrow">→</span>
+                        <a href="services.php" class="service-link">
+                            Learn More <span class="arrow">→</span>
                         </a>
                     </div>
                 </div>
                 <div class="service-preview-card" data-aos="fade-up" data-aos-delay="300">
                     <div class="service-image">
-                        <img src="public/services/HMI.jpg" alt="IoT Integration and HMI Systems">
+                        <img src="public/services/HMI.jpg" alt="IoT Integration and Smart Systems">
                         <div class="service-overlay"></div>
                     </div>
                     <div class="service-content">
                         <div class="service-icon">🌐</div>
-                        <h3>IoT Integration</h3>
-                        <p>Smart sensors and IoT devices for real-time monitoring, predictive maintenance, and operational excellence.</p>
+                        <h3>Smart IoT Integration</h3>
+                        <p>IoT sensors and smart devices for real-time monitoring, predictive maintenance, and data analytics.</p>
                         <div class="service-features">
                             <span class="feature-tag">Smart Sensors</span>
                             <span class="feature-tag">Edge Computing</span>
-                            <span class="feature-tag">Cloud Analytics</span>
+                            <span class="feature-tag">Real-time Analytics</span>
                         </div>
-                        <a href="services.php?category=iot" class="service-link">
-                            Explore Solutions <span class="arrow">→</span>
+                        <a href="services.php" class="service-link">
+                            Learn More <span class="arrow">→</span>
                         </a>
                     </div>
                 </div>
@@ -310,7 +258,7 @@ include 'includes/header.php';
     </section>
 </main>
 
-<!-- Added animation scripts for counters and AOS -->
+<!-- Animation Scripts -->
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
     // Initialize AOS animations
@@ -321,7 +269,7 @@ include 'includes/header.php';
         offset: 100
     });
 
-    // Animated counter function
+    // Animated counter function for metrics section
     function animateCounter(element, target, duration = 2000) {
         let start = 0;
         const increment = target / (duration / 16);
@@ -336,7 +284,7 @@ include 'includes/header.php';
         }, 16);
     }
 
-    // Initialize counters when in viewport
+    // Initialize counters when metrics section is in viewport
     const observerOptions = {
         threshold: 0.5,
         rootMargin: '0px 0px -100px 0px'
@@ -355,16 +303,13 @@ include 'includes/header.php';
         });
     }, observerOptions);
 
-    // Observe metrics and hero stats sections
+    // Observe metrics section when page loads
     document.addEventListener('DOMContentLoaded', () => {
         const metricsSection = document.querySelector('.metrics-section');
-        const heroStats = document.querySelector('.hero-stats');
-        
-        if (metricsSection) observer.observe(metricsSection);
-        if (heroStats) observer.observe(heroStats);
+        if (metricsSection) {
+            observer.observe(metricsSection);
+        }
     });
 </script>
-<!-- <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script src="public/js/hero.js"></script> Add this -->
 
 <?php include 'includes/footer.php'; ?>
