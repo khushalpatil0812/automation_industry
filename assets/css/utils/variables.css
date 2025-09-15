@@ -1,47 +1,88 @@
-/* CSS Variables and Base Styles */
+/* CSS Variables and Base Styles - Custom Color Scheme */
 :root {
-  /* Primary Colors */
-  --primary-teal: #0d9488;
-  --primary-teal-light: #14b8a6;
-  --primary-teal-dark: #0f766e;
-  --secondary-teal: #e6fffa;
-  
-  /* Accent Colors */
-  --accent-navy: #1e293b;
-  --accent-gray: #64748b;
-  
-  /* Neutral Colors */
-  --neutral-50: #f8fafc;
-  --neutral-100: #f1f5f9;
-  --neutral-200: #e2e8f0;
-  --neutral-300: #cbd5e1;
-  --neutral-600: #475569;
-  --neutral-700: #334155;
-  --neutral-800: #1e293b;
-  --neutral-900: #0f172a;
-  --white: #ffffff;
-  
+  /* Custom Color Palette */
+  --dominant-platinum: #d8d5db;
+  --secondary-french-gray: #adacb5;
+  --accent-gunmetal: #203142;
+
+  /* Color Variations */
+  --gunmetal-light: #2c4155;
+  --gunmetal-dark: #1a2934;
+  --platinum-light: #e5e3e7;
+  --platinum-dark: #cbc7cd;
+  --french-gray-light: #c0bfc6;
+  --french-gray-dark: #9a99a4;
+
+  /* Text Colors */
+  --text-primary: var(--dominant-platinum);
+  --text-secondary: var(--secondary-french-gray);
+  --text-dark: var(--accent-gunmetal);
+  --text-contrast: #ffffff;
+
+  /* Background Colors */
+  --bg-primary: var(--accent-gunmetal);
+  --bg-secondary: var(--gunmetal-light);
+  --bg-light: var(--dominant-platinum);
+  --bg-card: rgba(216, 213, 219, 0.95);
+  --bg-overlay: rgba(32, 49, 66, 0.9);
+
+  /* Border Colors */
+  --border-light: rgba(216, 213, 219, 0.3);
+  --border-medium: rgba(173, 172, 181, 0.5);
+  --border-dark: rgba(32, 49, 66, 0.8);
+
   /* Shadows */
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
-  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
-  
+  --shadow-sm: 0 1px 2px 0 rgba(32, 49, 66, 0.1);
+  --shadow-md: 0 4px 6px -1px rgba(32, 49, 66, 0.15);
+  --shadow-lg: 0 10px 15px -3px rgba(32, 49, 66, 0.2);
+  --shadow-xl: 0 20px 25px -5px rgba(32, 49, 66, 0.25);
+  --shadow-glow: 0 0 20px rgba(216, 213, 219, 0.3);
+
   /* Gradients */
-  --gradient-industrial: linear-gradient(135deg, var(--primary-teal) 0%, var(--accent-navy) 100%);
-  --gradient-teal: linear-gradient(135deg, var(--primary-teal-light) 0%, var(--primary-teal-dark) 100%);
-  
+  --gradient-primary: linear-gradient(
+    135deg,
+    var(--accent-gunmetal) 0%,
+    var(--gunmetal-light) 100%
+  );
+  --gradient-secondary: linear-gradient(
+    135deg,
+    var(--secondary-french-gray) 0%,
+    var(--dominant-platinum) 100%
+  );
+  --gradient-accent: linear-gradient(
+    135deg,
+    var(--dominant-platinum) 0%,
+    var(--secondary-french-gray) 100%
+  );
+  --gradient-dark: linear-gradient(
+    135deg,
+    var(--gunmetal-dark) 0%,
+    var(--accent-gunmetal) 100%
+  );
+
+  /* Legacy Support */
+  --white: #ffffff;
+  --primary-teal: var(--secondary-french-gray);
+  --primary-teal-light: var(--dominant-platinum);
+  --primary-teal-dark: var(--accent-gunmetal);
+  --secondary-teal: var(--bg-light);
+  --accent-navy: var(--accent-gunmetal);
+  --neutral-50: var(--dominant-platinum);
+  --neutral-600: var(--secondary-french-gray);
+  --neutral-700: var(--accent-gunmetal);
+  --neutral-900: var(--gunmetal-dark);
+
   /* Transitions */
   --transition-fast: 0.15s ease;
   --transition-normal: 0.3s ease;
   --transition-slow: 0.5s ease;
-  
+
   /* Border Radius */
   --radius-sm: 0.375rem;
   --radius-md: 0.5rem;
   --radius-lg: 0.75rem;
   --radius-xl: 1rem;
-  
+
   /* Spacing */
   --spacing-xs: 0.25rem;
   --spacing-sm: 0.5rem;
@@ -63,8 +104,19 @@
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   line-height: 1.6;
-  color: var(--neutral-700);
-  background-color: var(--white);
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  background-image: radial-gradient(
+      circle at 20% 80%,
+      rgba(216, 213, 219, 0.05) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 20%,
+      rgba(173, 172, 181, 0.05) 0%,
+      transparent 50%
+    );
+  min-height: 100vh;
 }
 
 /* Container */
@@ -79,6 +131,6 @@ body {
   font-size: 2.5rem;
   font-weight: 700;
   text-align: center;
-  color: var(--neutral-900);
+  color: var(--text-primary);
   margin-bottom: 3rem;
 }
