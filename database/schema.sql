@@ -25,6 +25,7 @@ CREATE TABLE services (
     description TEXT NOT NULL,
     image VARCHAR(500),
     features TEXT,
+    is_active BOOLEAN DEFAULT TRUE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     INDEX idx_category_id (category_id),
