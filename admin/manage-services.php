@@ -156,7 +156,7 @@ $categories = $category->getAllCategories();
         <div class="card-body">
             <div class="services-grid">
                 <?php foreach ($services as $svc): ?>
-                <div class="service-item">
+                <div class="service-item" onclick="window.location.href='view-service.php?id=<?php echo $svc['id']; ?>'" style="cursor: pointer;">
                     <div class="service-content">
                         <h3><?php echo htmlspecialchars($svc['title']); ?></h3>
                         <p class="service-category">
@@ -168,11 +168,12 @@ $categories = $category->getAllCategories();
                         <p class="service-description">
                             <?php echo substr(htmlspecialchars($svc['description']), 0, 100) . '...'; ?>
                         </p>
-                        <div class="service-actions">
+                        <div class="service-actions" onclick="event.stopPropagation();">
                             <a href="edit-service.php?id=<?php echo $svc['id']; ?>" class="btn btn-sm btn-secondary">Edit</a>
+                            <a href="view-service.php?id=<?php echo $svc['id']; ?>" class="btn btn-sm" style="background: #2196F3; color: white;">View</a>
                             
                             <!-- Toggle Active/Inactive -->
-                            <form method="POST">
+                            <form method="POST" style="display: inline;">
                                 <input type="hidden" name="service_id" value="<?php echo $svc['id']; ?>">
                                 <?php if ($svc['is_active']): ?>
                                     <button type="submit" name="toggle_service" value="deactivate" class="btn btn-sm btn-warning">
@@ -186,7 +187,7 @@ $categories = $category->getAllCategories();
                             </form>
 
                             <!-- Delete -->
-                            <form method="POST" onsubmit="return confirm('Are you sure you want to delete this service?')">
+                            <form method="POST" onsubmit="return confirm('Are you sure you want to delete this service?')" style="display: inline;">
                                 <input type="hidden" name="service_id" value="<?php echo $svc['id']; ?>">
                                 <button type="submit" name="delete_service" class="btn btn-sm btn-danger">Delete</button>
                             </form>

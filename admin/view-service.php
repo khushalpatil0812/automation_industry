@@ -274,7 +274,7 @@ include 'includes/admin-header.php';
             
             if (response.ok) {
                 // Redirect to manage services page after successful deletion
-                window.location.href = 'manage-services.php?deleted=1';
+                window.location.href = 'dashboard.php?deleted=1';
             } else {
                 alert('Error deleting service. Please try again.');
             }
