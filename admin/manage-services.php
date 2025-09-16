@@ -170,7 +170,7 @@ $categories = $category->getAllCategories();
                         </p>
                         <div class="service-actions" onclick="event.stopPropagation();">
                             <a href="edit-service.php?id=<?php echo $svc['id']; ?>" class="btn btn-sm btn-secondary">Edit</a>
-                            <a href="view-service.php?id=<?php echo $svc['id']; ?>" class="btn btn-sm" style="background: #2196F3; color: white;">View</a>
+                            <a href="view-service.php?id=<?php echo $svc['id']; ?>" class="btn btn-sm" style="background: #6b7280; color: white;">View</a>
                             
                             <!-- Toggle Active/Inactive -->
                             <form method="POST" style="display: inline;">

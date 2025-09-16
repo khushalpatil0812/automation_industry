@@ -1,15 +1,15 @@
-/* Admin Panel Styles - Enhanced with Automation Industry Theme */
+/* Admin Panel Styles - Grey Theme */
 :root {
-  --admin-primary: #0f766e;
-  --admin-primary-light: #14b8a6;
-  --admin-secondary: #f0fdfa;
-  --admin-accent: #06b6d4;
-  --admin-success: #10b981;
-  --admin-danger: #ef4444;
-  --admin-warning: #f59e0b;
-  --admin-dark: #0f172a;
-  --admin-light: #f8fafc;
-  --admin-border: #e2e8f0;
+  --admin-primary: #6b7280;
+  --admin-primary-light: #9ca3af;
+  --admin-secondary: #f9fafb;
+  --admin-accent: #4b5563;
+  --admin-success: #6b7280;
+  --admin-danger: #dc2626;
+  --admin-warning: #d97706;
+  --admin-dark: #1f2937;
+  --admin-light: #f9fafb;
+  --admin-border: #e5e7eb;
   --admin-gradient: linear-gradient(135deg, var(--admin-primary) 0%, var(--admin-accent) 100%);
 }
 /* Modern Login Form CSS with Animations */
@@ -75,7 +75,7 @@
   position: relative;
   width: 100%;
   border: 2px solid #8000ff;
-  background-color: #8000ff;
+  background-color: #6b7280;
   height: 40px;
   color: white;
   font-size: .8em;
@@ -225,7 +225,7 @@
 
 .file-upload-area.has-image {
   border-color: var(--admin-success);
-  background: #f0fdf4;
+  background: #f3f4f6;
 }
 
 .upload-placeholder {
@@ -426,7 +426,7 @@
 }
 
 .success-message {
-  background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+  background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
   color: #065f46;
   border: 1px solid #10b981;
 }

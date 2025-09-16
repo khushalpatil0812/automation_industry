@@ -1,11 +1,11 @@
 :root {
-    --primary-color: #4361ee;
-    --secondary-color: #3a0ca3;
-    --success-color: #4cc9f0;
-    --error-color: #f72585;
-    --dark-color: #2b2d42;
-    --light-color: #f8f9fa;
-    --gray-color: #adb5bd;
+    --primary-color: #6b7280;
+    --secondary-color: #4b5563;
+    --success-color: #9ca3af;
+    --error-color: #ef4444;
+    --dark-color: #1f2937;
+    --light-color: #f9fafb;
+    --gray-color: #d1d5db;
 }
 
 * {
@@ -16,7 +16,7 @@
 }
 
 body.login-page {
-    background: linear-gradient(-45deg, #3a0ca3, #4361ee, #4cc9f0, #7209b7);
+    background: linear-gradient(-45deg, #4b5563, #6b7280, #9ca3af, #374151);
     background-size: 400% 400%;
     height: 100vh;
     display: flex;
