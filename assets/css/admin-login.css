@@ -1,11 +1,14 @@
 :root {
-    --primary-color: #6b7280;
-    --secondary-color: #4b5563;
-    --success-color: #9ca3af;
+    --primary-color: #4b5563;
+    --secondary-color: #374151;
+    --success-color: #6b7280;
     --error-color: #ef4444;
     --dark-color: #1f2937;
     --light-color: #f9fafb;
-    --gray-color: #d1d5db;
+    --gray-color: #9ca3af;
+    --medium-gray: #6b7280;
+    --light-gray: #e5e7eb;
+    --form-bg: rgba(249, 250, 251, 0.95);
 }
 
 * {
@@ -16,7 +19,7 @@
 }
 
 body.login-page {
-    background: linear-gradient(-45deg, #4b5563, #6b7280, #9ca3af, #374151);
+    background: linear-gradient(-45deg, #374151, #4b5563, #6b7280, #374151);
     background-size: 400% 400%;
     height: 100vh;
     display: flex;
@@ -40,15 +43,16 @@ body.login-page {
 }
 
 .login-card {
-    background: rgba(255, 255, 255, 0.95);
+    background: var(--form-bg);
     backdrop-filter: blur(10px);
     border-radius: 16px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 15px 35px rgba(75, 85, 99, 0.2);
     padding: 2.5rem;
     transform: translateY(0);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     position: relative;
     overflow: hidden;
+    border: 1px solid rgba(156, 163, 175, 0.3);
 }
 
 .login-card::before {
@@ -70,7 +74,7 @@ body.login-page {
 
 .login-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 20px 45px rgba(75, 85, 99, 0.25);
 }
 
 .login-header {
@@ -146,16 +150,17 @@ body.login-page {
 .animated-input {
     width: 100%;
     padding: 14px 16px;
-    border: 2px solid #e9ecef;
+    border: 2px solid var(--light-gray);
     border-radius: 8px;
     font-size: 1rem;
     transition: all 0.3s ease;
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, 0.9);
+    color: var(--dark-color);
 }
 
 .animated-input:focus {
     border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+    box-shadow: 0 0 0 3px rgba(75, 85, 99, 0.2);
     outline: none;
     transform: translateY(-2px);
 }
