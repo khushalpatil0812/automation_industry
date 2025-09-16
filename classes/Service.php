@@ -52,6 +52,18 @@ class Service {
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+    // 🔹 Get a single service by ID (admin: includes inactive services)
+    public function getServiceByIdAdmin($id) {
+        $query = "SELECT s.*, c.name as category_name 
+                  FROM " . $this->table . " s 
+                  LEFT JOIN categories c ON s.category_id = c.id 
+                  WHERE s.id = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $id);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
     // 🔹 Get active categories
     public function getCategories() {
         $query = "SELECT name FROM categories WHERE is_active = 1 ORDER BY name";

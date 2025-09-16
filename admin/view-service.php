@@ -29,7 +29,7 @@ if (!$service_id) {
 }
 
 // Get service details
-$service_data = $service->getServiceById($service_id);
+$service_data = $service->getServiceByIdAdmin($service_id);
 if (!$service_data) {
     header('Location: manage-services.php');
     exit;
@@ -205,7 +205,7 @@ include 'includes/admin-header.php';
                         </a>
                         <button class="action-button toggle-btn" data-id="<?php echo $service_id; ?>">
                             <i class="fas fa-power-off"></i>
-                            Toggle Status
+                            <?php echo (isset($service_data['is_active']) && $service_data['is_active']) ? 'Deactivate' : 'Activate'; ?>
                         </button>
                         <button class="action-button delete-btn" data-id="<?php echo $service_id; ?>">
                             <i class="fas fa-trash-alt"></i>
@@ -240,7 +240,9 @@ include 'includes/admin-header.php';
     const deleteBtn = document.querySelector('.delete-btn');
     const confirmDelete = document.getElementById('confirmDelete');
     const cancelDelete = document.getElementById('cancelDelete');
+    const toggleBtn = document.querySelector('.toggle-btn');
 
+    // Delete modal functionality
     deleteBtn.addEventListener('click', () => {
         deleteModal.style.display = 'flex';
     });
@@ -257,23 +259,66 @@ include 'includes/admin-header.php';
     });
 
     // Handle service deletion
-    confirmDelete.addEventListener('click', () => {
+    confirmDelete.addEventListener('click', async () => {
         const serviceId = deleteBtn.dataset.id;
-        // Add your delete service logic here
-        window.location.href = `delete-service.php?id=${serviceId}`;
-    });
-
-    // Toggle service status
-    document.querySelector('.toggle-btn').addEventListener('click', async (e) => {
-        const serviceId = e.target.dataset.id;
-        // Add your toggle status logic here
+        
         try {
-            const response = await fetch(`toggle-service-status.php?id=${serviceId}`);
+            const formData = new FormData();
+            formData.append('action', 'delete');
+            formData.append('service_id', serviceId);
+            
+            const response = await fetch('manage-services.php', {
+                method: 'POST',
+                body: formData
+            });
+            
             if (response.ok) {
-                window.location.reload();
+                // Redirect to manage services page after successful deletion
+                window.location.href = 'manage-services.php?deleted=1';
+            } else {
+                alert('Error deleting service. Please try again.');
             }
         } catch (error) {
             console.error('Error:', error);
+            alert('Error deleting service. Please try again.');
+        }
+        
+        deleteModal.style.display = 'none';
+    });
+
+    // Toggle service status
+    toggleBtn.addEventListener('click', async (e) => {
+        const serviceId = e.target.dataset.id;
+        const button = e.target;
+        const originalText = button.innerHTML;
+        
+        // Disable button during request
+        button.disabled = true;
+        button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+        
+        try {
+            const formData = new FormData();
+            formData.append('action', 'toggle_status');
+            formData.append('service_id', serviceId);
+            
+            const response = await fetch('manage-services.php', {
+                method: 'POST',
+                body: formData
+            });
+            
+            if (response.ok) {
+                // Reload page to show updated status
+                window.location.reload();
+            } else {
+                alert('Error updating service status. Please try again.');
+                button.disabled = false;
+                button.innerHTML = originalText;
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Error updating service status. Please try again.');
+            button.disabled = false;
+            button.innerHTML = originalText;
         }
     });
 </script>

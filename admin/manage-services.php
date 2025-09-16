@@ -15,6 +15,41 @@ $service = new Service();
 $category = new Category($pdo);
 $message = '';
 
+// Handle AJAX requests from view-service.php
+if (isset($_POST['action'])) {
+    header('Content-Type: application/json');
+    
+    if ($_POST['action'] === 'delete' && isset($_POST['service_id'])) {
+        $id = intval($_POST['service_id']);
+        if ($service->deleteService($id)) {
+            echo json_encode(['success' => true, 'message' => 'Service deleted successfully']);
+        } else {
+            http_response_code(500);
+            echo json_encode(['success' => false, 'message' => 'Error deleting service']);
+        }
+        exit;
+    }
+    
+    if ($_POST['action'] === 'toggle_status' && isset($_POST['service_id'])) {
+        $id = intval($_POST['service_id']);
+        // Get current status and toggle it
+        $currentService = $service->getServiceByIdAdmin($id);
+        if ($currentService) {
+            $newStatus = $currentService['is_active'] ? 0 : 1;
+            if ($service->setServiceStatus($id, $newStatus)) {
+                echo json_encode(['success' => true, 'message' => 'Service status updated', 'new_status' => $newStatus]);
+            } else {
+                http_response_code(500);
+                echo json_encode(['success' => false, 'message' => 'Error updating service status']);
+            }
+        } else {
+            http_response_code(404);
+            echo json_encode(['success' => false, 'message' => 'Service not found']);
+        }
+        exit;
+    }
+}
+
 // Handle delete service
 if (isset($_POST['delete_service'])) {
     $id = $_POST['service_id'];
