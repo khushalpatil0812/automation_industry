@@ -99,14 +99,14 @@ include 'includes/admin-header.php';
         <div class="service-content-grid">
             <!-- Left Column - Main Info -->
             <div class="service-main-content">
-                <!-- Service Details -->
+                <!-- Service Image and Details -->
                 <div class="content-card">
                     <div class="card-header">
-                        <h2><i class="fas fa-info-circle"></i> Service Details</h2>
+                        <h2><i class="fas fa-images"></i> Service Image</h2>
                     </div>
                     <div class="service-image-main">
                         <?php if ($service_data['image']): ?>
-                        <img src="<?php echo htmlspecialchars($service_data['image']); ?>" 
+                        <img src="../<?php echo htmlspecialchars($service_data['image']); ?>" 
                              alt="<?php echo htmlspecialchars($service_data['title']); ?>">
                         <?php else: ?>
                         <div class="no-image">
@@ -115,9 +115,19 @@ include 'includes/admin-header.php';
                         </div>
                         <?php endif; ?>
                     </div>
+                </div>
+
+                <!-- Service Description -->
+                <div class="content-card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-align-left"></i> Service Description</h2>
+                    </div>
                     <div class="service-description">
-                        <h3>Description</h3>
-                        <?php echo nl2br(htmlspecialchars($service_data['description'])); ?>
+                        <?php if (!empty($service_data['description'])): ?>
+                            <?php echo nl2br(htmlspecialchars($service_data['description'])); ?>
+                        <?php else: ?>
+                            <p class="no-content">No description available</p>
+                        <?php endif; ?>
                     </div>
                 </div>
 
