@@ -2,3 +2,6 @@
 config/database.php
 config/config.php
 
+# Ignore database folder
+database/
+
