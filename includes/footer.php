@@ -1,80 +1,113 @@
 <footer class="bg-dark text-light py-5">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-4 col-md-6 mb-4">
-                <h5 class="text-primary mb-3">BusinessPro</h5>
-                <p class="text-light-emphasis">Professional automation & industrial solutions tailored to your needs. We help businesses grow and succeed with robust, secure systems.</p>
-                <div class="d-flex gap-2 mt-3">
-                    <a href="#" class="btn btn-outline-light btn-sm" aria-label="LinkedIn">
-                        <i class="fab fa-linkedin"></i>
-                    </a>
-                    <a href="#" class="btn btn-outline-light btn-sm" aria-label="Twitter">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-                    <a href="#" class="btn btn-outline-light btn-sm" aria-label="Facebook">
-                        <i class="fab fa-facebook"></i>
-                    </a>
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6">
+                <div class="mb-4">
+                    <h5 class="text-warning fw-bold mb-3">
+                        <i class="fas fa-cogs me-2"></i>AutomationPro
+                    </h5>
+                    <p class="text-light mb-4">Professional automation & industrial solutions tailored to your needs. We help businesses grow and succeed with robust, secure systems that drive innovation and efficiency.</p>
+                    <div class="d-flex gap-2">
+                        <a href="#" class="btn btn-outline-light btn-sm rounded-circle" style="width: 40px; height: 40px;" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="#" class="btn btn-outline-light btn-sm rounded-circle" style="width: 40px; height: 40px;" aria-label="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="btn btn-outline-light btn-sm rounded-circle" style="width: 40px; height: 40px;" aria-label="Facebook">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="#" class="btn btn-outline-light btn-sm rounded-circle" style="width: 40px; height: 40px;" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
 
-            <div class="col-lg-2 col-md-6 mb-4">
-                <h6 class="mb-3">Services</h6>
+            <div class="col-lg-2 col-md-6">
+                <h6 class="fw-bold text-warning mb-3">Quick Links</h6>
                 <ul class="list-unstyled">
-                    <li class="mb-2"><a href="services.php?category=Web Development" class="text-light-emphasis text-decoration-none">Web Development</a></li>
-                    <li class="mb-2"><a href="services.php?category=Mobile Apps" class="text-light-emphasis text-decoration-none">Mobile Apps</a></li>
-                    <li class="mb-2"><a href="services.php?category=Digital Marketing" class="text-light-emphasis text-decoration-none">Digital Marketing</a></li>
-                    <li class="mb-2"><a href="services.php?category=Consulting" class="text-light-emphasis text-decoration-none">Consulting</a></li>
+                    <li class="mb-2">
+                        <a href="index.php" class="text-light text-decoration-none d-flex align-items-center">
+                            <i class="fas fa-chevron-right me-2 text-warning" style="font-size: 0.7rem;"></i>Home
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="about.php" class="text-light text-decoration-none d-flex align-items-center">
+                            <i class="fas fa-chevron-right me-2 text-warning" style="font-size: 0.7rem;"></i>About Us
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="services.php" class="text-light text-decoration-none d-flex align-items-center">
+                            <i class="fas fa-chevron-right me-2 text-warning" style="font-size: 0.7rem;"></i>Services
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="contact.php" class="text-light text-decoration-none d-flex align-items-center">
+                            <i class="fas fa-chevron-right me-2 text-warning" style="font-size: 0.7rem;"></i>Contact
+                        </a>
+                    </li>
                 </ul>
             </div>
 
-            <div class="col-lg-3 col-md-6 mb-4">
-                <h6 class="mb-3">Contact</h6>
-                <div class="text-light-emphasis">
-                    <p class="mb-2">
-                        <i class="fas fa-envelope me-2"></i>
-                        <a href="mailto:info@businesspro.com" class="text-light-emphasis text-decoration-none">info@businesspro.com</a>
-                    </p>
-                    <p class="mb-2">
-                        <i class="fas fa-phone me-2"></i>
-                        <a href="tel:+15551234567" class="text-light-emphasis text-decoration-none">+1 (555) 123-4567</a>
-                    </p>
-                    <p class="mb-0">
-                        <i class="fas fa-map-marker-alt me-2"></i>
-                        123 Business St, City, State 12345
-                    </p>
+            <div class="col-lg-3 col-md-6">
+                <h6 class="fw-bold text-warning mb-3">Contact Info</h6>
+                <div class="mb-3">
+                    <div class="d-flex align-items-start mb-2">
+                        <i class="fas fa-map-marker-alt text-warning me-2 mt-1" style="font-size: 0.9rem;"></i>
+                        <span class="text-light small">123 Automation Street<br>Industrial City, State 12345</span>
+                    </div>
+                    <div class="d-flex align-items-center mb-2">
+                        <i class="fas fa-phone text-warning me-2" style="font-size: 0.9rem;"></i>
+                        <a href="tel:+15551234567" class="text-light text-decoration-none small">+1 (555) 123-4567</a>
+                    </div>
+                    <div class="d-flex align-items-center mb-2">
+                        <i class="fas fa-envelope text-warning me-2" style="font-size: 0.9rem;"></i>
+                        <a href="mailto:info@automationpro.com" class="text-light text-decoration-none small">info@automationpro.com</a>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-clock text-warning me-2" style="font-size: 0.9rem;"></i>
+                        <span class="text-light small">Mon - Fri: 9AM - 6PM</span>
+                    </div>
                 </div>
             </div>
 
-            <div class="col-lg-3 col-md-6 mb-4">
-                <h6 class="mb-3">Subscribe</h6>
-                <p class="text-light-emphasis mb-3">Get product updates, insights and tips — twice a month.</p>
-                <form action="#" method="post" class="d-flex flex-column gap-2">
-                    <div class="input-group">
-                        <input type="email" class="form-control" placeholder="you@company.com" required>
-                        <button class="btn btn-primary" type="submit">
+            <div class="col-lg-3 col-md-6">
+                <h6 class="fw-bold text-warning mb-3">Newsletter</h6>
+                <p class="text-light mb-3 small">Get product updates, insights and automation tips delivered to your inbox.</p>
+                <form action="#" method="post">
+                    <div class="input-group mb-3">
+                        <input type="email" class="form-control" placeholder="Enter your email" required>
+                        <button class="btn btn-warning" type="submit">
                             <i class="fas fa-paper-plane"></i>
                         </button>
                     </div>
                 </form>
+                <small class="text-muted">We respect your privacy. Unsubscribe anytime.</small>
             </div>
         </div>
 
-        <hr class="my-4 border-secondary">
+        <hr class="my-4 border-secondary opacity-25">
         
         <div class="row align-items-center">
             <div class="col-md-6">
-                <p class="mb-0 text-light-emphasis">&copy; <span id="current-year">2024</span> BusinessPro. All rights reserved.</p>
+                <p class="mb-0 text-light small">
+                    &copy; <span id="current-year">2024</span> AutomationPro. All rights reserved.
+                </p>
             </div>
-            <div class="col-md-6 text-md-end">
-                <a href="about.php" class="text-light-emphasis text-decoration-none me-3">About</a>
-                <a href="contact.php" class="text-light-emphasis text-decoration-none me-3">Contact</a>
-                <a href="services.php" class="text-light-emphasis text-decoration-none">All Services</a>
+            <div class="col-md-6 text-md-end mt-2 mt-md-0">
+                <div class="d-flex justify-content-md-end gap-3 flex-wrap">
+                    <a href="#" class="text-light text-decoration-none small">Privacy Policy</a>
+                    <a href="#" class="text-light text-decoration-none small">Terms of Service</a>
+                    <a href="#" class="text-light text-decoration-none small">Cookie Policy</a>
+                </div>
             </div>
         </div>
     </div>
 
     <!-- Back to top button -->
-    <button class="btn btn-primary position-fixed bottom-0 end-0 m-3" id="backToTop" style="display: none;" aria-label="Back to top">
+    <button class="btn btn-warning position-fixed bottom-0 end-0 m-3 rounded-circle shadow" 
+            id="backToTop" style="display: none; width: 50px; height: 50px;" aria-label="Back to top">
         <i class="fas fa-arrow-up"></i>
     </button>
 </footer>
