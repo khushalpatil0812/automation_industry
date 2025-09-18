@@ -21,8 +21,8 @@ include 'includes/header.php';
                 <div class="d-flex align-items-center justify-content-center h-100 position-relative">
                     <div class="container text-center text-white" data-aos="fade-up">
                         <span class="badge px-3 py-2 fs-6 mb-3" style="background-color: var(--color-platinum); color: var(--color-gunmetal);">Industry 4.0 Solutions</span>
-                        <h1 class="display-3 fw-bold mb-4">Transform Your <span style="color: var(--color-platinum);">Industrial Operations</span></h1>
-                        <p class="fs-5 mb-4 col-lg-8 mx-auto">Leading provider of cutting-edge automation solutions that revolutionize manufacturing processes and boost productivity</p>
+                        <h1 class="display-3 mb-4" style="font-weight: 900; text-shadow: 2px 2px 8px rgba(0,0,0,0.7), 0 0 20px rgba(0,0,0,0.5);">Transform Your <span style="color: var(--color-platinum); text-shadow: 2px 2px 8px rgba(0,0,0,0.8), 0 0 25px rgba(216,213,219,0.3);">Industrial Operations</span></h1>
+                        <p class="fs-5 mb-4 col-lg-8 mx-auto" style="text-shadow: 1px 1px 4px rgba(0,0,0,0.6);">Leading provider of cutting-edge automation solutions that revolutionize manufacturing processes and boost productivity</p>
                         <div class="d-flex gap-3 justify-content-center flex-wrap">
                             <a href="services.php" class="btn btn-lg px-4 py-3 fw-semibold" style="background-color: var(--color-platinum); color: var(--color-gunmetal); border: none;">
                                 <i class="fas fa-rocket me-2"></i>Explore Services
@@ -41,8 +41,8 @@ include 'includes/header.php';
                 <div class="d-flex align-items-center justify-content-center h-100 position-relative">
                     <div class="container text-center text-white" data-aos="fade-up">
                         <span class="badge text-white px-3 py-2 fs-6 mb-3" style="background-color: var(--color-gunmetal);">Smart Manufacturing</span>
-                        <h1 class="display-3 fw-bold mb-4">Advanced <span style="color: var(--color-gunmetal);">Robotics & AI</span></h1>
-                        <p class="fs-5 mb-4 col-lg-8 mx-auto">Harness the power of artificial intelligence and robotics to create intelligent, self-optimizing manufacturing systems</p>
+                        <h1 class="display-3 mb-4" style="font-weight: 900; text-shadow: 2px 2px 8px rgba(0,0,0,0.7), 0 0 20px rgba(0,0,0,0.5);">Advanced <span style="color: var(--color-gunmetal); text-shadow: 2px 2px 8px rgba(0,0,0,0.8), 0 0 25px rgba(33,37,41,0.4);">Robotics & AI</span></h1>
+                        <p class="fs-5 mb-4 col-lg-8 mx-auto" style="text-shadow: 1px 1px 4px rgba(0,0,0,0.6);">Harness the power of artificial intelligence and robotics to create intelligent, self-optimizing manufacturing systems</p>
                         <div class="d-flex gap-3 justify-content-center flex-wrap">
                             <a href="services.php" class="btn btn-lg px-4 py-3 fw-semibold" style="background-color: var(--color-gunmetal); color: white; border: none;">
                                 <i class="fas fa-robot me-2"></i>AI Solutions
@@ -61,8 +61,8 @@ include 'includes/header.php';
                 <div class="d-flex align-items-center justify-content-center h-100 position-relative">
                     <div class="container text-center text-white" data-aos="fade-up">
                         <span class="badge bg-success text-white px-3 py-2 fs-6 mb-3">Sustainable Future</span>
-                        <h1 class="display-3 fw-bold mb-4">Green <span class="text-success">Technology Solutions</span></h1>
-                        <p class="fs-5 mb-4 col-lg-8 mx-auto">Sustainable automation solutions that reduce environmental impact while maximizing operational efficiency</p>
+                        <h1 class="display-3 mb-4" style="font-weight: 900; text-shadow: 2px 2px 8px rgba(0,0,0,0.7), 0 0 20px rgba(0,0,0,0.5);">Green <span class="text-success" style="text-shadow: 2px 2px 8px rgba(0,0,0,0.8), 0 0 25px rgba(25,135,84,0.4);">Technology Solutions</span></h1>
+                        <p class="fs-5 mb-4 col-lg-8 mx-auto" style="text-shadow: 1px 1px 4px rgba(0,0,0,0.6);">Sustainable automation solutions that reduce environmental impact while maximizing operational efficiency</p>
                         <div class="d-flex gap-3 justify-content-center flex-wrap">
                             <a href="services.php" class="btn btn-success btn-lg px-4 py-3 fw-semibold">
                                 <i class="fas fa-leaf me-2"></i>Green Solutions
