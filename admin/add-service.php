@@ -70,7 +70,7 @@ if ($_POST) {
         // Handle file upload with better validation
         $image_path = '';
         if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
-            $upload_dir = '../uploads/services/';
+            $upload_dir = '../public/services/';
             if (!is_dir($upload_dir)) {
                 mkdir($upload_dir, 0755, true);
             }
@@ -83,12 +83,28 @@ if ($_POST) {
             } elseif ($_FILES['image']['size'] > $max_size) {
                 $errors[] = "File too large. Maximum size is 5MB.";
             } else {
-                $file_extension = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
-                $filename       = uniqid() . '.' . strtolower($file_extension);
-                $upload_path    = $upload_dir . $filename;
+                // Use original filename with some sanitization
+                $original_name = $_FILES['image']['name'];
+                $file_extension = pathinfo($original_name, PATHINFO_EXTENSION);
+                $base_name = pathinfo($original_name, PATHINFO_FILENAME);
+                
+                // Sanitize filename: remove special characters, spaces to hyphens
+                $safe_name = preg_replace('/[^a-zA-Z0-9\-_]/', '-', $base_name);
+                $safe_name = preg_replace('/-+/', '-', $safe_name); // Remove multiple hyphens
+                $safe_name = trim($safe_name, '-'); // Remove leading/trailing hyphens
+                
+                // Create final filename
+                $filename = $safe_name . '.' . strtolower($file_extension);
+                
+                // Check if file already exists, if so add timestamp
+                $upload_path = $upload_dir . $filename;
+                if (file_exists($upload_path)) {
+                    $filename = $safe_name . '-' . time() . '.' . strtolower($file_extension);
+                    $upload_path = $upload_dir . $filename;
+                }
 
                 if (move_uploaded_file($_FILES['image']['tmp_name'], $upload_path)) {
-                    $image_path = 'uploads/services/' . $filename;
+                    $image_path = 'public/services/' . $filename;
                 } else {
                     $errors[] = "Failed to upload image. Please try again.";
                 }

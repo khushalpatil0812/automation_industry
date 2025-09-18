@@ -699,8 +699,30 @@ include 'includes/admin-header.php';
                 <div class="card-body-pro">
                     <!-- Service Image -->
                     <div class="image-container">
-                        <?php if (!empty($service_data['image']) && file_exists('../uploads/services/' . $service_data['image'])): ?>
-                            <img src="../uploads/services/<?php echo htmlspecialchars($service_data['image']); ?>" 
+                        <?php 
+                        $image_found = false;
+                        $image_src = '';
+                        
+                        if (!empty($service_data['image'])) {
+                            // All images should be in public/services/ directory
+                            // Database stores path as: 'public/services/image-name.ext'
+                            if (strpos($service_data['image'], 'public/') === 0) {
+                                // Image path already includes 'public/' prefix
+                                $image_path = '../' . $service_data['image'];
+                            } else {
+                                // Assume it's just the filename, prepend the directory
+                                $image_path = '../public/services/' . $service_data['image'];
+                            }
+                            
+                            if (file_exists($image_path)) {
+                                $image_src = $image_path;
+                                $image_found = true;
+                            }
+                        }
+                        ?>
+                        
+                        <?php if ($image_found): ?>
+                            <img src="<?php echo htmlspecialchars($image_src); ?>" 
                                  alt="<?php echo htmlspecialchars($service_data['title']); ?>" 
                                  class="service-image" />
                         <?php else: ?>
@@ -708,6 +730,11 @@ include 'includes/admin-header.php';
                                 <i class="fas fa-image"></i>
                                 <p>No Image Available</p>
                                 <small>Upload an image to enhance this service's presentation</small>
+                                <?php if (!empty($service_data['image'])): ?>
+                                    <br><small style="color: #999; font-size: 0.7rem;">
+                                        Debug: Image not found at <?php echo htmlspecialchars($image_path ?? 'unknown path'); ?>
+                                    </small>
+                                <?php endif; ?>
                             </div>
                         <?php endif; ?>
                     </div>
