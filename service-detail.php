@@ -30,21 +30,21 @@ include 'includes/header.php';
 
 <main class="pt-5">
     <!-- Breadcrumb -->
-    <section class="py-3 bg-light">
+    <section class="py-3" style="background-color: #212529;">
         <div class="container">
             <nav aria-label="breadcrumb" data-aos="fade-right">
                 <ol class="breadcrumb mb-0">
-                    <li class="breadcrumb-item"><a href="index.php" class="text-decoration-none">Home</a></li>
-                    <li class="breadcrumb-item"><a href="services.php" class="text-decoration-none">Services</a></li>
-                    <li class="breadcrumb-item text-muted"><?php echo htmlspecialchars($service_data['category_name'] ?? 'Service'); ?></li>
-                    <li class="breadcrumb-item active" aria-current="page"><?php echo htmlspecialchars($service_data['title']); ?></li>
+                    <li class="breadcrumb-item"><a href="index.php" class="text-decoration-none" style="color: var(--color-platinum);">Home</a></li>
+                    <li class="breadcrumb-item"><a href="services.php" class="text-decoration-none" style="color: var(--color-platinum);">Services</a></li>
+                    <li class="breadcrumb-item text-light"><?php echo htmlspecialchars($service_data['category_name'] ?? 'Service'); ?></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page"><?php echo htmlspecialchars($service_data['title']); ?></li>
                 </ol>
             </nav>
         </div>
     </section>
 
     <!-- Service Hero Section -->
-    <section class="py-5">
+    <section class="py-5" style="background-color: #212529;">
         <div class="container">
             <div class="row align-items-center g-5">
                 <!-- Service Image -->
@@ -55,7 +55,7 @@ include 'includes/header.php';
                              class="img-fluid rounded-3 shadow-lg w-100"
                              style="height: 400px; object-fit: cover;">
                         <div class="position-absolute top-0 start-0 m-3">
-                            <span class="badge bg-primary px-3 py-2 fs-6">
+                            <span class="badge px-3 py-2 fs-6" style="background-color: var(--color-gunmetal); color: white;">
                                 <?php echo htmlspecialchars($service_data['category_name'] ?? 'Service'); ?>
                             </span>
                         </div>
@@ -65,16 +65,16 @@ include 'includes/header.php';
                 <!-- Service Info -->
                 <div class="col-lg-6" data-aos="fade-left">
                     <div class="mb-3">
-                        <span class="badge bg-success px-3 py-2">Professional Solution</span>
+                        <span class="badge px-3 py-2" style="background-color: #198754; color: white;">Professional Solution</span>
                     </div>
-                    <h1 class="display-5 fw-bold mb-4"><?php echo htmlspecialchars($service_data['title']); ?></h1>
-                    <p class="fs-5 text-muted mb-4 lh-lg"><?php echo htmlspecialchars($service_data['description']); ?></p>
+                    <h1 class="display-5 fw-bold mb-4 text-white"><?php echo htmlspecialchars($service_data['title']); ?></h1>
+                    <p class="fs-5 text-light opacity-75 mb-4 lh-lg"><?php echo htmlspecialchars($service_data['description']); ?></p>
                     
                     <div class="d-flex gap-3 flex-wrap">
-                        <a href="contact.php" class="btn btn-primary btn-lg px-4 py-3 fw-semibold">
+                        <a href="contact.php" class="btn btn-lg px-4 py-3 fw-semibold" style="background-color: var(--color-gunmetal); color: white; border: none;">
                             <i class="fas fa-rocket me-2"></i>Get Started
                         </a>
-                        <a href="services.php" class="btn btn-outline-secondary btn-lg px-4 py-3 fw-semibold">
+                        <a href="services.php" class="btn btn-lg px-4 py-3 fw-semibold" style="color: var(--color-french-gray); border: 1px solid var(--color-french-gray); background: transparent;">
                             <i class="fas fa-arrow-left me-2"></i>Back to Services
                         </a>
                     </div>
@@ -84,13 +84,13 @@ include 'includes/header.php';
     </section>
 
     <!-- Key Features Section -->
-    <section class="py-5 bg-light">
+    <section class="py-5" style="background-color: #212529;">
         <div class="container">
             <div class="row mb-5" data-aos="fade-up">
                 <div class="col-12 text-center">
-                    <span class="badge bg-secondary text-white px-3 py-2 fs-6 mb-3">Service Features</span>
-                    <h2 class="display-6 fw-bold text-dark mb-3">Key Features & Benefits</h2>
-                    <p class="fs-5 text-muted col-lg-8 mx-auto">Discover what makes this service exceptional and how it can benefit your business</p>
+                    <span class="badge text-white px-3 py-2 fs-6 mb-3" style="background-color: var(--color-french-gray);">Service Features</span>
+                    <h2 class="display-6 fw-bold text-white mb-3">Key Features & Benefits</h2>
+                    <p class="fs-5 text-light col-lg-8 mx-auto">Discover what makes this service exceptional and how it can benefit your business</p>
                 </div>
             </div>
             
@@ -102,7 +102,7 @@ include 'includes/header.php';
                         $color = $colors[$index % count($colors)];
                     ?>
                         <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="<?php echo $delay; ?>">
-                            <div class="card border-0 shadow-sm h-100">
+                            <div class="card border-0 shadow-sm h-100" style="background-color: #343a40;">
                                 <div class="card-body p-4">
                                     <div class="d-flex align-items-start">
                                         <div class="bg-<?php echo $color; ?> bg-gradient rounded-circle d-flex align-items-center justify-content-center me-3 flex-shrink-0" 
@@ -110,8 +110,8 @@ include 'includes/header.php';
                                             <i class="fas fa-check text-white"></i>
                                         </div>
                                         <div>
-                                            <h5 class="fw-bold mb-2"><?php echo htmlspecialchars(trim($feature)); ?></h5>
-                                            <p class="text-muted mb-0 small">Advanced feature that enhances your operational efficiency and productivity.</p>
+                                            <h5 class="fw-bold mb-2 text-white"><?php echo htmlspecialchars(trim($feature)); ?></h5>
+                                            <p class="text-light opacity-75 mb-0 small">Advanced feature that enhances your operational efficiency and productivity.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -132,44 +132,44 @@ include 'includes/header.php';
     </section>
 
     <!-- Service Benefits Section -->
-    <section class="py-5">
+    <section class="py-5" style="background-color: #212529;">
         <div class="container">
             <div class="row align-items-center g-5">
                 <div class="col-lg-6" data-aos="fade-right">
-                    <h2 class="display-6 fw-bold mb-4">Why Choose This Solution?</h2>
-                    <p class="fs-5 text-muted mb-4">This automation solution provides comprehensive benefits that transform your business operations and drive measurable results.</p>
+                    <h2 class="display-6 fw-bold mb-4 text-white">Why Choose This Solution?</h2>
+                    <p class="fs-5 text-light opacity-75 mb-4">This automation solution provides comprehensive benefits that transform your business operations and drive measurable results.</p>
                     
                     <div class="row g-3">
                         <div class="col-md-6">
-                            <div class="d-flex align-items-center p-3 bg-light rounded-3">
+                            <div class="d-flex align-items-center p-3 rounded-3" style="background-color: #343a40;">
                                 <div class="bg-primary bg-gradient rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px;">
                                     <i class="fas fa-bolt text-white"></i>
                                 </div>
                                 <div>
-                                    <h6 class="fw-bold mb-1">Fast Implementation</h6>
-                                    <small class="text-muted">Quick deployment</small>
+                                    <h6 class="fw-bold mb-1 text-white">Fast Implementation</h6>
+                                    <small class="text-light opacity-75">Quick deployment</small>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="d-flex align-items-center p-3 bg-light rounded-3">
+                            <div class="d-flex align-items-center p-3 rounded-3" style="background-color: #343a40;">
                                 <div class="bg-success bg-gradient rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px;">
                                     <i class="fas fa-shield-alt text-white"></i>
                                 </div>
                                 <div>
-                                    <h6 class="fw-bold mb-1">Reliable Support</h6>
-                                    <small class="text-muted">24/7 assistance</small>
+                                    <h6 class="fw-bold mb-1 text-white">Reliable Support</h6>
+                                    <small class="text-light opacity-75">24/7 assistance</small>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="d-flex align-items-center p-3 bg-light rounded-3">
+                            <div class="d-flex align-items-center p-3 rounded-3" style="background-color: #343a40;">
                                 <div class="bg-warning bg-gradient rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px;">
                                     <i class="fas fa-chart-line text-white"></i>
                                 </div>
                                 <div>
-                                    <h6 class="fw-bold mb-1">Proven ROI</h6>
-                                    <small class="text-muted">Measurable results</small>
+                                    <h6 class="fw-bold mb-1 text-white">Proven ROI</h6>
+                                    <small class="text-light opacity-75">Measurable results</small>
                                 </div>
                             </div>
                         </div>
@@ -199,7 +199,7 @@ include 'includes/header.php';
     </section>
 
     <!-- Call to Action Section -->
-    <section class="py-5 bg-primary text-white">
+    <section class="py-5 text-white" style="background-color: #212529;">
         <div class="container">
             <div class="row align-items-center" data-aos="fade-up">
                 <div class="col-lg-8">
@@ -207,7 +207,7 @@ include 'includes/header.php';
                     <p class="fs-5 mb-0">Contact us today to discuss how this service can transform your business operations and drive measurable results.</p>
                 </div>
                 <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
-                    <a href="contact.php" class="btn btn-warning btn-lg px-4 py-3 fw-semibold me-3">
+                    <a href="contact.php" class="btn btn-lg px-4 py-3 fw-semibold me-3" style="background-color: var(--color-platinum); color: var(--color-gunmetal); border: none;">
                         <i class="fas fa-phone me-2"></i>Contact Us Now
                     </a>
                 </div>
@@ -216,13 +216,13 @@ include 'includes/header.php';
     </section>
 
     <!-- Related Services Section -->
-    <section class="py-5 bg-light">
+    <section class="py-5" style="background-color: #212529;">
         <div class="container">
             <div class="row mb-5" data-aos="fade-up">
                 <div class="col-12 text-center">
-                    <span class="badge bg-secondary text-white px-3 py-2 fs-6 mb-3">Related Solutions</span>
-                    <h2 class="display-6 fw-bold text-dark mb-3">You Might Also Like</h2>
-                    <p class="fs-5 text-muted">Explore other automation services that complement this solution</p>
+                    <span class="badge text-white px-3 py-2 fs-6 mb-3" style="background-color: var(--color-french-gray);">Related Solutions</span>
+                    <h2 class="display-6 fw-bold text-white mb-3">You Might Also Like</h2>
+                    <p class="fs-5 text-light">Explore other automation services that complement this solution</p>
                 </div>
             </div>
             
@@ -243,21 +243,21 @@ include 'includes/header.php';
                         $delay = ($index + 1) * 100;
                 ?>
                     <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="<?php echo $delay; ?>">
-                        <div class="card border-0 shadow-sm h-100" style="cursor: pointer;" onclick="window.location.href='service-detail.php?id=<?php echo $related_service['id']; ?>'">
+                        <div class="card border-0 shadow-sm h-100" style="cursor: pointer; background-color: #343a40;" onclick="window.location.href='service-detail.php?id=<?php echo $related_service['id']; ?>'">
                             <div class="position-relative overflow-hidden">
                                 <img src="<?php echo htmlspecialchars($related_service['image']); ?>" 
                                      class="card-img-top" alt="<?php echo htmlspecialchars($related_service['title']); ?>" 
                                      style="height: 200px; object-fit: cover;">
                                 <div class="position-absolute top-0 start-0 m-3">
-                                    <span class="badge bg-primary"><?php echo htmlspecialchars($related_service['category_name'] ?? 'Service'); ?></span>
+                                    <span class="badge" style="background-color: var(--color-gunmetal); color: white;"><?php echo htmlspecialchars($related_service['category_name'] ?? 'Service'); ?></span>
                                 </div>
                             </div>
                             <div class="card-body p-4">
-                                <h5 class="fw-bold mb-3"><?php echo htmlspecialchars($related_service['title']); ?></h5>
-                                <p class="text-muted mb-3">
+                                <h5 class="fw-bold mb-3 text-white"><?php echo htmlspecialchars($related_service['title']); ?></h5>
+                                <p class="text-light opacity-75 mb-3">
                                     <?php echo htmlspecialchars(substr($related_service['description'], 0, 100)) . '...'; ?>
                                 </p>
-                                <span class="text-primary fw-semibold">
+                                <span class="fw-semibold" style="color: var(--color-platinum);">
                                     View Details <i class="fas fa-arrow-right ms-1"></i>
                                 </span>
                             </div>

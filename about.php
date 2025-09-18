@@ -1,12 +1,53 @@
 <?php
 require_once 'config/config.php';
-$page_title = 'About Us - Automation Industry Solutions';
+$page_title = 'About Us - Automation Indus                <div class="col-lg-3 col-md-6" da                <div class=                <div class=                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="card border-0 shadow-sm text-center" style="background-color: #343a40;">
+                        <div class="card-body p-4">
+                            <div class="position-relative d-inline-block mb-3">
+                                <img src="public/icons/placeholder-user.jpg" 
+                                     alt="David Chen" 
+                                     class="rounded-circle" 
+                                     style="width: 120px; height: 120px; object-fit: cover;">
+                            </div>
+                            <h5 class="fw-bold mb-1 text-white">David Chen</h5>
+                            <p class="text-warning fw-semibold mb-2">Lead Engineer</p>
+                            <p class="text-light opacity-75 small">Specialist in IoT integration and process optimization systems</p>l-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="card border-0 shadow-sm text-center" style="background-color: #343a40;">
+                        <div class="card-body p-4">
+                            <div class="position-relative d-inline-block mb-3">
+                                <img src="public/icons/placeholder-user.jpg" 
+                                     alt="Sarah Mitchell" 
+                                     class="rounded-circle" 
+                                     style="width: 120px; height: 120px; object-fit: cover;">
+                            </div>
+                            <h5 class="fw-bold mb-1 text-white">Sarah Mitchell</h5>
+                            <p class="text-success fw-semibold mb-2">CTO</p>
+                            <p class="text-light opacity-75 small">Expert in AI and robotics with PhD in Mechanical Engineering</p>l-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="card border-0 shadow-sm text-center" style="background-color: #343a40;">
+                        <div class="card-body p-4">
+                            <div class="position-relative d-inline-block mb-3">
+                                <img src="public/icons/placeholder-user.jpg" 
+                                     alt="John Anderson" 
+                                     class="rounded-circle" 
+                                     style="width: 120px; height: 120px; object-fit: cover;">
+                            </div>
+                            <h5 class="fw-bold mb-1 text-white">John Anderson</h5>
+                            <p class="fw-semibold mb-2" style="color: var(--color-platinum);">CEO & Founder</p>
+                            <p class="text-light opacity-75 small">15+ years of experience in industrial automation and strategic business development</p>-left" data-aos-delay="300">
+                    <div class="card border-0 shadow-sm h-100 text-center" style="background-color: #343a40;">
+                        <div class="card-body p-4">
+                            <div class="bg-success bg-gradient rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
+                                 style="width: 80px; height: 80px;">
+                                <i class="fas fa-trophy text-white fs-2"></i>
+                            </div>
+                            <h4 class="fw-bold mb-3 text-white">Excellence</h4>
+                            <p class="text-light opacity-75">Delivering the highest quality in everything we do, exceeding expectations</p>ions';
 include 'includes/header.php';
 ?>
 
 <main class="pt-5">
     <!-- Hero Section -->
-    <section class="py-5 bg-primary text-white">
+    <section class="py-5 text-white" style="background-color: #212529;">
         <div class="container">
             <div class="row align-items-center min-vh-50">
                 <div class="col-lg-6" data-aos="fade-right">
@@ -45,39 +86,39 @@ include 'includes/header.php';
     </section>
 
     <!-- Core Values Section -->
-    <section class="py-5 bg-light">
+    <section class="py-5" style="background-color: #212529;">
         <div class="container">
             <div class="row mb-5" data-aos="fade-up">
                 <div class="col-12 text-center">
-                    <span class="badge bg-primary text-white px-3 py-2 fs-6 mb-3">Core Values</span>
-                    <h2 class="display-5 fw-bold text-dark mb-3">What Drives Us Forward</h2>
-                    <p class="fs-5 text-muted col-lg-8 mx-auto">Our fundamental principles that guide every decision and innovation</p>
+                    <span class="badge text-white px-3 py-2 fs-6 mb-3" style="background-color: var(--color-gunmetal);">Core Values</span>
+                    <h2 class="display-5 fw-bold text-white mb-3">What Drives Us Forward</h2>
+                    <p class="fs-5 text-light col-lg-8 mx-auto">Our fundamental principles that guide every decision and innovation</p>
                 </div>
             </div>
             
             <div class="row g-4">
                 <div class="col-lg-3 col-md-6" data-aos="flip-left" data-aos-delay="100">
-                    <div class="card border-0 shadow-sm h-100 text-center">
+                    <div class="card border-0 shadow-sm h-100 text-center" style="background-color: #343a40;">
                         <div class="card-body p-4">
                             <div class="bg-warning bg-gradient rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
                                  style="width: 80px; height: 80px;">
                                 <i class="fas fa-lightbulb text-white fs-2"></i>
                             </div>
-                            <h4 class="fw-bold mb-3">Innovation</h4>
-                            <p class="text-muted">Constantly pushing boundaries to create cutting-edge solutions that transform industries</p>
+                            <h4 class="fw-bold mb-3 text-white">Innovation</h4>
+                            <p class="text-light opacity-75">Constantly pushing boundaries to create cutting-edge solutions that transform industries</p>
                         </div>
                     </div>
                 </div>
                 
                 <div class="col-lg-3 col-md-6" data-aos="flip-left" data-aos-delay="200">
-                    <div class="card border-0 shadow-sm h-100 text-center">
+                    <div class="card border-0 shadow-sm h-100 text-center" style="background-color: #343a40;">
                         <div class="card-body p-4">
                             <div class="bg-primary bg-gradient rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
                                  style="width: 80px; height: 80px;">
                                 <i class="fas fa-handshake text-white fs-2"></i>
                             </div>
-                            <h4 class="fw-bold mb-3">Collaboration</h4>
-                            <p class="text-muted">Working together with clients and partners to achieve exceptional results</p>
+                            <h4 class="fw-bold mb-3 text-white">Collaboration</h4>
+                            <p class="text-light opacity-75">Working together with clients and partners to achieve exceptional results</p>
                         </div>
                     </div>
                 </div>
@@ -96,14 +137,14 @@ include 'includes/header.php';
                 </div>
                 
                 <div class="col-lg-3 col-md-6" data-aos="flip-left" data-aos-delay="400">
-                    <div class="card border-0 shadow-sm h-100 text-center">
+                    <div class="card border-0 shadow-sm h-100 text-center" style="background-color: #343a40;">
                         <div class="card-body p-4">
                             <div class="bg-info bg-gradient rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
                                  style="width: 80px; height: 80px;">
                                 <i class="fas fa-leaf text-white fs-2"></i>
                             </div>
-                            <h4 class="fw-bold mb-3">Sustainability</h4>
-                            <p class="text-muted">Creating solutions that protect our environment for future generations</p>
+                            <h4 class="fw-bold mb-3 text-white">Sustainability</h4>
+                            <p class="text-light opacity-75">Creating solutions that protect our environment for future generations</p>
                         </div>
                     </div>
                 </div>
@@ -112,13 +153,13 @@ include 'includes/header.php';
     </section>
 
     <!-- Team Section -->
-    <section class="py-5">
+    <section class="py-5" style="background-color: #212529;">
         <div class="container">
             <div class="row mb-5" data-aos="fade-up">
                 <div class="col-12 text-center">
-                    <span class="badge bg-secondary text-white px-3 py-2 fs-6 mb-3">Our Team</span>
-                    <h2 class="display-5 fw-bold text-dark mb-3">The Innovators Behind Our Success</h2>
-                    <p class="fs-5 text-muted col-lg-8 mx-auto">Meet the experts who make automation dreams a reality</p>
+                    <span class="badge text-white px-3 py-2 fs-6 mb-3" style="background-color: var(--color-french-gray);">Our Team</span>
+                    <h2 class="display-5 fw-bold text-white mb-3">The Innovators Behind Our Success</h2>
+                    <p class="fs-5 text-light col-lg-8 mx-auto">Meet the experts who make automation dreams a reality</p>
                 </div>
             </div>
             
@@ -175,35 +216,35 @@ include 'includes/header.php';
     </section>
 
     <!-- Global Presence Section -->
-    <section class="py-5 bg-light">
+    <section class="py-5" style="background-color: #212529;">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6" data-aos="fade-up">
-                    <span class="badge bg-info text-white px-3 py-2 fs-6 mb-3">Global Impact</span>
-                    <h2 class="display-5 fw-bold text-dark mb-4">Worldwide Presence</h2>
+                    <span class="badge text-white px-3 py-2 fs-6 mb-3" style="background-color: #17a2b8;">Global Impact</span>
+                    <h2 class="display-5 fw-bold text-white mb-4">Worldwide Presence</h2>
                     
                     <div class="row g-3">
                         <div class="col-md-4">
-                            <div class="text-center p-3 bg-white rounded-3 shadow-sm">
-                                <h3 class="fw-bold text-primary mb-1">25+</h3>
-                                <p class="text-muted mb-0 small">Countries</p>
+                            <div class="text-center p-3 rounded-3 shadow-sm" style="background-color: #343a40;">
+                                <h3 class="fw-bold text-white mb-1">25+</h3>
+                                <p class="text-light opacity-75 mb-0 small">Countries</p>
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <div class="text-center p-3 bg-white rounded-3 shadow-sm">
-                                <h3 class="fw-bold text-success mb-1">150+</h3>
-                                <p class="text-muted mb-0 small">Partners</p>
+                            <div class="text-center p-3 rounded-3 shadow-sm" style="background-color: #343a40;">
+                                <h3 class="fw-bold text-white mb-1">150+</h3>
+                                <p class="text-light opacity-75 mb-0 small">Partners</p>
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <div class="text-center p-3 bg-white rounded-3 shadow-sm">
-                                <h3 class="fw-bold text-warning mb-1">500k+</h3>
-                                <p class="text-muted mb-0 small">Users</p>
+                            <div class="text-center p-3 rounded-3 shadow-sm" style="background-color: #343a40;">
+                                <h3 class="fw-bold text-white mb-1">500k+</h3>
+                                <p class="text-light opacity-75 mb-0 small">Users</p>
                             </div>
                         </div>
                     </div>
                     
-                    <p class="mt-4 text-muted">Our solutions are deployed across industries worldwide, from automotive manufacturing in Germany to semiconductor facilities in Asia, helping companies achieve unprecedented levels of efficiency and innovation.</p>
+                    <p class="mt-4 text-light opacity-75">Our solutions are deployed across industries worldwide, from automotive manufacturing in Germany to semiconductor facilities in Asia, helping companies achieve unprecedented levels of efficiency and innovation.</p>
                 </div>
                 <div class="col-lg-6" data-aos="zoom-in">
                     <div class="text-center">
@@ -217,7 +258,7 @@ include 'includes/header.php';
     </section>
 
     <!-- Call to Action -->
-    <section class="py-5 bg-primary text-white">
+    <section class="py-5 text-white" style="background-color: #212529;">
         <div class="container">
             <div class="row align-items-center" data-aos="fade-up">
                 <div class="col-lg-8">
@@ -225,7 +266,7 @@ include 'includes/header.php';
                     <p class="fs-5 mb-0">Join us in shaping the future of manufacturing with innovative automation solutions that drive success.</p>
                 </div>
                 <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
-                    <a href="contact.php" class="btn btn-warning btn-lg px-4 py-3 fw-semibold me-3">
+                    <a href="contact.php" class="btn btn-lg px-4 py-3 fw-semibold me-3" style="background-color: var(--color-platinum); color: var(--color-gunmetal); border: none;">
                         <i class="fas fa-phone me-2"></i>Get Started
                     </a>
                     <a href="services.php" class="btn btn-outline-light btn-lg px-4 py-3 fw-semibold">
