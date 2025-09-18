@@ -22,14 +22,52 @@ if ($_POST) {
     ini_set('display_errors', 1);
 
     $title       = trim($_POST['title'] ?? '');
-    $category_id = $_POST['category_id'] ?? '';
+    $category_id = intval($_POST['category_id'] ?? 0);
     $description = trim($_POST['description'] ?? '');
     $features    = trim($_POST['features'] ?? '');
+    
+    $errors = [];
 
-    if (empty($title) || empty($category_id) || empty($description)) {
-        $message = '<div class="alert alert-error">Please fill in all required fields.</div>';
+    // Validation
+    if (empty($title)) {
+        $errors[] = "Service title is required.";
+    } elseif (strlen($title) < 3) {
+        $errors[] = "Service title must be at least 3 characters long.";
+    } elseif (strlen($title) > 255) {
+        $errors[] = "Service title must be less than 255 characters.";
+    }
+
+    if ($category_id <= 0) {
+        $errors[] = "Please select a valid category.";
+    }
+
+    if (empty($description)) {
+        $errors[] = "Service description is required.";
+    } elseif (strlen($description) < 10) {
+        $errors[] = "Description must be at least 10 characters long.";
+    }
+
+    // Validate category exists
+    $validCategories = $service->getCategoriesWithDetails();
+    $categoryExists = false;
+    foreach($validCategories as $cat) {
+        if ($cat['id'] == $category_id) {
+            $categoryExists = true;
+            break;
+        }
+    }
+    if (!$categoryExists) {
+        $errors[] = "Selected category does not exist.";
+    }
+
+    if (!empty($errors)) {
+        $message = '<div class="alert alert-error"><strong>Please fix the following errors:</strong><ul>';
+        foreach($errors as $error) {
+            $message .= '<li>' . htmlspecialchars($error) . '</li>';
+        }
+        $message .= '</ul></div>';
     } else {
-        // Handle file upload
+        // Handle file upload with better validation
         $image_path = '';
         if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
             $upload_dir = '../uploads/services/';
@@ -37,25 +75,52 @@ if ($_POST) {
                 mkdir($upload_dir, 0755, true);
             }
 
-            $file_extension = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
-            $filename       = uniqid() . '.' . $file_extension;
-            $upload_path    = $upload_dir . $filename;
+            $allowed_types = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+            $max_size = 5 * 1024 * 1024; // 5MB
 
-            if (move_uploaded_file($_FILES['image']['tmp_name'], $upload_path)) {
-                $image_path = 'uploads/services/' . $filename;
+            if (!in_array($_FILES['image']['type'], $allowed_types)) {
+                $errors[] = "Invalid file type. Please upload JPG, PNG, GIF, or WebP images.";
+            } elseif ($_FILES['image']['size'] > $max_size) {
+                $errors[] = "File too large. Maximum size is 5MB.";
+            } else {
+                $file_extension = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+                $filename       = uniqid() . '.' . strtolower($file_extension);
+                $upload_path    = $upload_dir . $filename;
+
+                if (move_uploaded_file($_FILES['image']['tmp_name'], $upload_path)) {
+                    $image_path = 'uploads/services/' . $filename;
+                } else {
+                    $errors[] = "Failed to upload image. Please try again.";
+                }
             }
+        } elseif (isset($_FILES['image']) && $_FILES['image']['error'] !== UPLOAD_ERR_NO_FILE) {
+            $errors[] = "Image upload error: " . $_FILES['image']['error'];
         }
 
-        if ($service->createService($title, $category_id, $description, $image_path, $features)) {
-            header('Location: manage-services.php');
-            exit;
+        if (empty($errors)) {
+            try {
+                if ($service->createService($title, $category_id, $description, $image_path, $features)) {
+                    $message = '<div class="alert alert-success"><strong>Success!</strong> Service "' . htmlspecialchars($title) . '" has been added successfully! <a href="manage-services.php">View all services</a></div>';
+                    // Clear form data after successful submission
+                    $_POST = [];
+                } else {
+                    $message = '<div class="alert alert-error"><strong>Database Error:</strong> Failed to add service. Please check your database connection and try again.</div>';
+                }
+            } catch (Exception $e) {
+                $message = '<div class="alert alert-error"><strong>Error:</strong> ' . htmlspecialchars($e->getMessage()) . '</div>';
+                error_log("Service creation error: " . $e->getMessage());
+            }
         } else {
-            $message = '<div class="alert alert-error">Error adding service. Please check your inputs and database connection.</div>';
+            $message = '<div class="alert alert-error"><strong>Upload Error:</strong><ul>';
+            foreach($errors as $error) {
+                $message .= '<li>' . htmlspecialchars($error) . '</li>';
+            }
+            $message .= '</ul></div>';
         }
     }
 }
 
-$categories = $category->getAllCategories();
+$categories = $service->getCategoriesWithDetails();
 ?>
 
 <?php include 'includes/admin-header.php'; ?>
@@ -300,6 +365,27 @@ $categories = $category->getAllCategories();
             border: 1px solid #ef9a9a;
         }
         
+        .alert-success {
+            background-color: #e8f5e8;
+            color: #2e7d32;
+            border: 1px solid #a5d6a7;
+        }
+        
+        .alert ul {
+            margin: 10px 0 0 20px;
+            padding: 0;
+        }
+        
+        .alert li {
+            margin-bottom: 5px;
+        }
+        
+        .alert a {
+            color: inherit;
+            text-decoration: underline;
+            font-weight: bold;
+        }
+        
         @media (max-width: 768px) {
             .form-grid {
                 grid-template-columns: 1fr;
@@ -335,7 +421,13 @@ $categories = $category->getAllCategories();
                             <!-- Service Title -->
                             <div class="form-group">
                                 <label for="title">Service Title *</label>
-                                <input type="text" id="title" name="title" required class="form-input">
+                                <input type="text" 
+                                       id="title" 
+                                       name="title" 
+                                       required 
+                                       class="form-input"
+                                       value="<?php echo isset($_POST['title']) ? htmlspecialchars($_POST['title']) : ''; ?>"
+                                       placeholder="Enter a descriptive service title">
                             </div>
                             
                             <!-- Category -->
@@ -344,7 +436,8 @@ $categories = $category->getAllCategories();
                                 <select id="category_id" name="category_id" required class="form-input">
                                     <option value="">Select Category</option>
                                     <?php foreach ($categories as $cat): ?>
-                                        <option value="<?php echo $cat['id']; ?>">
+                                        <option value="<?php echo $cat['id']; ?>" 
+                                                <?php echo (isset($_POST['category_id']) && $_POST['category_id'] == $cat['id']) ? 'selected' : ''; ?>>
                                             <?php echo htmlspecialchars($cat['name']); ?>
                                         </option>
                                     <?php endforeach; ?>
@@ -354,13 +447,22 @@ $categories = $category->getAllCategories();
                             <!-- Description -->
                             <div class="form-group full-width">
                                 <label for="description">Description *</label>
-                                <textarea id="description" name="description" rows="6" required class="form-input" placeholder="Provide a detailed description of the service..."></textarea>
+                                <textarea id="description" 
+                                         name="description" 
+                                         rows="6" 
+                                         required 
+                                         class="form-input" 
+                                         placeholder="Provide a detailed description of the service..."><?php echo isset($_POST['description']) ? htmlspecialchars($_POST['description']) : ''; ?></textarea>
                             </div>
                             
                             <!-- Features -->
                             <div class="form-group full-width">
                                 <label for="features">Features (one per line)</label>
-                                <textarea id="features" name="features" rows="8" placeholder="Enter each feature on a new line&#10;Example:&#10;Feature 1&#10;Feature 2&#10;Feature 3" class="form-input"></textarea>
+                                <textarea id="features" 
+                                         name="features" 
+                                         rows="8" 
+                                         placeholder="Enter each feature on a new line&#10;Example:&#10;Feature 1&#10;Feature 2&#10;Feature 3" 
+                                         class="form-input"><?php echo isset($_POST['features']) ? htmlspecialchars($_POST['features']) : ''; ?></textarea>
                             </div>
                             
                             <!-- Image Upload -->
@@ -383,6 +485,7 @@ $categories = $category->getAllCategories();
                         <div class="form-actions">
                             <button type="submit" class="btn btn-primary">Add Service</button>
                             <a href="manage-services.php" class="btn btn-secondary">Cancel</a>
+                            <a href="test-database.php" class="btn btn-secondary" style="background: #17a2b8; color: white;">Test Database</a>
                         </div>
                     </form>
                 </div>

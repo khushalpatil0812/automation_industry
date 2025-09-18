@@ -92,7 +92,7 @@ if (isset($_POST['delete_category'])) {
 
 // Get all services and categories
 $services = $service->getAllServices();
-$categories = $category->getAllCategories();
+$categories = $service->getCategoriesWithDetails();
 ?>
 
 <?php include 'includes/admin-header.php'; ?>
@@ -882,10 +882,17 @@ $(document).ready(function() {
         order: [[4, 'desc']], // Sort by created date
         columnDefs: [
             { orderable: false, targets: [0, 5] }, // Disable sorting for checkbox and actions
-            { searchable: false, targets: [0, 5] }
+            { searchable: false, targets: [0, 5] }, // Disable search for checkbox and actions
+            { width: "5%", targets: 0 }, // Checkbox column
+            { width: "35%", targets: 1 }, // Service details
+            { width: "15%", targets: 2 }, // Category
+            { width: "10%", targets: 3 }, // Status
+            { width: "15%", targets: 4 }, // Created date
+            { width: "20%", targets: 5 }  // Actions
         ],
         language: {
-            search: "Search:",
+            search: "",
+            searchPlaceholder: "Search services...",
             lengthMenu: "Show _MENU_ entries",
             info: "Showing _START_ to _END_ of _TOTAL_ services",
             infoEmpty: "No services available",
@@ -897,8 +904,13 @@ $(document).ready(function() {
                 previous: "Previous"
             }
         },
-        dom: '<"row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>rtip'
+        dom: '<"row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6">>rtip',
+        searching: true,
+        searchHighlight: true
     });
+
+    // Hide the default DataTables search box
+    $('.dataTables_filter').hide();
 
     // Custom search functionality
     $('#serviceSearch').on('keyup', function() {
@@ -908,11 +920,7 @@ $(document).ready(function() {
     // Category filter
     $('#categoryFilter').on('change', function() {
         const selectedCategory = this.value;
-        if (selectedCategory === '') {
-            servicesTable.column(2).search('').draw();
-        } else {
-            servicesTable.column(2).search(selectedCategory).draw();
-        }
+        servicesTable.column(2).search(selectedCategory).draw();
     });
 
     // Status filter

@@ -34,7 +34,7 @@ try {
 
 // Get categories with error handling
 try {
-    $categories = $service->getCategories();
+    $categories = $service->getCategoriesWithDetails();
     if (!is_array($categories)) {
         $categories = [];
     }
