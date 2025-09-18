@@ -109,35 +109,10 @@
                             <i class="fas fa-building me-1"></i>About Us
                         </a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle px-3 <?php echo basename($_SERVER['PHP_SELF']) == 'services.php' ? 'active' : ''; ?>" 
-                           href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <li class="nav-item">
+                        <a class="nav-link px-3 <?php echo basename($_SERVER['PHP_SELF']) == 'services.php' ? 'active' : ''; ?>" href="services.php">
                             <i class="fas fa-tools me-1"></i>Services
                         </a>
-                        <ul class="dropdown-menu shadow">
-                            <?php
-                            try {
-                                require_once 'classes/Service.php';
-                                $service = new Service();
-                                $categories = $service->getCategories();
-                                foreach ($categories as $category): ?>
-                                    <li><a class="dropdown-item rounded" href="services.php?category=<?php echo urlencode($category); ?>">
-                                        <i class="fas fa-chevron-right me-2" style="color: var(--color-gunmetal);"></i><?php echo htmlspecialchars($category); ?>
-                                    </a></li>
-                                <?php endforeach;
-                            } catch (Exception $e) {
-                                // Fallback menu if database is not available
-                                echo '<li><a class="dropdown-item rounded" href="services.php"><i class="fas fa-chevron-right me-2" style="color: var(--color-gunmetal);"></i>Industrial Automation</a></li>';
-                                echo '<li><a class="dropdown-item rounded" href="services.php"><i class="fas fa-chevron-right me-2" style="color: var(--color-gunmetal);"></i>Robotics Solutions</a></li>';
-                                echo '<li><a class="dropdown-item rounded" href="services.php"><i class="fas fa-chevron-right me-2" style="color: var(--color-gunmetal);"></i>IoT Integration</a></li>';
-                                echo '<li><a class="dropdown-item rounded" href="services.php"><i class="fas fa-chevron-right me-2" style="color: var(--color-gunmetal);"></i>Process Control</a></li>';
-                            }
-                            ?>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item rounded" href="services.php">
-                                <i class="fas fa-list me-2" style="color: var(--color-gunmetal);"></i>All Services
-                            </a></li>
-                        </ul>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link px-3 <?php echo basename($_SERVER['PHP_SELF']) == 'contact.php' ? 'active' : ''; ?>" href="contact.php">

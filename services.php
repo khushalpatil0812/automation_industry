@@ -23,12 +23,17 @@ include 'includes/header.php';
 
 <main class="pt-5">
     <!-- Page Header -->
-    <section class="py-5 text-white" style="background: var(--gradient-primary);">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 text-center" data-aos="fade-up">
-                    <h1 class="display-4 fw-bold mb-3">Our Services</h1>
-                    <p class="fs-5 col-lg-8 mx-auto">Comprehensive automation solutions tailored to transform your business operations and drive success</p>
+    <section class="py-5 position-relative text-white" style="background: #212529; overflow: hidden;">
+        <div class="container position-relative" style="z-index: 1;">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-lg-10 text-center" data-aos="fade-up">
+                    <div class="mb-4">
+                        <span class="d-inline-flex align-items-center justify-content-center rounded-circle shadow-lg mb-3" style="width: 70px; height: 70px; background: rgba(33,37,41,0.7); border: 2px solid #fff;">
+                            <i class="fas fa-cogs fa-2x text-white"></i>
+                        </span>
+                    </div>
+                    <h1 class="display-3 fw-bold mb-3" style="letter-spacing: 1px;">Our Services</h1>
+                    <p class="fs-4 col-lg-8 mx-auto mb-0 opacity-85">Comprehensive automation solutions tailored to transform your business operations and drive success</p>
                 </div>
             </div>
         </div>
@@ -37,20 +42,18 @@ include 'includes/header.php';
     <!-- Services Section -->
     <section class="py-5" style="background-color: #212529;">
         <div class="container">
-            <!-- Category Filter -->
+            <!-- Service Category Dropdown -->
             <div class="row mb-5" data-aos="fade-up">
-                <div class="col-12">
-                    <div class="d-flex flex-wrap justify-content-center gap-2">
-                        <button class="btn filter-btn" style="<?php echo !$selected_category ? 'background-color: var(--color-gunmetal); color: white; border: none;' : 'color: var(--color-gunmetal); border: 1px solid var(--color-gunmetal); background: transparent;'; ?>" 
-                                onclick="filterServices('')">
-                            <i class="fas fa-th-large me-2"></i>All Services
-                        </button>
-                        <?php foreach ($categories as $category): ?>
-                            <button class="btn filter-btn" style="<?php echo $selected_category === $category ? 'background-color: var(--color-gunmetal); color: white; border: none;' : 'color: var(--color-gunmetal); border: 1px solid var(--color-gunmetal); background: transparent;'; ?>" 
-                                    onclick="filterServices('<?php echo htmlspecialchars($category); ?>')">
-                                <i class="fas fa-tag me-2"></i><?php echo htmlspecialchars($category); ?>
-                            </button>
-                        <?php endforeach; ?>
+                <div class="col-12 text-center">
+                    <div class="d-inline-block">
+                        <select id="serviceFilter" class="form-select form-select-lg" style="min-width: 300px; background-color: #343a40; border-color: var(--color-gunmetal); color: white; border-radius: 25px; padding: 12px 20px;" onchange="filterServices(this.value)">
+                            <option value="" <?php echo !$selected_category ? 'selected' : ''; ?>>🔍 All Services</option>
+                            <?php foreach ($categories as $category): ?>
+                                <option value="<?php echo htmlspecialchars($category); ?>" <?php echo $selected_category === $category ? 'selected' : ''; ?>>
+                                    📁 <?php echo htmlspecialchars($category); ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
                     </div>
                 </div>
             </div>
@@ -193,23 +196,32 @@ include 'includes/header.php';
     transform: scale(1.05);
 }
 
-.filter-btn {
+#serviceFilter {
     transition: all 0.3s ease;
-    border-radius: 25px;
-    padding: 0.5rem 1.25rem;
-    font-weight: 500;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
 }
 
-.filter-btn:hover {
+#serviceFilter:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+}
+
+#serviceFilter:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(var(--color-gunmetal-rgb), 0.3);
+    border-color: var(--color-gunmetal);
+}
+
+#serviceFilter option {
+    background-color: #343a40;
+    color: white;
+    padding: 10px;
 }
 
 @media (max-width: 768px) {
-    .filter-btn {
+    #serviceFilter {
+        min-width: 250px !important;
         font-size: 0.9rem;
-        padding: 0.4rem 1rem;
-        margin: 0.25rem;
     }
 }
 </style>
