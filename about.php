@@ -258,20 +258,128 @@ include 'includes/header.php';
     </section>
 
     <!-- Call to Action -->
-    <section class="py-5 text-white" style="background-color: #212529;">
-        <div class="container">
-            <div class="row align-items-center" data-aos="fade-up">
-                <div class="col-lg-8">
-                    <h2 class="display-6 fw-bold mb-3">Ready to Transform Your Industry?</h2>
-                    <p class="fs-5 mb-0">Join us in shaping the future of manufacturing with innovative automation solutions that drive success.</p>
+    <section class="py-5 position-relative overflow-hidden" style="background-color: #212529;">
+        <!-- Decorative Elements -->
+        <div class="position-absolute top-0 start-0 w-100 h-100" style="opacity: 0.1;">
+            <div class="position-absolute" style="top: 10%; left: 5%; width: 100px; height: 100px; background: var(--color-platinum); border-radius: 50%; filter: blur(60px);"></div>
+            <div class="position-absolute" style="top: 60%; right: 10%; width: 150px; height: 150px; background: var(--color-french-gray); border-radius: 50%; filter: blur(80px);"></div>
+            <div class="position-absolute" style="bottom: 20%; left: 15%; width: 80px; height: 80px; background: var(--color-platinum); border-radius: 50%; filter: blur(50px);"></div>
+        </div>
+        
+        <!-- Geometric Pattern Overlay -->
+        <div class="position-absolute top-0 start-0 w-100 h-100" style="opacity: 0.05; background-image: url('data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"60\" height=\"60\" viewBox=\"0 0 60 60\"><g fill=\"%23ffffff\"><polygon points=\"30,0 60,30 30,60 0,30\"/></g></svg>'); background-size: 60px 60px;"></div>
+        
+        <div class="container position-relative">
+            <div class="row align-items-center py-5">
+                <!-- Content Column -->
+                <div class="col-lg-7" data-aos="fade-right">
+                    <div class="mb-4">
+                        <span class="badge px-4 py-2 fs-6 mb-3" style="background: rgba(216, 213, 219, 0.2); color: var(--color-platinum); border: 1px solid rgba(216, 213, 219, 0.3); backdrop-filter: blur(10px);">
+                            <i class="fas fa-rocket me-2"></i>Start Your Digital Transformation
+                        </span>
+                    </div>
+                    
+                    <h2 class="display-4 fw-bold text-white mb-4">
+                        Ready to <span style="color: var(--color-platinum); text-shadow: 0 0 20px rgba(216, 213, 219, 0.5);">Transform</span> Your Operations?
+                    </h2>
+                    
+                    <p class="fs-5 text-light mb-4 opacity-90 lh-lg">
+                        Join <strong class="text-white">500+ companies</strong> that have revolutionized their manufacturing processes with our cutting-edge automation solutions. Experience increased efficiency, reduced costs, and enhanced productivity.
+                    </p>
+                    
+                    <!-- Key Benefits -->
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-center text-light">
+                                <div class="bg-success rounded-circle p-2 me-3 flex-shrink-0" style="width: 40px; height: 40px;">
+                                    <i class="fas fa-check text-white fs-6"></i>
+                                </div>
+                                <span class="fw-semibold">Free Consultation & Analysis</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-center text-light">
+                                <div class="bg-warning rounded-circle p-2 me-3 flex-shrink-0" style="width: 40px; height: 40px;">
+                                    <i class="fas fa-clock text-white fs-6"></i>
+                                </div>
+                                <span class="fw-semibold">Quick Implementation</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-center text-light">
+                                <div class="bg-info rounded-circle p-2 me-3 flex-shrink-0" style="width: 40px; height: 40px;">
+                                    <i class="fas fa-shield-alt text-white fs-6"></i>
+                                </div>
+                                <span class="fw-semibold">24/7 Expert Support</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-center text-light">
+                                <div class="rounded-circle p-2 me-3 flex-shrink-0" style="width: 40px; height: 40px; background: var(--color-platinum);">
+                                    <i class="fas fa-trophy fs-6" style="color: var(--color-gunmetal);"></i>
+                                </div>
+                                <span class="fw-semibold">Industry-Leading Solutions</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
-                    <a href="contact.php" class="btn btn-lg px-4 py-3 fw-semibold me-3" style="background-color: var(--color-platinum); color: var(--color-gunmetal); border: none;">
-                        <i class="fas fa-phone me-2"></i>Get Started
-                    </a>
-                    <a href="services.php" class="btn btn-outline-light btn-lg px-4 py-3 fw-semibold">
-                        <i class="fas fa-list me-2"></i>Our Services
-                    </a>
+                
+                <!-- Action Column -->
+                <div class="col-lg-5" data-aos="fade-left" data-aos-delay="200">
+                    <div class="bg-white rounded-4 p-5 shadow-lg position-relative" style="backdrop-filter: blur(10px);">
+                        <!-- Decorative Corner -->
+                        <div class="position-absolute top-0 end-0 m-3">
+                            <div class="rounded-circle p-2" style="background: linear-gradient(135deg, var(--color-gunmetal), var(--color-french-gray)); width: 50px; height: 50px;">
+                                <i class="fas fa-industry text-white d-flex align-items-center justify-content-center h-100"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="text-center mb-4">
+                            <h3 class="fw-bold mb-2" style="color: var(--color-gunmetal);">Get Your Free Consultation</h3>
+                            <p class="text-muted mb-0">Discover how automation can transform your business in just 30 minutes.</p>
+                        </div>
+                        
+                        <!-- Action Buttons -->
+                        <div class="d-grid gap-3">
+                            <a href="contact.php" class="btn btn-lg py-3 fw-semibold position-relative overflow-hidden" style="background: linear-gradient(135deg, var(--color-gunmetal) 0%, #1a1d2e 100%); color: white; border: none; transition: all 0.3s ease;">
+                                <span class="position-relative z-2">
+                                    <i class="fas fa-calendar-check me-2"></i>Schedule Free Consultation
+                                </span>
+                                <div class="position-absolute top-0 start-0 w-100 h-100 opacity-0" style="background: linear-gradient(135deg, #1a1d2e 0%, var(--color-gunmetal) 100%); transition: opacity 0.3s ease;"></div>
+                            </a>
+                            
+                            <div class="row g-2">
+                                <div class="col-sm-6">
+                                    <a href="tel:+15551234567" class="btn btn-outline-dark btn-lg py-3 fw-semibold w-100" style="border-color: var(--color-french-gray); color: var(--color-gunmetal);">
+                                        <i class="fas fa-phone me-2"></i>Call Now
+                                    </a>
+                                </div>
+                                <div class="col-sm-6">
+                                    <a href="services.php" class="btn btn-lg py-3 fw-semibold w-100" style="background-color: var(--color-platinum); color: var(--color-gunmetal); border: none;">
+                                        <i class="fas fa-cogs me-2"></i>Our Services
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Trust Indicators -->
+                        <div class="text-center mt-4 pt-3" style="border-top: 1px solid var(--color-platinum);">
+                            <div class="row text-center">
+                                <div class="col-4">
+                                    <div class="fw-bold" style="color: var(--color-gunmetal);">500+</div>
+                                    <small class="text-muted">Projects</small>
+                                </div>
+                                <div class="col-4">
+                                    <div class="fw-bold" style="color: var(--color-gunmetal);">98%</div>
+                                    <small class="text-muted">Success Rate</small>
+                                </div>
+                                <div class="col-4">
+                                    <div class="fw-bold" style="color: var(--color-gunmetal);">15+</div>
+                                    <small class="text-muted">Years Exp.</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
