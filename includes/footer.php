@@ -3,7 +3,7 @@
         <div class="row g-4">
             <div class="col-lg-4 col-md-6">
                 <div class="mb-4">
-                    <h5 class="text-warning fw-bold mb-3">
+                    <h5 class="fw-bold mb-3" style="color: var(--color-platinum);">
                         <i class="fas fa-cogs me-2"></i>AutomationPro
                     </h5>
                     <p class="text-light mb-4">Professional automation & industrial solutions tailored to your needs. We help businesses grow and succeed with robust, secure systems that drive innovation and efficiency.</p>
@@ -25,60 +25,60 @@
             </div>
 
             <div class="col-lg-2 col-md-6">
-                <h6 class="fw-bold text-warning mb-3">Quick Links</h6>
+                <h6 class="fw-bold mb-3" style="color: var(--color-platinum);">Quick Links</h6>
                 <ul class="list-unstyled">
                     <li class="mb-2">
                         <a href="index.php" class="text-light text-decoration-none d-flex align-items-center">
-                            <i class="fas fa-chevron-right me-2 text-warning" style="font-size: 0.7rem;"></i>Home
+                            <i class="fas fa-chevron-right me-2" style="color: var(--color-platinum); font-size: 0.7rem;"></i>Home
                         </a>
                     </li>
                     <li class="mb-2">
                         <a href="about.php" class="text-light text-decoration-none d-flex align-items-center">
-                            <i class="fas fa-chevron-right me-2 text-warning" style="font-size: 0.7rem;"></i>About Us
+                            <i class="fas fa-chevron-right me-2" style="color: var(--color-platinum); font-size: 0.7rem;"></i>About Us
                         </a>
                     </li>
                     <li class="mb-2">
                         <a href="services.php" class="text-light text-decoration-none d-flex align-items-center">
-                            <i class="fas fa-chevron-right me-2 text-warning" style="font-size: 0.7rem;"></i>Services
+                            <i class="fas fa-chevron-right me-2" style="color: var(--color-platinum); font-size: 0.7rem;"></i>Services
                         </a>
                     </li>
                     <li class="mb-2">
                         <a href="contact.php" class="text-light text-decoration-none d-flex align-items-center">
-                            <i class="fas fa-chevron-right me-2 text-warning" style="font-size: 0.7rem;"></i>Contact
+                            <i class="fas fa-chevron-right me-2" style="color: var(--color-platinum); font-size: 0.7rem;"></i>Contact
                         </a>
                     </li>
                 </ul>
             </div>
 
             <div class="col-lg-3 col-md-6">
-                <h6 class="fw-bold text-warning mb-3">Contact Info</h6>
+                <h6 class="fw-bold mb-3" style="color: var(--color-platinum);">Contact Info</h6>
                 <div class="mb-3">
                     <div class="d-flex align-items-start mb-2">
-                        <i class="fas fa-map-marker-alt text-warning me-2 mt-1" style="font-size: 0.9rem;"></i>
+                        <i class="fas fa-map-marker-alt me-2 mt-1" style="color: var(--color-platinum); font-size: 0.9rem;"></i>
                         <span class="text-light small">123 Automation Street<br>Industrial City, State 12345</span>
                     </div>
                     <div class="d-flex align-items-center mb-2">
-                        <i class="fas fa-phone text-warning me-2" style="font-size: 0.9rem;"></i>
+                        <i class="fas fa-phone me-2" style="color: var(--color-platinum); font-size: 0.9rem;"></i>
                         <a href="tel:+15551234567" class="text-light text-decoration-none small">+1 (555) 123-4567</a>
                     </div>
                     <div class="d-flex align-items-center mb-2">
-                        <i class="fas fa-envelope text-warning me-2" style="font-size: 0.9rem;"></i>
+                        <i class="fas fa-envelope me-2" style="color: var(--color-platinum); font-size: 0.9rem;"></i>
                         <a href="mailto:info@automationpro.com" class="text-light text-decoration-none small">info@automationpro.com</a>
                     </div>
                     <div class="d-flex align-items-center">
-                        <i class="fas fa-clock text-warning me-2" style="font-size: 0.9rem;"></i>
+                        <i class="fas fa-clock me-2" style="color: var(--color-platinum); font-size: 0.9rem;"></i>
                         <span class="text-light small">Mon - Fri: 9AM - 6PM</span>
                     </div>
                 </div>
             </div>
 
             <div class="col-lg-3 col-md-6">
-                <h6 class="fw-bold text-warning mb-3">Newsletter</h6>
+                <h6 class="fw-bold mb-3" style="color: var(--color-platinum);">Newsletter</h6>
                 <p class="text-light mb-3 small">Get product updates, insights and automation tips delivered to your inbox.</p>
                 <form action="#" method="post">
                     <div class="input-group mb-3">
                         <input type="email" class="form-control" placeholder="Enter your email" required>
-                        <button class="btn btn-warning" type="submit">
+                        <button class="btn" type="submit" style="background-color: var(--color-platinum); color: var(--color-gunmetal); border: none;">
                             <i class="fas fa-paper-plane"></i>
                         </button>
                     </div>
@@ -106,8 +106,8 @@
     </div>
 
     <!-- Back to top button -->
-    <button class="btn btn-warning position-fixed bottom-0 end-0 m-3 rounded-circle shadow" 
-            id="backToTop" style="display: none; width: 50px; height: 50px;" aria-label="Back to top">
+    <button class="btn position-fixed bottom-0 end-0 m-3 rounded-circle shadow" 
+            id="backToTop" style="display: none; width: 50px; height: 50px; background-color: var(--color-platinum); color: var(--color-gunmetal); border: none;" aria-label="Back to top">
         <i class="fas fa-arrow-up"></i>
     </button>
 </footer>

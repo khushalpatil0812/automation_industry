@@ -15,20 +15,31 @@
     
     <style>
         :root {
-            --bs-primary: #0d6efd;
-            --bs-secondary: #6c757d;
+            /* New Color Theme */
+            --color-platinum: #D8D5DB;
+            --color-french-gray: #ADACB5;
+            --color-gunmetal: #2D3142;
+            
+            /* Bootstrap Color Overrides */
+            --bs-primary: #2D3142;
+            --bs-secondary: #ADACB5;
             --bs-success: #198754;
-            --bs-info: #0dcaf0;
+            --bs-info: #D8D5DB;
             --bs-warning: #ffc107;
             --bs-danger: #dc3545;
             --bs-light: #f8f9fa;
             --bs-dark: #212529;
-            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            
+            /* Custom Gradients with New Theme */
+            --gradient-primary: linear-gradient(135deg, #2D3142 0%, #4A5568 100%);
+            --gradient-secondary: linear-gradient(135deg, #ADACB5 0%, #D8D5DB 100%);
+            --gradient-accent: linear-gradient(135deg, #D8D5DB 0%, #ADACB5 100%);
             --gradient-success: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            --shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-            --shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-            --shadow-lg: 0 1rem 3rem rgba(0, 0, 0, 0.175);
+            
+            /* Enhanced Shadows */
+            --shadow-sm: 0 0.125rem 0.25rem rgba(45, 49, 66, 0.1);
+            --shadow: 0 0.5rem 1rem rgba(45, 49, 66, 0.15);
+            --shadow-lg: 0 1rem 3rem rgba(45, 49, 66, 0.2);
         }
         
         body {
@@ -78,7 +89,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow-lg">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="index.php">
-                <i class="fas fa-cogs text-warning me-2 fs-3"></i>
+                <i class="fas fa-cogs me-2 fs-3" style="color: var(--color-platinum);"></i>
                 <span class="fw-bold">AutomationPro</span>
             </a>
             
@@ -111,20 +122,20 @@
                                 $categories = $service->getCategories();
                                 foreach ($categories as $category): ?>
                                     <li><a class="dropdown-item rounded" href="services.php?category=<?php echo urlencode($category); ?>">
-                                        <i class="fas fa-chevron-right me-2 text-primary"></i><?php echo htmlspecialchars($category); ?>
+                                        <i class="fas fa-chevron-right me-2" style="color: var(--color-gunmetal);"></i><?php echo htmlspecialchars($category); ?>
                                     </a></li>
                                 <?php endforeach;
                             } catch (Exception $e) {
                                 // Fallback menu if database is not available
-                                echo '<li><a class="dropdown-item rounded" href="services.php"><i class="fas fa-chevron-right me-2 text-primary"></i>Industrial Automation</a></li>';
-                                echo '<li><a class="dropdown-item rounded" href="services.php"><i class="fas fa-chevron-right me-2 text-primary"></i>Robotics Solutions</a></li>';
-                                echo '<li><a class="dropdown-item rounded" href="services.php"><i class="fas fa-chevron-right me-2 text-primary"></i>IoT Integration</a></li>';
-                                echo '<li><a class="dropdown-item rounded" href="services.php"><i class="fas fa-chevron-right me-2 text-primary"></i>Process Control</a></li>';
+                                echo '<li><a class="dropdown-item rounded" href="services.php"><i class="fas fa-chevron-right me-2" style="color: var(--color-gunmetal);"></i>Industrial Automation</a></li>';
+                                echo '<li><a class="dropdown-item rounded" href="services.php"><i class="fas fa-chevron-right me-2" style="color: var(--color-gunmetal);"></i>Robotics Solutions</a></li>';
+                                echo '<li><a class="dropdown-item rounded" href="services.php"><i class="fas fa-chevron-right me-2" style="color: var(--color-gunmetal);"></i>IoT Integration</a></li>';
+                                echo '<li><a class="dropdown-item rounded" href="services.php"><i class="fas fa-chevron-right me-2" style="color: var(--color-gunmetal);"></i>Process Control</a></li>';
                             }
                             ?>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item rounded" href="services.php">
-                                <i class="fas fa-list me-2 text-primary"></i>All Services
+                                <i class="fas fa-list me-2" style="color: var(--color-gunmetal);"></i>All Services
                             </a></li>
                         </ul>
                     </li>

@@ -23,7 +23,7 @@ include 'includes/header.php';
 
 <main class="pt-5">
     <!-- Page Header -->
-    <section class="py-5 bg-primary text-white">
+    <section class="py-5 text-white" style="background: var(--gradient-primary);">
         <div class="container">
             <div class="row">
                 <div class="col-12 text-center" data-aos="fade-up">
@@ -35,18 +35,18 @@ include 'includes/header.php';
     </section>
 
     <!-- Services Section -->
-    <section class="py-5">
+    <section class="py-5" style="background-color: #212529;">
         <div class="container">
             <!-- Category Filter -->
             <div class="row mb-5" data-aos="fade-up">
                 <div class="col-12">
                     <div class="d-flex flex-wrap justify-content-center gap-2">
-                        <button class="btn <?php echo !$selected_category ? 'btn-primary' : 'btn-outline-primary'; ?> filter-btn" 
+                        <button class="btn filter-btn" style="<?php echo !$selected_category ? 'background-color: var(--color-gunmetal); color: white; border: none;' : 'color: var(--color-gunmetal); border: 1px solid var(--color-gunmetal); background: transparent;'; ?>" 
                                 onclick="filterServices('')">
                             <i class="fas fa-th-large me-2"></i>All Services
                         </button>
                         <?php foreach ($categories as $category): ?>
-                            <button class="btn <?php echo $selected_category === $category ? 'btn-primary' : 'btn-outline-primary'; ?> filter-btn" 
+                            <button class="btn filter-btn" style="<?php echo $selected_category === $category ? 'background-color: var(--color-gunmetal); color: white; border: none;' : 'color: var(--color-gunmetal); border: 1px solid var(--color-gunmetal); background: transparent;'; ?>" 
                                     onclick="filterServices('<?php echo htmlspecialchars($category); ?>')">
                                 <i class="fas fa-tag me-2"></i><?php echo htmlspecialchars($category); ?>
                             </button>
@@ -60,10 +60,10 @@ include 'includes/header.php';
                 <?php if (empty($services)): ?>
                     <div class="col-12">
                         <div class="alert alert-info text-center py-5" data-aos="fade-up">
-                            <i class="fas fa-info-circle fs-1 text-primary mb-3"></i>
+                            <i class="fas fa-info-circle fs-1 mb-3" style="color: var(--color-gunmetal);"></i>
                             <h4 class="fw-bold mb-3">No Services Found</h4>
                             <p class="mb-3">No services found in this category. Please try another category or view all services.</p>
-                            <a href="services.php" class="btn btn-primary">
+                            <a href="services.php" class="btn" style="background-color: var(--color-gunmetal); color: white; border: none;">
                                 <i class="fas fa-list me-2"></i>View All Services
                             </a>
                         </div>
@@ -79,13 +79,13 @@ include 'includes/header.php';
                                          class="card-img-top" alt="<?php echo htmlspecialchars($service_item['title']); ?>" 
                                          style="height: 250px; object-fit: cover; transition: transform 0.3s ease;">
                                     <div class="position-absolute top-0 start-0 m-3">
-                                        <span class="badge bg-primary px-3 py-2">
+                                        <span class="badge px-3 py-2" style="background-color: var(--color-gunmetal); color: white;">
                                             <?php echo htmlspecialchars($service_item['category_name'] ?? 'Service'); ?>
                                         </span>
                                     </div>
                                     <div class="position-absolute bottom-0 end-0 m-3">
                                         <div class="bg-white rounded-circle p-2 shadow-sm">
-                                            <i class="fas fa-arrow-right text-primary"></i>
+                                            <i class="fas fa-arrow-right" style="color: var(--color-gunmetal);"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -95,8 +95,8 @@ include 'includes/header.php';
                                         <?php echo htmlspecialchars(substr($service_item['description'], 0, 120)) . '...'; ?>
                                     </p>
                                     <div class="d-flex justify-content-between align-items-center">
-                                        <span class="text-primary fw-semibold">Learn More</span>
-                                        <i class="fas fa-chevron-right text-primary"></i>
+                                        <span class="fw-semibold" style="color: var(--color-gunmetal);">Learn More</span>
+                                        <i class="fas fa-chevron-right" style="color: var(--color-gunmetal);"></i>
                                     </div>
                                 </div>
                             </div>
@@ -109,14 +109,14 @@ include 'includes/header.php';
             <?php if (!empty($services)): ?>
             <div class="row mt-5" data-aos="fade-up">
                 <div class="col-12 text-center">
-                    <div class="bg-light rounded-4 p-5">
-                        <h3 class="fw-bold mb-3">Can't Find What You're Looking For?</h3>
-                        <p class="text-muted mb-4 fs-5">Our team can create custom automation solutions tailored to your specific needs.</p>
+                    <div class="rounded-4 p-5" style="background-color: #343a40;">
+                        <h3 class="fw-bold mb-3 text-white">Can't Find What You're Looking For?</h3>
+                        <p class="text-light opacity-75 mb-4 fs-5">Our team can create custom automation solutions tailored to your specific needs.</p>
                         <div class="d-flex gap-3 justify-content-center flex-wrap">
-                            <a href="contact.php" class="btn btn-primary btn-lg px-4 py-3 fw-semibold">
+                            <a href="contact.php" class="btn btn-lg px-4 py-3 fw-semibold" style="background-color: var(--color-gunmetal); color: white; border: none;">
                                 <i class="fas fa-phone me-2"></i>Contact Us
                             </a>
-                            <a href="about.php" class="btn btn-outline-primary btn-lg px-4 py-3 fw-semibold">
+                            <a href="about.php" class="btn btn-lg px-4 py-3 fw-semibold" style="color: var(--color-gunmetal); border: 1px solid var(--color-gunmetal); background: transparent;">
                                 <i class="fas fa-info-circle me-2"></i>Learn More
                             </a>
                         </div>
@@ -128,24 +128,24 @@ include 'includes/header.php';
     </section>
 
     <!-- Features Section -->
-    <section class="py-5 bg-light">
+    <section class="py-5" style="background-color: #212529;">
         <div class="container">
             <div class="row mb-5" data-aos="fade-up">
                 <div class="col-12 text-center">
-                    <span class="badge bg-secondary text-white px-3 py-2 fs-6 mb-3">Why Choose Our Services</span>
-                    <h2 class="display-5 fw-bold text-dark mb-3">Service Excellence</h2>
-                    <p class="fs-5 text-muted col-lg-8 mx-auto">What sets our automation services apart from the competition</p>
+                    <span class="badge text-white px-3 py-2 fs-6 mb-3" style="background-color: var(--color-french-gray);">Why Choose Our Services</span>
+                    <h2 class="display-5 fw-bold text-white mb-3">Service Excellence</h2>
+                    <p class="fs-5 text-light col-lg-8 mx-auto">What sets our automation services apart from the competition</p>
                 </div>
             </div>
             
             <div class="row g-4">
                 <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
                     <div class="text-center">
-                        <div class="bg-primary bg-gradient rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                        <div class="bg-gradient rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px; background: var(--gradient-primary) !important;">
                             <i class="fas fa-rocket text-white fs-2"></i>
                         </div>
-                        <h5 class="fw-bold mb-3">Fast Implementation</h5>
-                        <p class="text-muted">Quick deployment with minimal downtime to get your operations running smoothly</p>
+                        <h5 class="fw-bold mb-3 text-white">Fast Implementation</h5>
+                        <p class="text-light opacity-75">Quick deployment with minimal downtime to get your operations running smoothly</p>
                     </div>
                 </div>
                 
@@ -154,8 +154,8 @@ include 'includes/header.php';
                         <div class="bg-success bg-gradient rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
                             <i class="fas fa-shield-alt text-white fs-2"></i>
                         </div>
-                        <h5 class="fw-bold mb-3">Reliable Support</h5>
-                        <p class="text-muted">24/7 technical support and maintenance to ensure optimal performance</p>
+                        <h5 class="fw-bold mb-3 text-white">Reliable Support</h5>
+                        <p class="text-light opacity-75">24/7 technical support and maintenance to ensure optimal performance</p>
                     </div>
                 </div>
                 
@@ -164,8 +164,8 @@ include 'includes/header.php';
                         <div class="bg-warning bg-gradient rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
                             <i class="fas fa-cogs text-white fs-2"></i>
                         </div>
-                        <h5 class="fw-bold mb-3">Custom Solutions</h5>
-                        <p class="text-muted">Tailored automation systems designed to meet your specific requirements</p>
+                        <h5 class="fw-bold mb-3 text-white">Custom Solutions</h5>
+                        <p class="text-light opacity-75">Tailored automation systems designed to meet your specific requirements</p>
                     </div>
                 </div>
                 
@@ -174,8 +174,8 @@ include 'includes/header.php';
                         <div class="bg-info bg-gradient rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
                             <i class="fas fa-chart-line text-white fs-2"></i>
                         </div>
-                        <h5 class="fw-bold mb-3">Proven Results</h5>
-                        <p class="text-muted">Track record of successful implementations with measurable ROI improvements</p>
+                        <h5 class="fw-bold mb-3 text-white">Proven Results</h5>
+                        <p class="text-light opacity-75">Track record of successful implementations with measurable ROI improvements</p>
                     </div>
                 </div>
             </div>
