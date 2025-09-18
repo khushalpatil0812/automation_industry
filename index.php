@@ -1,3 +1,4 @@
+<!-- front end index page.  -->
 <?php
 require_once 'config/config.php';
 require_once 'classes/Service.php';
