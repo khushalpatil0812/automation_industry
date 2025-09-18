@@ -87,7 +87,7 @@ include 'includes/header.php';
     </section>
 
     <!-- Key Metrics Section -->
-    <section class="py-5" style="background-color: #212529;">
+    <section id="metricsSection" class="py-5" style="background-color: #212529;">
         <div class="container">
             <div class="row text-center mb-5" data-aos="fade-up">
                 <div class="col-12">
@@ -103,7 +103,7 @@ include 'includes/header.php';
                             <div class="bg-gradient rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 70px; height: 70px; background: var(--gradient-primary) !important;">
                                 <i class="fas fa-industry text-white fs-3"></i>
                             </div>
-                            <h3 class="fw-bold mb-1 text-white">500+</h3>
+                            <h3 class="fw-bold mb-1 text-white"><span class="counter" data-target="500">0</span>+</h3>
                             <h5 class="fw-semibold mb-2 text-light">Projects Completed</h5>
                             <p class="text-light small mb-0 opacity-75">Successfully delivered automation solutions worldwide</p>
                         </div>
@@ -116,7 +116,7 @@ include 'includes/header.php';
                             <div class="bg-success bg-gradient rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 70px; height: 70px;">
                                 <i class="fas fa-users text-white fs-3"></i>
                             </div>
-                            <h3 class="fw-bold text-success mb-1">150+</h3>
+                            <h3 class="fw-bold text-success mb-1"><span class="counter" data-target="150">0</span>+</h3>
                             <h5 class="fw-semibold mb-2 text-light">Happy Clients</h5>
                             <p class="text-light small mb-0 opacity-75">Trusted by leading manufacturing companies</p>
                         </div>
@@ -129,7 +129,7 @@ include 'includes/header.php';
                             <div class="bg-warning bg-gradient rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 70px; height: 70px;">
                                 <i class="fas fa-clock text-white fs-3"></i>
                             </div>
-                            <h3 class="fw-bold text-warning mb-1">15+</h3>
+                            <h3 class="fw-bold text-warning mb-1"><span class="counter" data-target="15">0</span>+</h3>
                             <h5 class="fw-semibold mb-2 text-light">Years Experience</h5>
                             <p class="text-light small mb-0 opacity-75">Decades of expertise in industrial automation</p>
                         </div>
@@ -142,7 +142,7 @@ include 'includes/header.php';
                             <div class="bg-info bg-gradient rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 70px; height: 70px;">
                                 <i class="fas fa-trophy text-white fs-3"></i>
                             </div>
-                            <h3 class="fw-bold text-info mb-1">98%</h3>
+                            <h3 class="fw-bold text-info mb-1"><span class="counter" data-target="98">0</span>%</h3>
                             <h5 class="fw-semibold mb-2 text-light">Success Rate</h5>
                             <p class="text-light small mb-0 opacity-75">Exceptional project delivery success rate</p>
                         </div>
@@ -426,5 +426,82 @@ include 'includes/header.php';
         </div>
     </section>
 </main>
+
+<style>
+.counter {
+    font-weight: inherit;
+    transition: all 0.3s ease;
+}
+
+.counter.counting {
+    animation: pulse 0.5s ease-in-out;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+</style>
+
+<script>
+// Counter Animation Function
+function animateCounter(element, target, duration = 2000) {
+    const start = 0;
+    const increment = target / (duration / 16); // 60fps
+    let current = start;
+    
+    const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+            current = target;
+            clearInterval(timer);
+            element.classList.remove('counting');
+        }
+        element.textContent = Math.floor(current);
+    }, 16);
+    
+    element.classList.add('counting');
+}
+
+// Intersection Observer for triggering animation when section is visible
+const observerOptions = {
+    threshold: 0.3,
+    rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const counters = entry.target.querySelectorAll('.counter');
+            counters.forEach(counter => {
+                if (!counter.classList.contains('animated')) {
+                    const target = parseInt(counter.getAttribute('data-target'));
+                    const duration = 2500; // 2.5 seconds for smooth animation
+                    
+                    // Add a small delay based on the counter's position for staggered effect
+                    const delay = Array.from(counters).indexOf(counter) * 200;
+                    
+                    setTimeout(() => {
+                        animateCounter(counter, target, duration);
+                        counter.classList.add('animated');
+                    }, delay);
+                }
+            });
+            
+            // Unobserve after animation starts to prevent re-triggering
+            observer.unobserve(entry.target);
+        }
+    });
+}, observerOptions);
+
+// Start observing when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    const metricsSection = document.querySelector('#metricsSection');
+    if (metricsSection) {
+        observer.observe(metricsSection);
+    }
+});
+</script>
 
 <?php include 'includes/footer.php'; ?>
