@@ -23,7 +23,7 @@ include 'includes/admin-header.php';
 ?>
 
 <!-- Link to Dashboard CSS -->
-<link rel="stylesheet" href="../assets/css/admindashboard.css">
+<link rel="stylesheet" href="../assets/css//admindashboard.css">
 
 <main class="admin-main">
     <div class="admin-container">
@@ -36,28 +36,31 @@ include 'includes/admin-header.php';
 
         <!-- Statistics Cards -->
         <div class="stats-grid">
-            <div class="stat-card">
+            <a href="manage-services.php" class="stat-card">
                 <div class="stat-icon">📊</div>
                 <div class="stat-content">
                     <h3><?php echo $total_services; ?></h3>
                     <p>Total Services</p>
                 </div>
-            </div>
+                <div class="stat-action">View All Services →</div>
+            </a>
 
-            <div class="stat-card">
+            <a href="manage-categories.php" class="stat-card">
                 <div class="stat-icon">📂</div>
                 <div class="stat-content">
                     <h3><?php echo count($categories); ?></h3>
                     <p>Categories</p>
                 </div>
-            </div>
+                <div class="stat-action">Manage Categories →</div>
+            </a>
 
             <div class="stat-card">
                 <div class="stat-icon">👤</div>
                 <div class="stat-content">
                     <h3><?php echo htmlspecialchars($_SESSION['admin_username']); ?></h3>
-                    <p>Logged in as</p>
+                    <p>Administrator</p>
                 </div>
+                <div class="stat-action">Account Active</div>
             </div>
         </div>
 
@@ -65,9 +68,27 @@ include 'includes/admin-header.php';
         <div class="quick-actions">
             <h2>Quick Actions</h2>
             <div class="action-buttons">
-                <a href="add-service.php" class="btn btn-primary">Add New Service</a>
-                <a href="manage-services.php" class="btn btn-secondary">Manage Services</a>
-                <a href="../index.php" class="btn btn-outline" target="_blank">View Website</a>
+                <a href="add-service.php" class="action-button primary">
+                    <span class="action-icon">✨</span>
+                    <span class="action-text">
+                        <strong>Add New Service</strong>
+                        <span>Create a new service listing</span>
+                    </span>
+                </a>
+                <a href="manage-services.php" class="action-button secondary">
+                    <span class="action-icon">🔧</span>
+                    <span class="action-text">
+                        <strong>Manage Services</strong>
+                        <span>Edit or update existing services</span>
+                    </span>
+                </a>
+                <a href="manage-categories.php" class="action-button accent">
+                    <span class="action-icon">📁</span>
+                    <span class="action-text">
+                        <strong>Manage Categories</strong>
+                        <span>Organize your services</span>
+                    </span>
+                </a>
             </div>
         </div>
 
@@ -94,14 +115,21 @@ include 'includes/admin-header.php';
                                     </span>
                                 </td>
                                 <td><?php echo date('M j, Y', strtotime($service_item['created_at'])); ?></td>
-                                <td>
-                                    <a href="edit-service.php?id=<?php echo $service_item['id']; ?>" class="btn-small">Edit</a>
-                                    <a href="../service-detail.php?id=<?php echo $service_item['id']; ?>" class="btn-small" target="_blank">View</a>
+                                <td class="actions-cell">
+                                    <a href="edit-service.php?id=<?php echo $service_item['id']; ?>" class="action-link edit">
+                                        <span class="icon">✏️</span> Edit
+                                    </a>
+                                    <a href="view-service.php?id=<?php echo $service_item['id']; ?>" class="action-link view">
+                                        <span class="icon">👁️</span> View
+                                    </a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
                 </table>
+                <div class="table-footer">
+                    <a href="manage-services.php" class="view-all-link">View All Services →</a>
+                </div>
             </div>
         </div>
 

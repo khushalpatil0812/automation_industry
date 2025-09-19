@@ -15,6 +15,41 @@ $service = new Service();
 $category = new Category($pdo);
 $message = '';
 
+// Handle AJAX requests from view-service.php
+if (isset($_POST['action'])) {
+    header('Content-Type: application/json');
+    
+    if ($_POST['action'] === 'delete' && isset($_POST['service_id'])) {
+        $id = intval($_POST['service_id']);
+        if ($service->deleteService($id)) {
+            echo json_encode(['success' => true, 'message' => 'Service deleted successfully']);
+        } else {
+            http_response_code(500);
+            echo json_encode(['success' => false, 'message' => 'Error deleting service']);
+        }
+        exit;
+    }
+    
+    if ($_POST['action'] === 'toggle_status' && isset($_POST['service_id'])) {
+        $id = intval($_POST['service_id']);
+        // Get current status and toggle it
+        $currentService = $service->getServiceByIdAdmin($id);
+        if ($currentService) {
+            $newStatus = $currentService['is_active'] ? 0 : 1;
+            if ($service->setServiceStatus($id, $newStatus)) {
+                echo json_encode(['success' => true, 'message' => 'Service status updated', 'new_status' => $newStatus]);
+            } else {
+                http_response_code(500);
+                echo json_encode(['success' => false, 'message' => 'Error updating service status']);
+            }
+        } else {
+            http_response_code(404);
+            echo json_encode(['success' => false, 'message' => 'Service not found']);
+        }
+        exit;
+    }
+}
+
 // Handle delete service
 if (isset($_POST['delete_service'])) {
     $id = $_POST['service_id'];
@@ -121,7 +156,7 @@ $categories = $category->getAllCategories();
         <div class="card-body">
             <div class="services-grid">
                 <?php foreach ($services as $svc): ?>
-                <div class="service-item">
+                <div class="service-item" onclick="window.location.href='view-service.php?id=<?php echo $svc['id']; ?>'" style="cursor: pointer;">
                     <div class="service-content">
                         <h3><?php echo htmlspecialchars($svc['title']); ?></h3>
                         <p class="service-category">
@@ -133,11 +168,12 @@ $categories = $category->getAllCategories();
                         <p class="service-description">
                             <?php echo substr(htmlspecialchars($svc['description']), 0, 100) . '...'; ?>
                         </p>
-                        <div class="service-actions">
+                        <div class="service-actions" onclick="event.stopPropagation();">
                             <a href="edit-service.php?id=<?php echo $svc['id']; ?>" class="btn btn-sm btn-secondary">Edit</a>
+                            <a href="view-service.php?id=<?php echo $svc['id']; ?>" class="btn btn-sm" style="background: #6b7280; color: white;">View</a>
                             
                             <!-- Toggle Active/Inactive -->
-                            <form method="POST">
+                            <form method="POST" style="display: inline;">
                                 <input type="hidden" name="service_id" value="<?php echo $svc['id']; ?>">
                                 <?php if ($svc['is_active']): ?>
                                     <button type="submit" name="toggle_service" value="deactivate" class="btn btn-sm btn-warning">
@@ -151,7 +187,7 @@ $categories = $category->getAllCategories();
                             </form>
 
                             <!-- Delete -->
-                            <form method="POST" onsubmit="return confirm('Are you sure you want to delete this service?')">
+                            <form method="POST" onsubmit="return confirm('Are you sure you want to delete this service?')" style="display: inline;">
                                 <input type="hidden" name="service_id" value="<?php echo $svc['id']; ?>">
                                 <button type="submit" name="delete_service" class="btn btn-sm btn-danger">Delete</button>
                             </form>
