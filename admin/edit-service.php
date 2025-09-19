@@ -29,33 +29,82 @@ if ($_POST) {
     $description = trim($_POST['description']);
     $features = trim($_POST['features']);
     
+    $errors = [];
+    
+    // Basic validation
+    if (empty($title)) {
+        $errors[] = "Service title is required.";
+    }
+    if (empty($description)) {
+        $errors[] = "Service description is required.";
+    }
+    
     $image_path = $current_service['image'];
     if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
-        $upload_dir = '../uploads/services/';
+        $upload_dir = '../public/services/';
         if (!is_dir($upload_dir)) {
             mkdir($upload_dir, 0755, true);
         }
-        $file_extension = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
-        $filename = uniqid() . '.' . $file_extension;
-        $upload_path = $upload_dir . $filename;
+        
+        $allowed_types = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+        $max_size = 5 * 1024 * 1024; // 5MB
 
-        if (move_uploaded_file($_FILES['image']['tmp_name'], $upload_path)) {
-            if ($current_service['image'] && file_exists('../' . $current_service['image'])) {
-                unlink('../' . $current_service['image']);
+        if (!in_array($_FILES['image']['type'], $allowed_types)) {
+            $errors[] = "Invalid file type. Please upload JPG, PNG, GIF, or WebP images.";
+        } elseif ($_FILES['image']['size'] > $max_size) {
+            $errors[] = "File too large. Maximum size is 5MB.";
+        } else {
+            // Use original filename with sanitization
+            $original_name = $_FILES['image']['name'];
+            $file_extension = pathinfo($original_name, PATHINFO_EXTENSION);
+            $base_name = pathinfo($original_name, PATHINFO_FILENAME);
+            
+            // Sanitize filename: remove special characters, spaces to hyphens
+            $safe_name = preg_replace('/[^a-zA-Z0-9\-_]/', '-', $base_name);
+            $safe_name = preg_replace('/-+/', '-', $safe_name); // Remove multiple hyphens
+            $safe_name = trim($safe_name, '-'); // Remove leading/trailing hyphens
+            
+            // Create final filename
+            $filename = $safe_name . '.' . strtolower($file_extension);
+            
+            // Check if file already exists, if so add timestamp
+            $upload_path = $upload_dir . $filename;
+            if (file_exists($upload_path)) {
+                $filename = $safe_name . '-' . time() . '.' . strtolower($file_extension);
+                $upload_path = $upload_dir . $filename;
             }
-            $image_path = 'uploads/services/' . $filename;
+
+            if (move_uploaded_file($_FILES['image']['tmp_name'], $upload_path)) {
+                // Delete old image if it exists
+                if ($current_service['image'] && file_exists('../' . $current_service['image'])) {
+                    unlink('../' . $current_service['image']);
+                }
+                $image_path = 'public/services/' . $filename;
+            } else {
+                $errors[] = "Failed to upload image. Please try again.";
+            }
         }
     }
 
-    if ($service->updateService($service_id, $title, $category_id, $description, $image_path, $features)) {
-        $message = '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                      <i class="fas fa-check-circle"></i> Service updated successfully!
-                      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>';
-        $current_service = $service->getServiceById($service_id);
+    // Only proceed if no errors
+    if (empty($errors)) {
+        if ($service->updateService($service_id, $title, $category_id, $description, $image_path, $features)) {
+            $message = '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                          <i class="fas fa-check-circle"></i> Service updated successfully!
+                          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>';
+            $current_service = $service->getServiceById($service_id);
+        } else {
+            $message = '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                          <i class="fas fa-exclamation-circle"></i> Error updating service.
+                          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>';
+        }
     } else {
+        // Display validation errors
         $message = '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                      <i class="fas fa-exclamation-circle"></i> Error updating service.
+                      <i class="fas fa-exclamation-triangle"></i> Please fix the following errors:<br>
+                      • ' . implode('<br>• ', $errors) . '
                       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>';
     }
@@ -388,7 +437,17 @@ body {
                             <div class="image-preview">
                                 <?php if ($current_service['image']): ?>
                                 <div class="preview-container">
-                                    <img src="../<?php echo htmlspecialchars($current_service['image']); ?>" alt="Current image">
+                                    <?php
+                                    // All images should be in public/services/ directory
+                                    if (strpos($current_service['image'], 'public/') === 0) {
+                                        // Image path already includes 'public/' prefix
+                                        $image_src = '../' . $current_service['image'];
+                                    } else {
+                                        // Assume it's just the filename, prepend the directory
+                                        $image_src = '../public/services/' . $current_service['image'];
+                                    }
+                                    ?>
+                                    <img src="<?php echo htmlspecialchars($image_src); ?>" alt="Current image">
                                     <button type="button" class="remove-image" onclick="removeImage()">×</button>
                                 </div>
                                 <?php endif; ?>
