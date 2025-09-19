@@ -135,556 +135,405 @@ $page_title = "Manage Categories";
 include 'includes/admin-header.php';
 ?>
 
-<!-- Professional CSS Styling -->
-<style>
-:root {
-    --category-primary: #4f46e5;
-    --category-secondary: #6366f1;
-    --category-success: #10b981;
-    --category-warning: #f59e0b;
-    --category-danger: #ef4444;
-    --category-info: #3b82f6;
-    --category-light: #f8fafc;
-    --category-dark: #1e293b;
-    --category-border: #e2e8f0;
-    --category-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    --category-shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-    --category-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-}
-
-.category-container {
-    padding: 2rem 0;
-    min-height: calc(100vh - 200px);
-}
-
-/* Professional Header */
-.category-header {
-    background: var(--category-gradient);
-    color: white;
-    padding: 2.5rem 0;
-    margin: -2rem -15px 2rem -15px;
-    border-radius: 0 0 1.5rem 1.5rem;
-    position: relative;
-    overflow: hidden;
-}
-
-.category-header::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="white" opacity="0.1"><polygon points="1000,0 1000,100 0,100"/></svg>');
-    background-size: cover;
-}
-
-.category-header .container-fluid {
-    position: relative;
-    z-index: 1;
-}
-
-/* Breadcrumb Navigation */
-.breadcrumb-nav {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    margin-bottom: 1.5rem;
-    font-size: 0.9rem;
-}
-
-.breadcrumb-nav a {
-    color: rgba(255, 255, 255, 0.8);
-    text-decoration: none;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.breadcrumb-nav a:hover {
-    color: white;
-    text-decoration: none;
-}
-
-.breadcrumb-separator {
-    color: rgba(255, 255, 255, 0.6);
-}
-
-/* Category Title and Meta */
-.category-title {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    line-height: 1.2;
-}
-
-.category-stats {
-    display: flex;
-    gap: 2rem;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-.stat-item {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 0.75rem 1.5rem;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 2rem;
-    backdrop-filter: blur(10px);
-}
-
-.stat-icon {
-    font-size: 1.5rem;
-    opacity: 0.9;
-}
-
-.stat-content {
-    display: flex;
-    flex-direction: column;
-}
-
-.stat-number {
-    font-size: 1.5rem;
-    font-weight: 700;
-    line-height: 1;
-}
-
-.stat-label {
-    font-size: 0.875rem;
-    opacity: 0.9;
-    line-height: 1;
-}
-
-/* Action Buttons Header */
-.header-actions {
-    display: flex;
-    gap: 1rem;
-    margin-top: 1.5rem;
-    flex-wrap: wrap;
-}
-
-.action-btn-header {
-    padding: 0.75rem 1.5rem;
-    border-radius: 0.75rem;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 0.9rem;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: rgba(255, 255, 255, 0.2);
-    color: white;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(10px);
-    cursor: pointer;
-}
-
-.action-btn-header:hover {
-    background: rgba(255, 255, 255, 0.3);
-    transform: translateY(-2px);
-    color: white;
-    text-decoration: none;
-}
-
-/* Professional Cards */
-.category-card {
-    background: white;
-    border-radius: 1rem;
-    box-shadow: var(--category-shadow);
-    border: 1px solid var(--category-border);
-    overflow: hidden;
-    margin-bottom: 2rem;
-    transition: all 0.3s ease;
-}
-
-.category-card:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--category-shadow-lg);
-}
-
-.card-header-pro {
-    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-    padding: 1.5rem;
-    border-bottom: 1px solid var(--category-border);
-}
-
-.card-title-pro {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: var(--category-dark);
-    margin: 0;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-}
-
-.card-title-pro i {
-    color: var(--category-primary);
-}
-
-.card-body-pro {
-    padding: 0;
-}
-
-/* DataTable Styling */
-.category-table-container {
-    position: relative;
-}
-
-.table-responsive {
-    border-radius: 0.5rem;
-    overflow: hidden;
-}
-
-.category-table {
-    margin: 0;
-    border: none;
-}
-
-.category-table thead th {
-    background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
-    border: none;
-    padding: 1rem;
-    font-weight: 600;
-    color: var(--category-dark);
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    border-bottom: 2px solid var(--category-border);
-}
-
-.category-table tbody td {
-    padding: 1rem;
-    border: none;
-    border-bottom: 1px solid #f1f5f9;
-    vertical-align: middle;
-}
-
-.category-table tbody tr:hover {
-    background: #f8fafc;
-}
-
-/* Category Name with Icon */
-.category-name {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    font-weight: 600;
-    color: var(--category-dark);
-}
-
-.category-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--category-primary), var(--category-secondary));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 1.1rem;
-}
-
-.category-description {
-    color: #64748b;
-    font-size: 0.9rem;
-    max-width: 300px;
-    line-height: 1.4;
-}
-
-/* Status Badge */
-.status-badge {
-    padding: 0.375rem 0.75rem;
-    border-radius: 2rem;
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.375rem;
-}
-
-.status-badge.active {
-    background: rgba(16, 185, 129, 0.1);
-    color: var(--category-success);
-}
-
-.status-badge.inactive {
-    background: rgba(239, 68, 68, 0.1);
-    color: var(--category-danger);
-}
-
-.status-badge i {
-    font-size: 0.75rem;
-}
-
-/* Service Count Badge */
-.service-count {
-    padding: 0.25rem 0.75rem;
-    background: rgba(79, 70, 229, 0.1);
-    color: var(--category-primary);
-    border-radius: 1rem;
-    font-size: 0.8rem;
-    font-weight: 600;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.375rem;
-}
-
-/* Action Buttons */
-.action-buttons {
-    display: flex;
-    gap: 0.5rem;
-    align-items: center;
-}
-
-.action-btn {
-    padding: 0.5rem;
-    border: none;
-    border-radius: 0.5rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 36px;
-    height: 36px;
-    font-size: 0.875rem;
-}
-
-.action-btn:hover {
-    transform: translateY(-2px);
-}
-
-.action-btn.edit-btn {
-    background: rgba(59, 130, 246, 0.1);
-    color: var(--category-info);
-}
-
-.action-btn.edit-btn:hover {
-    background: var(--category-info);
-    color: white;
-}
-
-.action-btn.toggle-btn {
-    background: rgba(245, 158, 11, 0.1);
-    color: var(--category-warning);
-}
-
-.action-btn.toggle-btn:hover {
-    background: var(--category-warning);
-    color: white;
-}
-
-.action-btn.delete-btn {
-    background: rgba(239, 68, 68, 0.1);
-    color: var(--category-danger);
-}
-
-.action-btn.delete-btn:hover {
-    background: var(--category-danger);
-    color: white;
-}
-
-.action-btn.loading {
-    opacity: 0.7;
-    pointer-events: none;
-}
-
-.action-btn.loading i {
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-/* Modal Styling */
-.modal-content {
-    border-radius: 1rem;
-    border: none;
-    box-shadow: var(--category-shadow-lg);
-}
-
-.modal-header {
-    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-    border-bottom: 1px solid var(--category-border);
-    border-radius: 1rem 1rem 0 0;
-    padding: 1.5rem;
-}
-
-.modal-title {
-    font-weight: 600;
-    color: var(--category-dark);
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-}
-
-.modal-title i {
-    color: var(--category-primary);
-}
-
-.modal-body {
-    padding: 2rem;
-}
-
-.modal-footer {
-    border-top: 1px solid var(--category-border);
-    padding: 1.5rem;
-}
-
-/* Form Styling */
-.form-group {
-    margin-bottom: 1.5rem;
-}
-
-.form-label {
-    font-weight: 600;
-    color: var(--category-dark);
-    margin-bottom: 0.5rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.form-control {
-    border: 2px solid var(--category-border);
-    border-radius: 0.75rem;
-    padding: 0.75rem 1rem;
-    transition: all 0.3s ease;
-    font-size: 0.95rem;
-}
-
-.form-control:focus {
-    border-color: var(--category-primary);
-    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
-}
-
-.btn {
-    padding: 0.75rem 1.5rem;
-    border-radius: 0.75rem;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.btn:hover {
-    transform: translateY(-2px);
-}
-
-.btn-primary {
-    background: var(--category-primary);
-    border-color: var(--category-primary);
-}
-
-.btn-primary:hover {
-    background: var(--category-secondary);
-    border-color: var(--category-secondary);
-}
-
-.btn-secondary {
-    background: #6b7280;
-    border-color: #6b7280;
-}
-
-.btn-secondary:hover {
-    background: #4b5563;
-    border-color: #4b5563;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .category-header {
-        margin: -1rem -15px 1.5rem -15px;
-        padding: 2rem 0;
-    }
+<div class="container-fluid py-4">
+    <!-- Page Header -->
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <h1 class="h3 mb-0 text-gray-800">
+                        <i class="fas fa-tags text-primary me-2"></i>Manage Categories
+                    </h1>
+                    <p class="text-muted mb-0">Organize and manage your service categories</p>
+                </div>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCategoryModal">
+                    <i class="fas fa-plus me-1"></i>Add Category
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Alert Messages -->
+    <?php if ($message): ?>
+        <div class="row">
+            <div class="col-12">
+                <?php echo $message; ?>
+            </div>
+        </div>
+    <?php endif; ?>
+
+    <!-- Statistics Cards -->
+    <div class="row mb-4">
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Categories</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo count($categories); ?></div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-layer-group fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Active Categories</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                <?php echo array_reduce($categories, function($count, $cat) { return ($cat['is_active'] ?? 1) ? $count + 1 : $count; }, 0); ?>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-check-circle fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">With Services</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                <?php echo array_reduce($categories, function($count, $cat) { return ($cat['service_count'] ?? 0) > 0 ? $count + 1 : $count; }, 0); ?>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-cogs fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Total Services</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                <?php echo array_sum(array_column($categories, 'service_count')); ?>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-th-list fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Categories Table -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Categories List</h6>
+                    <div class="dropdown no-arrow">
+                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown">
+                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right shadow">
+                            <div class="dropdown-header">Actions:</div>
+                            <a class="dropdown-item" href="#" onclick="refreshTable()">
+                                <i class="fas fa-sync fa-sm fa-fw mr-2 text-gray-400"></i>Refresh
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <?php if (empty($categories)): ?>
+                        <div class="text-center py-5">
+                            <i class="fas fa-tags fa-3x text-gray-300 mb-3"></i>
+                            <h5 class="text-gray-600">No Categories Found</h5>
+                            <p class="text-muted">Get started by creating your first category</p>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCategoryModal">
+                                <i class="fas fa-plus me-1"></i>Add First Category
+                            </button>
+                        </div>
+                    <?php else: ?>
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="categoriesTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Description</th>
+                                        <th>Icon</th>
+                                        <th>Services</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($categories as $cat): ?>
+                                        <tr>
+                                            <td><?php echo $cat['id']; ?></td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <?php if (!empty($cat['icon'])): ?>
+                                                        <i class="fas fa-<?php echo htmlspecialchars($cat['icon']); ?> text-primary me-2"></i>
+                                                    <?php endif; ?>
+                                                    <strong><?php echo htmlspecialchars($cat['name']); ?></strong>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <?php 
+                                                $desc = $cat['description'] ?? '';
+                                                echo !empty($desc) ? htmlspecialchars(substr($desc, 0, 50)) . (strlen($desc) > 50 ? '...' : '') : '<em class="text-muted">No description</em>'; 
+                                                ?>
+                                            </td>
+                                            <td>
+                                                <?php if (!empty($cat['icon'])): ?>
+                                                    <span class="badge bg-light text-dark">
+                                                        <i class="fas fa-<?php echo htmlspecialchars($cat['icon']); ?>"></i>
+                                                        fa-<?php echo htmlspecialchars($cat['icon']); ?>
+                                                    </span>
+                                                <?php else: ?>
+                                                    <span class="text-muted">No icon</span>
+                                                <?php endif; ?>
+                                            </td>
+                                            <td>
+                                                <span class="badge bg-primary"><?php echo $cat['service_count'] ?? 0; ?></span>
+                                            </td>
+                                            <td>
+                                                <?php if (($cat['is_active'] ?? 1)): ?>
+                                                    <span class="badge bg-success">Active</span>
+                                                <?php else: ?>
+                                                    <span class="badge bg-danger">Inactive</span>
+                                                <?php endif; ?>
+                                            </td>
+                                            <td>
+                                                <div class="btn-group" role="group">
+                                                    <button type="button" class="btn btn-sm btn-outline-primary" 
+                                                            onclick="editCategory(<?php echo htmlspecialchars(json_encode($cat)); ?>)"
+                                                            data-bs-toggle="tooltip" title="Edit">
+                                                        <i class="fas fa-edit"></i>
+                                                    </button>
+                                                    <button type="button" class="btn btn-sm btn-outline-warning" 
+                                                            onclick="toggleStatus(<?php echo $cat['id']; ?>, <?php echo $cat['is_active'] ?? 1; ?>)"
+                                                            data-bs-toggle="tooltip" title="Toggle Status">
+                                                        <i class="fas fa-toggle-<?php echo ($cat['is_active'] ?? 1) ? 'on' : 'off'; ?>"></i>
+                                                    </button>
+                                                    <button type="button" class="btn btn-sm btn-outline-danger" 
+                                                            onclick="confirmDelete(<?php echo $cat['id']; ?>, '<?php echo addslashes($cat['name']); ?>')"
+                                                            data-bs-toggle="tooltip" title="Delete">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Category Modal -->
+<div class="modal fade" id="addCategoryModal" tabindex="-1" aria-labelledby="addCategoryModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addCategoryModalLabel">
+                    <i class="fas fa-plus me-2"></i>Add New Category
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form method="POST">
+                <input type="hidden" name="action" value="add">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="categoryName" class="form-label">Category Name *</label>
+                        <input type="text" class="form-control" id="categoryName" name="name" required maxlength="100">
+                    </div>
+                    <div class="mb-3">
+                        <label for="categoryDescription" class="form-label">Description</label>
+                        <textarea class="form-control" id="categoryDescription" name="description" rows="3"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="categoryIcon" class="form-label">Icon (FontAwesome)</label>
+                        <input type="text" class="form-control" id="categoryIcon" name="icon" placeholder="e.g., home, user, cog">
+                        <div class="form-text">Enter icon name without 'fa-' prefix</div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Create Category</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Category Modal -->
+<div class="modal fade" id="editCategoryModal" tabindex="-1" aria-labelledby="editCategoryModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editCategoryModalLabel">
+                    <i class="fas fa-edit me-2"></i>Edit Category
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form method="POST">
+                <input type="hidden" name="action" value="edit">
+                <input type="hidden" id="editCategoryId" name="id">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="editCategoryName" class="form-label">Category Name *</label>
+                        <input type="text" class="form-control" id="editCategoryName" name="name" required maxlength="100">
+                    </div>
+                    <div class="mb-3">
+                        <label for="editCategoryDescription" class="form-label">Description</label>
+                        <textarea class="form-control" id="editCategoryDescription" name="description" rows="3"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editCategoryIcon" class="form-label">Icon (FontAwesome)</label>
+                        <input type="text" class="form-control" id="editCategoryIcon" name="icon" placeholder="e.g., home, user, cog">
+                        <div class="form-text">Enter icon name without 'fa-' prefix</div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Update Category</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title" id="deleteModalLabel">
+                    <i class="fas fa-exclamation-triangle me-2"></i>Confirm Delete
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete this category?</p>
+                <p class="text-muted" id="deleteMessage"></p>
+                <div class="alert alert-warning">
+                    <i class="fas fa-info-circle me-2"></i>
+                    This action will remove the category from all associated services.
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+$(document).ready(function() {
+    // Initialize DataTable
+    $('#categoriesTable').DataTable({
+        responsive: true,
+        pageLength: 10,
+        order: [[0, 'asc']],
+        columnDefs: [
+            { orderable: false, targets: [6] }
+        ]
+    });
     
-    .category-title {
-        font-size: 2rem;
-    }
-    
-    .category-stats {
-        gap: 1rem;
-    }
-    
-    .header-actions {
-        gap: 0.5rem;
-    }
-    
-    .action-btn-header {
-        padding: 0.5rem 1rem;
-        font-size: 0.8rem;
-    }
-    
-    .card-body-pro {
-        padding: 0;
-    }
-    
-    .category-table thead th,
-    .category-table tbody td {
-        padding: 0.75rem 0.5rem;
-    }
-    
-    .action-buttons {
-        flex-direction: column;
-        gap: 0.25rem;
+    // Initialize tooltips
+    $('[data-bs-toggle="tooltip"]').tooltip();
+});
+
+// Edit category function
+function editCategory(category) {
+    $('#editCategoryId').val(category.id);
+    $('#editCategoryName').val(category.name);
+    $('#editCategoryDescription').val(category.description || '');
+    $('#editCategoryIcon').val(category.icon || '');
+    $('#editCategoryModal').modal('show');
+}
+
+// Toggle status function
+async function toggleStatus(id, currentStatus) {
+    try {
+        const formData = new FormData();
+        formData.append('action', 'toggle_status');
+        formData.append('id', id);
+        formData.append('current_status', currentStatus);
+        
+        const response = await fetch(window.location.href, {
+            method: 'POST',
+            body: formData
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+            location.reload();
+        } else {
+            alert('Error: ' + result.message);
+        }
+    } catch (error) {
+        alert('An error occurred: ' + error.message);
     }
 }
 
-/* Loading States */
-.loading-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(255, 255, 255, 0.9);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 10;
-    border-radius: 1rem;
+// Confirm delete function
+let deleteId = null;
+function confirmDelete(id, name) {
+    deleteId = id;
+    $('#deleteMessage').text(`Category: "${name}"`);
+    $('#deleteModal').modal('show');
 }
 
-.loading-spinner {
-    width: 40px;
-    height: 40px;
-    border: 3px solid #f3f4f6;
-    border-top: 3px solid var(--category-primary);
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-}
+// Handle delete confirmation
+$('#confirmDeleteBtn').click(async function() {
+    if (!deleteId) return;
+    
+    try {
+        const formData = new FormData();
+        formData.append('action', 'delete');
+        formData.append('id', deleteId);
+        
+        const response = await fetch(window.location.href, {
+            method: 'POST',
+            body: formData
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+            $('#deleteModal').modal('hide');
+            location.reload();
+        } else {
+            alert('Error: ' + result.message);
+        }
+    } catch (error) {
+        alert('An error occurred: ' + error.message);
+    }
+});
 
-/* Empty State */
-.empty-state {
-    text-align: center;
-    padding: 4rem 2rem;
-    color: #64748b;
+// Refresh table function
+function refreshTable() {
+    location.reload();
 }
+</script>
 
-.empty-state i {
-    font-size: 4rem;
-    color: #cbd5e1;
-    margin-bottom: 1rem;
-}
-
-.empty-state h3 {
-    color: var(--category-dark);
-    margin-bottom: 0.5rem;
-}
-
-.empty-state p {
-    color: #64748b;
-    margin-bottom: 2rem;
-}
-</style>
+<?php include 'includes/admin-footer.php'; ?>
