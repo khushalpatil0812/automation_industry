@@ -1,62 +1,142 @@
-<footer class="footer">
-        <div class="footer-container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>BusinessPro</h3>
-                    <p>Professional business solutions tailored to your needs. We help businesses grow and succeed in today's competitive market.</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Services</h4>
-                    <ul>
-                        <li><a href="services.php?category=Web Development">Web Development</a></li>
-                        <li><a href="services.php?category=Mobile Apps">Mobile Apps</a></li>
-                        <li><a href="services.php?category=Digital Marketing">Digital Marketing</a></li>
-                        <li><a href="services.php?category=Consulting">Consulting</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Contact Info</h4>
-                    <p>📧 info@businesspro.com</p>
-                    <p>📞 +1 (555) 123-4567</p>
-                    <p>📍 123 Business St, City, State 12345</p>
+<footer class="bg-dark text-light py-5">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6">
+                <div class="mb-4">
+                    <h5 class="fw-bold mb-3" style="color: var(--color-platinum);">
+                        <i class="fas fa-cogs me-2"></i>AutomationPro
+                    </h5>
+                    <p class="text-light mb-4">Professional automation & industrial solutions tailored to your needs. We help businesses grow and succeed with robust, secure systems that drive innovation and efficiency.</p>
+                    <div class="d-flex gap-2">
+                        <a href="#" class="btn btn-outline-light btn-sm rounded-circle" style="width: 40px; height: 40px;" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="#" class="btn btn-outline-light btn-sm rounded-circle" style="width: 40px; height: 40px;" aria-label="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="btn btn-outline-light btn-sm rounded-circle" style="width: 40px; height: 40px;" aria-label="Facebook">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="#" class="btn btn-outline-light btn-sm rounded-circle" style="width: 40px; height: 40px;" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 BusinessPro. All rights reserved.</p>
+
+            <div class="col-lg-2 col-md-6">
+                <h6 class="fw-bold mb-3" style="color: var(--color-platinum);">Quick Links</h6>
+                <ul class="list-unstyled">
+                    <li class="mb-2">
+                        <a href="index.php" class="text-light text-decoration-none d-flex align-items-center">
+                            <i class="fas fa-chevron-right me-2" style="color: var(--color-platinum); font-size: 0.7rem;"></i>Home
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="about.php" class="text-light text-decoration-none d-flex align-items-center">
+                            <i class="fas fa-chevron-right me-2" style="color: var(--color-platinum); font-size: 0.7rem;"></i>About Us
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="services.php" class="text-light text-decoration-none d-flex align-items-center">
+                            <i class="fas fa-chevron-right me-2" style="color: var(--color-platinum); font-size: 0.7rem;"></i>Services
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="contact.php" class="text-light text-decoration-none d-flex align-items-center">
+                            <i class="fas fa-chevron-right me-2" style="color: var(--color-platinum); font-size: 0.7rem;"></i>Contact
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <h6 class="fw-bold mb-3" style="color: var(--color-platinum);">Contact Info</h6>
+                <div class="mb-3">
+                    <div class="d-flex align-items-start mb-2">
+                        <i class="fas fa-map-marker-alt me-2 mt-1" style="color: var(--color-platinum); font-size: 0.9rem;"></i>
+                        <span class="text-light small">123 Automation Street<br>Industrial City, State 12345</span>
+                    </div>
+                    <div class="d-flex align-items-center mb-2">
+                        <i class="fas fa-phone me-2" style="color: var(--color-platinum); font-size: 0.9rem;"></i>
+                        <a href="tel:+15551234567" class="text-light text-decoration-none small">+1 (555) 123-4567</a>
+                    </div>
+                    <div class="d-flex align-items-center mb-2">
+                        <i class="fas fa-envelope me-2" style="color: var(--color-platinum); font-size: 0.9rem;"></i>
+                        <a href="mailto:info@automationpro.com" class="text-light text-decoration-none small">info@automationpro.com</a>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-clock me-2" style="color: var(--color-platinum); font-size: 0.9rem;"></i>
+                        <span class="text-light small">Mon - Fri: 9AM - 6PM</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <h6 class="fw-bold mb-3" style="color: var(--color-platinum);">Newsletter</h6>
+                <p class="text-light mb-3 small">Get product updates, insights and automation tips delivered to your inbox.</p>
+                <form action="#" method="post">
+                    <div class="input-group mb-3">
+                        <input type="email" class="form-control" placeholder="Enter your email" required>
+                        <button class="btn" type="submit" style="background-color: var(--color-platinum); color: var(--color-gunmetal); border: none;">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </form>
+                <small class="text-muted">We respect your privacy. Unsubscribe anytime.</small>
             </div>
         </div>
-    </footer>
+
+        <hr class="my-4 border-secondary opacity-25">
+        
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <p class="mb-0 text-light small">
+                    &copy; <span id="current-year">2024</span> AutomationPro. All rights reserved.
+                </p>
+            </div>
+            <div class="col-md-6 text-md-end mt-2 mt-md-0">
+                <div class="d-flex justify-content-md-end gap-3 flex-wrap">
+                    <a href="#" class="text-light text-decoration-none small">Privacy Policy</a>
+                    <a href="#" class="text-light text-decoration-none small">Terms of Service</a>
+                    <a href="#" class="text-light text-decoration-none small">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Back to top button -->
-    <button class="back-to-top" aria-label="Back to top">
+    <button class="btn position-fixed bottom-0 end-0 m-3 rounded-circle shadow" 
+            id="backToTop" style="display: none; width: 50px; height: 50px; background-color: var(--color-platinum); color: var(--color-gunmetal); border: none;" aria-label="Back to top">
         <i class="fas fa-arrow-up"></i>
     </button>
+</footer>
 
-    <!-- External JavaScript libraries -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<!-- Bootstrap JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    // Set current year
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+
+    // Back to top functionality
+    const backToTopBtn = document.getElementById('backToTop');
     
-    <!-- Modular JavaScript components -->
-    <script src="assets/js/utils/helpers.js"></script>
-    <script src="assets/js/components/navigation.js"></script>
-    <script src="assets/js/components/forms.js"></script>
-    <script src="assets/js/components/animations.js"></script>
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+            backToTopBtn.style.display = 'block';
+        } else {
+            backToTopBtn.style.display = 'none';
+        }
+    });
     
-    <!-- Main application script -->
-    <script src="assets/js/main.js"></script>
-    
-    <!-- Initialize AOS -->
-    <script>
-        AOS.init({
-            duration: 800,
-            easing: 'ease-in-out',
-            once: true,
-            offset: 50
+    backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
         });
-    </script>
-    
-    <!-- Legacy script (can be removed after migration) -->
-    <!-- <script src="assets/js/script.js"></script> -->
-<script src="public/js/hero.js"></script>
-    
+    });
+</script>
+
 </body>
 </html>
