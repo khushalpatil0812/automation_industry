@@ -12,7 +12,6 @@ if (!$service_id) {
 
 $service_data = $service_class->getServiceById($service_id);
 
-// Redirect if service is inactive or not found
 if (!$service_data || !is_array($service_data)) {
     header('Location: services.php');
     exit;

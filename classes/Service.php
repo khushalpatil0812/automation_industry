@@ -13,7 +13,10 @@ class Service {
 
     // 🔹 Get all services (admin: active + inactive)
     public function getAllServices() {
-        $query = "SELECT * FROM " . $this->table . " ORDER BY created_at DESC";
+        $query = "SELECT s.*, c.name as category_name 
+                  FROM " . $this->table . " s 
+                  LEFT JOIN categories c ON s.category_id = c.id 
+                  ORDER BY s.created_at DESC";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -21,7 +24,11 @@ class Service {
 
     // 🔹 Get only active services (frontend)
     public function getActiveServices() {
-        $query = "SELECT * FROM " . $this->table . " WHERE is_active = 1 ORDER BY created_at DESC";
+        $query = "SELECT s.*, c.name as category_name 
+                  FROM " . $this->table . " s 
+                  LEFT JOIN categories c ON s.category_id = c.id 
+                  WHERE s.is_active = 1 
+                  ORDER BY s.created_at DESC";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -64,7 +71,7 @@ class Service {
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    // 🔹 Get active categories
+    // 🔹 Get active categories (names only)
     public function getCategories() {
         $query = "SELECT name FROM categories WHERE is_active = 1 ORDER BY name";
         $stmt = $this->conn->prepare($query);
@@ -72,8 +79,17 @@ class Service {
         return $stmt->fetchAll(PDO::FETCH_COLUMN);
     }
 
+    // 🔹 Get active categories with full details
     public function getCategoriesWithDetails() {
         $query = "SELECT * FROM categories WHERE is_active = 1 ORDER BY name";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    // 🔹 Get all categories (including inactive) with full details
+    public function getAllCategoriesWithDetails() {
+        $query = "SELECT * FROM categories ORDER BY name";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
