@@ -18,7 +18,7 @@ include 'includes/header.php';
         <div class="carousel-inner h-100">
             <!-- Slide 1 -->
             <div class="carousel-item active h-100 position-relative">
-                <div class="position-absolute w-100 h-100" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.3)), url('public/hero/industrial-automation-hero.jpg') center/cover;"></div>
+                <div class="position-absolute w-100 h-100" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.3)), url('public/freepics/mainheader.jpg') center/cover;"></div>
                 <div class="d-flex align-items-center justify-content-center h-100 position-relative">
                     <div class="container text-center text-white" data-aos="fade-up">
                         <span class="badge px-3 py-2 fs-6 mb-3" style="background-color: var(--color-platinum); color: var(--color-gunmetal);">Industry 4.0 Solutions</span>
@@ -38,7 +38,7 @@ include 'includes/header.php';
             
             <!-- Slide 2 -->
             <div class="carousel-item h-100 position-relative">
-                <div class="position-absolute w-100 h-100" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.3)), url('public/hero/Industry 4.0.jpg') center/cover;"></div>
+                <div class="position-absolute w-100 h-100" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.3)), url('public/freepics/ai-robot-hand-close-human-hand.jpg') center/cover;"></div>
                 <div class="d-flex align-items-center justify-content-center h-100 position-relative">
                     <div class="container text-center text-white" data-aos="fade-up">
                         <span class="badge text-white px-3 py-2 fs-6 mb-3" style="background-color: var(--color-gunmetal);">Smart Manufacturing</span>
@@ -58,7 +58,7 @@ include 'includes/header.php';
             
             <!-- Slide 3 -->
             <div class="carousel-item h-100 position-relative">
-                <div class="position-absolute w-100 h-100" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.3)), url('public/hero/Header_background.jpg') center/cover;"></div>
+                <div class="position-absolute w-100 h-100" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.3)), url('public/freepics/3442501.jpg') center/cover;"></div>
                 <div class="d-flex align-items-center justify-content-center h-100 position-relative">
                     <div class="container text-center text-white" data-aos="fade-up">
                         <span class="badge bg-success text-white px-3 py-2 fs-6 mb-3">Sustainable Future</span>
