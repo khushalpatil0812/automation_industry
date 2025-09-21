@@ -266,66 +266,228 @@ include 'includes/header.php';
         </button>
     </section>
 
-    <!-- Key Metrics Section -->
-    <section id="metricsSection" class="py-5" style="background-color: #212529;">
-        <div class="container">
-            <div class="row text-center mb-5" data-aos="fade-up">
+    <!-- Enhanced Key Metrics Section -->
+    <section id="metricsSection" class="py-5 position-relative overflow-hidden" style="background: linear-gradient(135deg, #1a1d2e 0%, #212529 50%, #2c3034 100%);">
+        <!-- Animated Background Elements -->
+        <div class="metrics-bg-animation position-absolute w-100 h-100">
+            <div class="metrics-particle particle-1"></div>
+            <div class="metrics-particle particle-2"></div>
+            <div class="metrics-particle particle-3"></div>
+            <div class="metrics-particle particle-4"></div>
+            <div class="metrics-particle particle-5"></div>
+        </div>
+        
+        <!-- Tech Grid Overlay -->
+        <div class="metrics-grid-overlay position-absolute w-100 h-100"></div>
+        
+        <!-- Professional Decorative Elements -->
+        <div class="metrics-decorations position-absolute w-100 h-100">
+            <div class="metrics-glow glow-1"></div>
+            <div class="metrics-glow glow-2"></div>
+            <div class="metrics-line line-1"></div>
+            <div class="metrics-line line-2"></div>
+        </div>
+        
+        <div class="container position-relative" style="z-index: 10;">
+            <!-- Enhanced Header -->
+            <div class="row text-center mb-5" data-aos="fade-up" data-aos-duration="1000">
                 <div class="col-12">
-                    <h2 class="display-5 fw-bold text-white mb-3">Proven Track Record</h2>
-                    <p class="fs-5 text-light">Numbers that speak for our excellence in automation solutions</p>
+                    <!-- Animated Badge -->
+                    <div class="metrics-badge-wrapper mb-4">
+                        <span class="badge metrics-badge px-4 py-3 fs-5 position-relative overflow-hidden" 
+                              style="background: rgba(255, 107, 53, 0.15); color: var(--color-industrial-orange); border: 2px solid rgba(255, 107, 53, 0.3); backdrop-filter: blur(15px); border-radius: 50px; font-weight: 600;">
+                            <span class="badge-metrics-glow position-absolute top-0 start-0 w-100 h-100"></span>
+                            <i class="fas fa-chart-line me-2 metrics-icon"></i>Performance Metrics
+                        </span>
+                    </div>
+                    
+                    <!-- Enhanced Title -->
+                    <h2 class="metrics-title display-4 fw-bold text-white mb-4 position-relative">
+                        <span class="metrics-text-line" data-aos="fade-right" data-aos-delay="300" data-aos-duration="800">
+                            Proven Track
+                        </span>
+                        <br>
+                        <span class="metrics-text-highlight" data-aos="fade-left" data-aos-delay="500" data-aos-duration="800">
+                            Record
+                        </span>
+                        <div class="metrics-title-underline position-absolute bottom-0 start-50 translate-middle-x"></div>
+                    </h2>
+                    
+                    <!-- Enhanced Description -->
+                    <p class="fs-4 text-light mb-0 col-lg-8 mx-auto metrics-description" 
+                       data-aos="fade-up" data-aos-delay="700" data-aos-duration="800"
+                       style="font-weight: 400; line-height: 1.6; color: rgba(255, 255, 255, 0.9);">
+                        Numbers that speak for our excellence in automation solutions and industrial innovation
+                    </p>
                 </div>
             </div>
             
-            <div class="row g-4">
-                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
-                    <div class="card border-0 shadow-sm h-100 text-center" style="background-color: #343a40;">
-                        <div class="card-body p-4">
-                            <div class="bg-gradient rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 70px; height: 70px; background: var(--gradient-primary) !important;">
-                                <i class="fas fa-industry text-white fs-3"></i>
+            <!-- Enhanced Metrics Cards -->
+            <div class="row g-4 metrics-cards-container">
+                <!-- Projects Metric -->
+                <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="100" data-aos-duration="800">
+                    <div class="metrics-card card border-0 h-100 text-center position-relative overflow-hidden" 
+                         style="background: rgba(30, 35, 40, 0.9) !important; color: white !important;">
+                        <!-- Card Glow Effect -->
+                        <div class="metrics-card-glow position-absolute w-100 h-100"></div>
+                        
+                        <!-- Animated Border -->
+                        <div class="metrics-card-border position-absolute w-100 h-100"></div>
+                        
+                        <div class="card-body p-5 position-relative" style="z-index: 2; background: transparent !important; color: white !important;">
+                            <!-- Enhanced Icon Container -->
+                            <div class="metrics-icon-container position-relative mb-4">
+                                <div class="metrics-icon-bg bg-gradient rounded-3 d-inline-flex align-items-center justify-content-center position-relative overflow-hidden" 
+                                     style="width: 90px; height: 90px; background: linear-gradient(135deg, var(--color-industrial-orange) 0%, #e55100 100%) !important; box-shadow: 0 8px 25px rgba(255, 107, 53, 0.3);">
+                                    <div class="metrics-icon-shimmer position-absolute w-100 h-100"></div>
+                                    <i class="fas fa-industry text-white" style="font-size: 2.2rem; position: relative; z-index: 1;"></i>
+                                </div>
+                                <!-- Floating Ring -->
+                                <div class="metrics-icon-ring position-absolute top-0 start-0 w-100 h-100"></div>
                             </div>
-                            <h3 class="fw-bold mb-1 text-white"><span class="counter" data-target="500">0</span>+</h3>
-                            <h5 class="fw-semibold mb-2 text-light">Projects Completed</h5>
-                            <p class="text-light small mb-0 opacity-75">Successfully delivered automation solutions worldwide</p>
+                            
+                            <!-- Enhanced Counter -->
+                            <div class="metrics-number-container mb-3">
+                                <h3 class="metrics-number fw-bold mb-0 position-relative" style="font-size: 3rem; line-height: 1;">
+                                    <span class="counter" data-target="500">0</span><span class="metrics-plus">+</span>
+                                    <div class="metrics-number-glow position-absolute top-0 start-0 w-100 h-100"></div>
+                                </h3>
+                            </div>
+                            
+                            <!-- Enhanced Label -->
+                            <h5 class="metrics-label fw-bold mb-3 text-white" style="font-size: 1.3rem; letter-spacing: -0.01em;">Projects Completed</h5>
+                            
+                            <!-- Enhanced Description -->
+                            <p class="metrics-desc text-light mb-0" style="font-size: 0.95rem; line-height: 1.5; opacity: 0.85;">
+                                Successfully delivered automation solutions worldwide with cutting-edge technology
+                            </p>
+                            
+                            <!-- Progress Indicator -->
+                            <div class="metrics-progress mt-4">
+                                <div class="metrics-progress-bar"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 
-                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
-                    <div class="card border-0 shadow-sm h-100 text-center" style="background-color: #343a40;">
-                        <div class="card-body p-4">
-                            <div class="bg-success bg-gradient rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 70px; height: 70px;">
-                                <i class="fas fa-users text-white fs-3"></i>
+                <!-- Clients Metric -->
+                <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="200" data-aos-duration="800">
+                    <div class="metrics-card card border-0 h-100 text-center position-relative overflow-hidden" 
+                         style="background: rgba(30, 35, 40, 0.9) !important; color: white !important;">
+                        <div class="metrics-card-glow metrics-card-glow-green position-absolute w-100 h-100"></div>
+                        <div class="metrics-card-border position-absolute w-100 h-100"></div>
+                        
+                        <div class="card-body p-5 position-relative" style="z-index: 2; background: transparent !important; color: white !important;">
+                            <div class="metrics-icon-container position-relative mb-4">
+                                <div class="metrics-icon-bg bg-success bg-gradient rounded-3 d-inline-flex align-items-center justify-content-center position-relative overflow-hidden" 
+                                     style="width: 90px; height: 90px; box-shadow: 0 8px 25px rgba(25, 135, 84, 0.3);">
+                                    <div class="metrics-icon-shimmer metrics-icon-shimmer-green position-absolute w-100 h-100"></div>
+                                    <i class="fas fa-users text-white" style="font-size: 2.2rem; position: relative; z-index: 1;"></i>
+                                </div>
+                                <div class="metrics-icon-ring metrics-icon-ring-green position-absolute top-0 start-0 w-100 h-100"></div>
                             </div>
-                            <h3 class="fw-bold text-success mb-1"><span class="counter" data-target="150">0</span>+</h3>
-                            <h5 class="fw-semibold mb-2 text-light">Happy Clients</h5>
-                            <p class="text-light small mb-0 opacity-75">Trusted by leading manufacturing companies</p>
+                            
+                            <div class="metrics-number-container mb-3">
+                                <h3 class="metrics-number metrics-number-green fw-bold mb-0 position-relative" style="font-size: 3rem; line-height: 1;">
+                                    <span class="counter" data-target="150">0</span><span class="metrics-plus">+</span>
+                                    <div class="metrics-number-glow metrics-number-glow-green position-absolute top-0 start-0 w-100 h-100"></div>
+                                </h3>
+                            </div>
+                            
+                            <h5 class="metrics-label fw-bold mb-3 text-white" style="font-size: 1.3rem; letter-spacing: -0.01em;">Happy Clients</h5>
+                            <p class="metrics-desc text-light mb-0" style="font-size: 0.95rem; line-height: 1.5; opacity: 0.85;">
+                                Trusted by leading manufacturing companies across diverse industries
+                            </p>
+                            
+                            <div class="metrics-progress mt-4">
+                                <div class="metrics-progress-bar metrics-progress-bar-green"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 
-                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
-                    <div class="card border-0 shadow-sm h-100 text-center" style="background-color: #343a40;">
-                        <div class="card-body p-4">
-                            <div class="bg-warning bg-gradient rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 70px; height: 70px;">
-                                <i class="fas fa-clock text-white fs-3"></i>
+                <!-- Experience Metric -->
+                <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="300" data-aos-duration="800">
+                    <div class="metrics-card card border-0 h-100 text-center position-relative overflow-hidden" 
+                         style="background: rgba(30, 35, 40, 0.9) !important; color: white !important;">
+                        <div class="metrics-card-glow metrics-card-glow-warning position-absolute w-100 h-100"></div>
+                        <div class="metrics-card-border position-absolute w-100 h-100"></div>
+                        
+                        <div class="card-body p-5 position-relative" style="z-index: 2; background: transparent !important; color: white !important;">
+                            <div class="metrics-icon-container position-relative mb-4">
+                                <div class="metrics-icon-bg bg-warning bg-gradient rounded-3 d-inline-flex align-items-center justify-content-center position-relative overflow-hidden" 
+                                     style="width: 90px; height: 90px; box-shadow: 0 8px 25px rgba(255, 193, 7, 0.3);">
+                                    <div class="metrics-icon-shimmer metrics-icon-shimmer-warning position-absolute w-100 h-100"></div>
+                                    <i class="fas fa-clock text-white" style="font-size: 2.2rem; position: relative; z-index: 1;"></i>
+                                </div>
+                                <div class="metrics-icon-ring metrics-icon-ring-warning position-absolute top-0 start-0 w-100 h-100"></div>
                             </div>
-                            <h3 class="fw-bold text-warning mb-1"><span class="counter" data-target="15">0</span>+</h3>
-                            <h5 class="fw-semibold mb-2 text-light">Years Experience</h5>
-                            <p class="text-light small mb-0 opacity-75">Decades of expertise in industrial automation</p>
+                            
+                            <div class="metrics-number-container mb-3">
+                                <h3 class="metrics-number metrics-number-warning fw-bold mb-0 position-relative" style="font-size: 3rem; line-height: 1;">
+                                    <span class="counter" data-target="15">0</span><span class="metrics-plus">+</span>
+                                    <div class="metrics-number-glow metrics-number-glow-warning position-absolute top-0 start-0 w-100 h-100"></div>
+                                </h3>
+                            </div>
+                            
+                            <h5 class="metrics-label fw-bold mb-3 text-white" style="font-size: 1.3rem; letter-spacing: -0.01em;">Years Experience</h5>
+                            <p class="metrics-desc text-light mb-0" style="font-size: 0.95rem; line-height: 1.5; opacity: 0.85;">
+                                Decades of expertise in industrial automation and smart manufacturing
+                            </p>
+                            
+                            <div class="metrics-progress mt-4">
+                                <div class="metrics-progress-bar metrics-progress-bar-warning"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 
-                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="400">
-                    <div class="card border-0 shadow-sm h-100 text-center" style="background-color: #343a40;">
-                        <div class="card-body p-4">
-                            <div class="bg-info bg-gradient rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 70px; height: 70px;">
-                                <i class="fas fa-trophy text-white fs-3"></i>
+                <!-- Success Rate Metric -->
+                <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="400" data-aos-duration="800">
+                    <div class="metrics-card card border-0 h-100 text-center position-relative overflow-hidden" 
+                         style="background: rgba(30, 35, 40, 0.9) !important; color: white !important;">
+                        <div class="metrics-card-glow metrics-card-glow-info position-absolute w-100 h-100"></div>
+                        <div class="metrics-card-border position-absolute w-100 h-100"></div>
+                        
+                        <div class="card-body p-5 position-relative" style="z-index: 2; background: transparent !important; color: white !important;">
+                            <div class="metrics-icon-container position-relative mb-4">
+                                <div class="metrics-icon-bg bg-info bg-gradient rounded-3 d-inline-flex align-items-center justify-content-center position-relative overflow-hidden" 
+                                     style="width: 90px; height: 90px; box-shadow: 0 8px 25px rgba(13, 202, 240, 0.3);">
+                                    <div class="metrics-icon-shimmer metrics-icon-shimmer-info position-absolute w-100 h-100"></div>
+                                    <i class="fas fa-trophy text-white" style="font-size: 2.2rem; position: relative; z-index: 1;"></i>
+                                </div>
+                                <div class="metrics-icon-ring metrics-icon-ring-info position-absolute top-0 start-0 w-100 h-100"></div>
                             </div>
-                            <h3 class="fw-bold text-info mb-1"><span class="counter" data-target="98">0</span>%</h3>
-                            <h5 class="fw-semibold mb-2 text-light">Success Rate</h5>
-                            <p class="text-light small mb-0 opacity-75">Exceptional project delivery success rate</p>
+                            
+                            <div class="metrics-number-container mb-3">
+                                <h3 class="metrics-number metrics-number-info fw-bold mb-0 position-relative" style="font-size: 3rem; line-height: 1;">
+                                    <span class="counter" data-target="98">0</span><span class="metrics-plus">%</span>
+                                    <div class="metrics-number-glow metrics-number-glow-info position-absolute top-0 start-0 w-100 h-100"></div>
+                                </h3>
+                            </div>
+                            
+                            <h5 class="metrics-label fw-bold mb-3 text-white" style="font-size: 1.3rem; letter-spacing: -0.01em;">Success Rate</h5>
+                            <p class="metrics-desc text-light mb-0" style="font-size: 0.95rem; line-height: 1.5; opacity: 0.85;">
+                                Exceptional project delivery success rate with unmatched quality standards
+                            </p>
+                            
+                            <div class="metrics-progress mt-4">
+                                <div class="metrics-progress-bar metrics-progress-bar-info"></div>
+                            </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Additional Trust Elements -->
+            <div class="row mt-5" data-aos="fade-up" data-aos-delay="800">
+                <div class="col-12 text-center">
+                    <div class="metrics-trust-section p-4 rounded-4 position-relative overflow-hidden">
+                        <div class="metrics-trust-bg position-absolute w-100 h-100"></div>
+                        <p class="text-light mb-0 fs-5 position-relative" style="z-index: 1; opacity: 0.9;">
+                            <i class="fas fa-shield-alt text-warning me-2"></i>
+                            Trusted by our clients for mission-critical automation projects
+                        </p>
                     </div>
                 </div>
             </div>
@@ -1302,6 +1464,676 @@ include 'includes/header.php';
     50% { transform: scale(1.05); }
     100% { transform: scale(1); }
 }
+
+/* Enhanced Metrics Section Styles */
+#metricsSection {
+    position: relative;
+    overflow: hidden;
+    background-attachment: fixed;
+}
+
+/* Animated Background Particles */
+.metrics-bg-animation {
+    z-index: 1;
+}
+
+.metrics-particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: rgba(255, 107, 53, 0.6);
+    border-radius: 50%;
+    animation: metricsFloat 15s infinite linear;
+}
+
+.particle-1 {
+    top: 20%;
+    left: 10%;
+    animation-delay: 0s;
+    animation-duration: 12s;
+}
+
+.particle-2 {
+    top: 60%;
+    left: 80%;
+    animation-delay: -3s;
+    animation-duration: 18s;
+    background: rgba(25, 135, 84, 0.6);
+}
+
+.particle-3 {
+    top: 30%;
+    left: 70%;
+    animation-delay: -6s;
+    animation-duration: 15s;
+    background: rgba(255, 193, 7, 0.6);
+}
+
+.particle-4 {
+    top: 80%;
+    left: 20%;
+    animation-delay: -9s;
+    animation-duration: 20s;
+    background: rgba(13, 202, 240, 0.6);
+}
+
+.particle-5 {
+    top: 10%;
+    left: 50%;
+    animation-delay: -12s;
+    animation-duration: 14s;
+    background: rgba(255, 107, 53, 0.4);
+}
+
+@keyframes metricsFloat {
+    0%, 100% {
+        transform: translate(0, 0) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    50% {
+        transform: translate(100px, -100px) rotate(180deg);
+        opacity: 0.8;
+    }
+}
+
+/* Tech Grid Overlay */
+.metrics-grid-overlay {
+    background-image: 
+        linear-gradient(rgba(255, 107, 53, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 107, 53, 0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+    opacity: 0.3;
+    z-index: 1;
+    animation: metricsGridMove 20s linear infinite;
+}
+
+@keyframes metricsGridMove {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(50px, 50px); }
+}
+
+/* Professional Decorative Elements */
+.metrics-decorations {
+    z-index: 2;
+}
+
+.metrics-glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(40px);
+    opacity: 0.4;
+    animation: metricsGlowPulse 6s ease-in-out infinite;
+}
+
+.glow-1 {
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(255, 107, 53, 0.3) 0%, transparent 70%);
+    top: 10%;
+    left: -5%;
+}
+
+.glow-2 {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(25, 135, 84, 0.2) 0%, transparent 70%);
+    bottom: 10%;
+    right: -10%;
+    animation-delay: -3s;
+}
+
+@keyframes metricsGlowPulse {
+    0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.3; }
+    50% { transform: scale(1.2) rotate(5deg); opacity: 0.6; }
+}
+
+.metrics-line {
+    position: absolute;
+    height: 2px;
+    background: linear-gradient(90deg, transparent 0%, rgba(255, 107, 53, 0.5) 50%, transparent 100%);
+    animation: metricsLineMove 8s ease-in-out infinite;
+}
+
+.line-1 {
+    width: 200px;
+    top: 30%;
+    left: 0;
+}
+
+.line-2 {
+    width: 150px;
+    bottom: 40%;
+    right: 0;
+    background: linear-gradient(90deg, transparent 0%, rgba(25, 135, 84, 0.5) 50%, transparent 100%);
+    animation-delay: -4s;
+}
+
+@keyframes metricsLineMove {
+    0%, 100% { transform: translateX(-100px); opacity: 0; }
+    50% { transform: translateX(100px); opacity: 1; }
+}
+
+/* Enhanced Badge */
+.metrics-badge-wrapper {
+    perspective: 1000px;
+}
+
+.metrics-badge {
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform-style: preserve-3d;
+}
+
+.metrics-badge:hover {
+    transform: translateY(-5px) rotateX(5deg);
+    box-shadow: 0 15px 40px rgba(255, 107, 53, 0.3);
+}
+
+.badge-metrics-glow {
+    background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.3) 50%, transparent 70%);
+    animation: badgeMetricsShine 3s ease-in-out infinite;
+}
+
+@keyframes badgeMetricsShine {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+.metrics-icon {
+    animation: metricsIconBounce 2s ease-in-out infinite;
+}
+
+@keyframes metricsIconBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
+}
+
+/* Enhanced Title */
+.metrics-title {
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    letter-spacing: -0.02em;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.metrics-text-line {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.metrics-text-highlight {
+    background: linear-gradient(135deg, var(--color-industrial-orange) 0%, #e55100 50%, #ff8a65 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    position: relative;
+}
+
+.metrics-title-underline {
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, transparent 0%, var(--color-industrial-orange) 50%, transparent 100%);
+    animation: metricsTitleGlow 2s ease-in-out infinite;
+}
+
+@keyframes metricsTitleGlow {
+    0%, 100% { opacity: 0.6; transform: scaleX(1); }
+    50% { opacity: 1; transform: scaleX(1.2); }
+}
+
+.metrics-description {
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Enhanced Metrics Cards */
+.metrics-cards-container {
+    perspective: 1000px;
+}
+
+.metrics-card {
+    background: rgba(30, 35, 40, 0.9) !important;
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform-style: preserve-3d;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    color: white !important;
+}
+
+.metrics-card .card-body {
+    background: transparent !important;
+    color: white !important;
+}
+
+.metrics-card:hover {
+    transform: translateY(-20px) rotateX(5deg) rotateY(2deg);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+    border-color: rgba(255, 107, 53, 0.3);
+}
+
+/* Card Glow Effects */
+.metrics-card-glow {
+    background: radial-gradient(circle at center, rgba(255, 107, 53, 0.15) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    z-index: 1;
+}
+
+.metrics-card-glow-green {
+    background: radial-gradient(circle at center, rgba(25, 135, 84, 0.15) 0%, transparent 70%);
+}
+
+.metrics-card-glow-warning {
+    background: radial-gradient(circle at center, rgba(255, 193, 7, 0.15) 0%, transparent 70%);
+}
+
+.metrics-card-glow-info {
+    background: radial-gradient(circle at center, rgba(13, 202, 240, 0.15) 0%, transparent 70%);
+}
+
+.metrics-card:hover .metrics-card-glow {
+    opacity: 1;
+}
+
+/* Additional Card Text Visibility Fixes */
+.metrics-card,
+.metrics-card * {
+    color: white !important;
+}
+
+.metrics-card .text-white,
+.metrics-card .text-light {
+    color: white !important;
+}
+
+.metrics-card .metrics-label {
+    color: white !important;
+}
+
+.metrics-card .metrics-desc {
+    color: rgba(255, 255, 255, 0.85) !important;
+}
+
+/* Ensure Bootstrap card overrides don't interfere */
+.card.metrics-card {
+    background-color: rgba(30, 35, 40, 0.9) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Strong overrides to fix white card issue */
+.metrics-card.card {
+    background: rgba(30, 35, 40, 0.9) !important;
+    background-color: rgba(30, 35, 40, 0.9) !important;
+}
+
+.metrics-card .card-body {
+    background: transparent !important;
+    background-color: transparent !important;
+}
+
+/* Force all text to be white/light in metrics cards */
+.metrics-card h1,
+.metrics-card h2, 
+.metrics-card h3,
+.metrics-card h4,
+.metrics-card h5,
+.metrics-card h6,
+.metrics-card p,
+.metrics-card span,
+.metrics-card div {
+    color: inherit !important;
+}
+
+.metrics-card .text-dark {
+    color: white !important;
+}
+
+/* Override any Bootstrap utilities */
+.metrics-card .bg-white {
+    background: transparent !important;
+}
+
+/* Animated Border */
+.metrics-card-border {
+    background: linear-gradient(45deg, 
+        transparent 25%, 
+        rgba(255, 107, 53, 0.3) 50%, 
+        transparent 75%);
+    background-size: 200% 200%;
+    border-radius: 20px;
+    opacity: 0;
+    animation: metricsCardBorder 3s linear infinite;
+    z-index: 1;
+}
+
+.metrics-card:hover .metrics-card-border {
+    opacity: 1;
+}
+
+@keyframes metricsCardBorder {
+    0% { background-position: 200% 200%; }
+    100% { background-position: -200% -200%; }
+}
+
+/* Enhanced Icon Container */
+.metrics-icon-container {
+    perspective: 1000px;
+}
+
+.metrics-icon-bg {
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform-style: preserve-3d;
+}
+
+.metrics-card:hover .metrics-icon-bg {
+    transform: rotateY(10deg) rotateX(5deg) scale(1.1);
+}
+
+/* Icon Shimmer Effects */
+.metrics-icon-shimmer {
+    background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.6) 50%, transparent 70%);
+    background-size: 200% 200%;
+    animation: metricsIconShimmer 3s ease-in-out infinite;
+    border-radius: 12px;
+}
+
+.metrics-icon-shimmer-green {
+    background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.6) 50%, transparent 70%);
+}
+
+.metrics-icon-shimmer-warning {
+    background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.6) 50%, transparent 70%);
+}
+
+.metrics-icon-shimmer-info {
+    background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.6) 50%, transparent 70%);
+}
+
+@keyframes metricsIconShimmer {
+    0% { background-position: -200% -200%; opacity: 0; }
+    50% { background-position: 200% 200%; opacity: 1; }
+    100% { background-position: 400% 400%; opacity: 0; }
+}
+
+/* Floating Ring */
+.metrics-icon-ring {
+    border: 2px solid rgba(255, 107, 53, 0.3);
+    border-radius: 50%;
+    animation: metricsIconRing 3s ease-in-out infinite;
+}
+
+.metrics-icon-ring-green {
+    border-color: rgba(25, 135, 84, 0.3);
+}
+
+.metrics-icon-ring-warning {
+    border-color: rgba(255, 193, 7, 0.3);
+}
+
+.metrics-icon-ring-info {
+    border-color: rgba(13, 202, 240, 0.3);
+}
+
+@keyframes metricsIconRing {
+    0%, 100% { 
+        transform: scale(1) rotate(0deg); 
+        opacity: 0.3; 
+    }
+    50% { 
+        transform: scale(1.2) rotate(180deg); 
+        opacity: 0.8; 
+    }
+}
+
+/* Enhanced Numbers */
+.metrics-number {
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #ffffff 0%, var(--color-industrial-orange) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 4px 20px rgba(255, 107, 53, 0.3);
+    transition: all 0.3s ease;
+}
+
+.metrics-number-green {
+    background: linear-gradient(135deg, #ffffff 0%, #28a745 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 4px 20px rgba(25, 135, 84, 0.3);
+}
+
+.metrics-number-warning {
+    background: linear-gradient(135deg, #ffffff 0%, #ffc107 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 4px 20px rgba(255, 193, 7, 0.3);
+}
+
+.metrics-number-info {
+    background: linear-gradient(135deg, #ffffff 0%, #0dcaf0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 4px 20px rgba(13, 202, 240, 0.3);
+}
+
+.metrics-card:hover .metrics-number {
+    transform: scale(1.1);
+}
+
+.metrics-plus {
+    opacity: 0.8;
+    font-size: 0.8em;
+    vertical-align: top;
+}
+
+/* Number Glow */
+.metrics-number-glow {
+    background: radial-gradient(circle, rgba(255, 107, 53, 0.3) 0%, transparent 70%);
+    filter: blur(20px);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.metrics-number-glow-green {
+    background: radial-gradient(circle, rgba(25, 135, 84, 0.3) 0%, transparent 70%);
+}
+
+.metrics-number-glow-warning {
+    background: radial-gradient(circle, rgba(255, 193, 7, 0.3) 0%, transparent 70%);
+}
+
+.metrics-number-glow-info {
+    background: radial-gradient(circle, rgba(13, 202, 240, 0.3) 0%, transparent 70%);
+}
+
+.metrics-card:hover .metrics-number-glow {
+    opacity: 1;
+}
+
+/* Enhanced Labels and Descriptions */
+.metrics-label {
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.metrics-card:hover .metrics-label {
+    color: var(--color-industrial-orange) !important;
+}
+
+.metrics-desc {
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    transition: all 0.3s ease;
+}
+
+.metrics-card:hover .metrics-desc {
+    opacity: 1 !important;
+    transform: translateY(-2px);
+}
+
+/* Progress Indicators */
+.metrics-progress {
+    height: 3px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.metrics-progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--color-industrial-orange) 0%, #e55100 100%);
+    border-radius: 2px;
+    transform: translateX(-100%);
+    transition: transform 1s ease-out;
+    animation: metricsProgressFill 2s ease-out infinite;
+}
+
+.metrics-progress-bar-green {
+    background: linear-gradient(90deg, #28a745 0%, #20c997 100%);
+}
+
+.metrics-progress-bar-warning {
+    background: linear-gradient(90deg, #ffc107 0%, #ffeb3b 100%);
+}
+
+.metrics-progress-bar-info {
+    background: linear-gradient(90deg, #0dcaf0 0%, #87ceeb 100%);
+}
+
+@keyframes metricsProgressFill {
+    0% { transform: translateX(-100%); }
+    50% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+}
+
+.metrics-card:hover .metrics-progress-bar {
+    animation-duration: 1s;
+}
+
+/* Trust Section */
+.metrics-trust-section {
+    background: rgba(30, 35, 40, 0.6);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.4s ease;
+}
+
+.metrics-trust-section:hover {
+    background: rgba(30, 35, 40, 0.8);
+    border-color: rgba(255, 193, 7, 0.3);
+    transform: translateY(-5px);
+}
+
+.metrics-trust-bg {
+    background: linear-gradient(45deg, transparent 30%, rgba(255, 193, 7, 0.1) 50%, transparent 70%);
+    background-size: 200% 200%;
+    animation: metricsTrustShine 4s ease-in-out infinite;
+}
+
+@keyframes metricsTrustShine {
+    0% { background-position: -200% -200%; }
+    100% { background-position: 200% 200%; }
+}
+
+/* Responsive Enhancements */
+@media (max-width: 768px) {
+    .metrics-title {
+        font-size: 2.5rem !important;
+    }
+    
+    .metrics-description {
+        font-size: 1.1rem !important;
+    }
+    
+    .metrics-card {
+        margin-bottom: 1rem;
+    }
+    
+    .metrics-card:hover {
+        transform: translateY(-10px);
+    }
+    
+    .metrics-number {
+        font-size: 2.5rem !important;
+    }
+    
+    .metrics-icon-bg {
+        width: 70px !important;
+        height: 70px !important;
+    }
+    
+    .metrics-particle {
+        display: none;
+    }
+}
+
+@media (max-width: 576px) {
+    .metrics-title {
+        font-size: 2rem !important;
+    }
+    
+    .metrics-number {
+        font-size: 2rem !important;
+    }
+    
+    .metrics-icon-bg {
+        width: 60px !important;
+        height: 60px !important;
+    }
+    
+    .metrics-glow {
+        display: none;
+    }
+}
+
+/* Accessibility Enhancements */
+@media (prefers-reduced-motion: reduce) {
+    .metrics-particle,
+    .metrics-glow,
+    .metrics-line,
+    .badge-metrics-glow,
+    .metrics-icon,
+    .metrics-title-underline,
+    .metrics-card-border,
+    .metrics-icon-shimmer,
+    .metrics-icon-ring,
+    .metrics-progress-bar,
+    .metrics-trust-bg,
+    .metrics-grid-overlay {
+        animation: none !important;
+    }
+    
+    .metrics-card:hover {
+        transform: translateY(-5px) !important;
+    }
+}
+
+/* Print Styles */
+@media print {
+    #metricsSection {
+        background: white !important;
+        color: black !important;
+    }
+    
+    .metrics-particle,
+    .metrics-glow,
+    .metrics-line,
+    .metrics-grid-overlay {
+        display: none !important;
+    }
+}
 </style>
 
 <script>
@@ -1673,63 +2505,259 @@ dynamicStyles.textContent = `
 `;
 document.head.appendChild(dynamicStyles);
 </script>
-// Counter Animation Function
-function animateCounter(element, target, duration = 2000) {
-    const start = 0;
-    const increment = target / (duration / 16); // 60fps
-    let current = start;
-    
-    const timer = setInterval(() => {
-        current += increment;
-        if (current >= target) {
-            current = target;
-            clearInterval(timer);
-            element.classList.remove('counting');
-        }
-        element.textContent = Math.floor(current);
-    }, 16);
-    
-    element.classList.add('counting');
-}
 
-// Intersection Observer for triggering animation when section is visible
-const observerOptions = {
-    threshold: 0.3,
-    rootMargin: '0px 0px -50px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            const counters = entry.target.querySelectorAll('.counter');
-            counters.forEach(counter => {
-                if (!counter.classList.contains('animated')) {
-                    const target = parseInt(counter.getAttribute('data-target'));
-                    const duration = 2500; // 2.5 seconds for smooth animation
-                    
-                    // Add a small delay based on the counter's position for staggered effect
-                    const delay = Array.from(counters).indexOf(counter) * 200;
-                    
-                    setTimeout(() => {
-                        animateCounter(counter, target, duration);
-                        counter.classList.add('animated');
-                    }, delay);
-                }
-            });
-            
-            // Unobserve after animation starts to prevent re-triggering
-            observer.unobserve(entry.target);
-        }
-    });
-}, observerOptions);
-
-// Start observing when DOM is loaded
+<script>
+// Enhanced Metrics Section JavaScript
 document.addEventListener('DOMContentLoaded', function() {
+    // ===== ENHANCED COUNTER ANIMATION =====
+    
+    // Sophisticated counter animation with easing
+    function animateCounter(element, target, duration = 2500) {
+        const start = 0;
+        const startTime = performance.now();
+        
+        // Easing function for smooth animation
+        const easeOutQuart = (t) => 1 - Math.pow(1 - t, 4);
+        
+        function update(currentTime) {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            const easedProgress = easeOutQuart(progress);
+            
+            const current = Math.floor(start + (target - start) * easedProgress);
+            element.textContent = current;
+            
+            // Add visual feedback during counting
+            if (progress < 1) {
+                element.classList.add('counting');
+                requestAnimationFrame(update);
+            } else {
+                element.classList.remove('counting');
+                element.classList.add('completed');
+                // Add completion effect
+                element.style.transform = 'scale(1.1)';
+                setTimeout(() => {
+                    element.style.transform = 'scale(1)';
+                }, 200);
+            }
+        }
+        
+        requestAnimationFrame(update);
+    }
+    
+    // ===== INTERSECTION OBSERVER FOR METRICS =====
+    
+    const metricsObserverOptions = {
+        threshold: 0.2,
+        rootMargin: '0px 0px -100px 0px'
+    };
+    
+    const metricsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const section = entry.target;
+                
+                // Animate counters with staggered delays
+                const counters = section.querySelectorAll('.counter');
+                counters.forEach((counter, index) => {
+                    if (!counter.classList.contains('animated')) {
+                        const target = parseInt(counter.getAttribute('data-target'));
+                        const delay = index * 300; // Staggered animation
+                        
+                        setTimeout(() => {
+                            animateCounter(counter, target, 2000 + (index * 200));
+                            counter.classList.add('animated');
+                        }, delay);
+                    }
+                });
+                
+                // Animate cards with staggered entrance
+                const cards = section.querySelectorAll('.metrics-card');
+                cards.forEach((card, index) => {
+                    setTimeout(() => {
+                        card.style.transform = 'translateY(0) rotateX(0)';
+                        card.style.opacity = '1';
+                    }, index * 150);
+                });
+                
+                // Animate progress bars
+                setTimeout(() => {
+                    const progressBars = section.querySelectorAll('.metrics-progress-bar');
+                    progressBars.forEach((bar, index) => {
+                        setTimeout(() => {
+                            bar.style.transform = 'translateX(0)';
+                        }, index * 200);
+                    });
+                }, 1000);
+                
+                // Stop observing after animation
+                metricsObserver.unobserve(entry.target);
+            }
+        });
+    }, metricsObserverOptions);
+    
+    // Start observing metrics section
     const metricsSection = document.querySelector('#metricsSection');
     if (metricsSection) {
-        observer.observe(metricsSection);
+        // Initialize cards for animation
+        const cards = metricsSection.querySelectorAll('.metrics-card');
+        cards.forEach(card => {
+            card.style.transform = 'translateY(50px) rotateX(10deg)';
+            card.style.opacity = '0';
+            card.style.transition = 'all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+        });
+        
+        // Initialize progress bars
+        const progressBars = metricsSection.querySelectorAll('.metrics-progress-bar');
+        progressBars.forEach(bar => {
+            bar.style.transform = 'translateX(-100%)';
+        });
+        
+        metricsObserver.observe(metricsSection);
     }
+    
+    // ===== ENHANCED CARD INTERACTIONS =====
+    
+    const metricsCards = document.querySelectorAll('.metrics-card');
+    metricsCards.forEach(card => {
+        // Enhanced hover effects
+        card.addEventListener('mouseenter', function() {
+            // Pause animations on hover for better UX
+            this.style.animationPlayState = 'paused';
+            
+            // Add subtle parallax effect to icon
+            const icon = this.querySelector('.metrics-icon-bg');
+            if (icon) {
+                icon.style.transform = 'rotateY(10deg) rotateX(5deg) scale(1.1)';
+            }
+            
+            // Enhance number glow
+            const numberGlow = this.querySelector('.metrics-number-glow');
+            if (numberGlow) {
+                numberGlow.style.opacity = '1';
+                numberGlow.style.transform = 'scale(1.2)';
+            }
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            // Resume animations
+            this.style.animationPlayState = 'running';
+            
+            // Reset transforms
+            const icon = this.querySelector('.metrics-icon-bg');
+            if (icon) {
+                icon.style.transform = 'rotateY(0deg) rotateX(0deg) scale(1)';
+            }
+            
+            const numberGlow = this.querySelector('.metrics-number-glow');
+            if (numberGlow) {
+                numberGlow.style.opacity = '0';
+                numberGlow.style.transform = 'scale(1)';
+            }
+        });
+        
+        // Add touch support for mobile
+        card.addEventListener('touchstart', function() {
+            this.classList.add('touch-active');
+        });
+        
+        card.addEventListener('touchend', function() {
+            setTimeout(() => {
+                this.classList.remove('touch-active');
+            }, 150);
+        });
+    });
+    
+    // ===== PERFORMANCE OPTIMIZATIONS =====
+    
+    // Throttle resize events
+    let resizeTimeout;
+    window.addEventListener('resize', function() {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            // Recalculate animations if needed
+            const cards = document.querySelectorAll('.metrics-card');
+            cards.forEach(card => {
+                // Reset transforms on resize to prevent layout issues
+                if (window.innerWidth <= 768) {
+                    card.style.transform = 'translateY(0)';
+                }
+            });
+        }, 250);
+    });
+    
+    // ===== ACCESSIBILITY ENHANCEMENTS =====
+    
+    // Respect reduced motion preferences
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        // Disable complex animations
+        const style = document.createElement('style');
+        style.textContent = `
+            .metrics-card {
+                transition: transform 0.2s ease !important;
+            }
+            .metrics-card:hover {
+                transform: translateY(-5px) !important;
+            }
+        `;
+        document.head.appendChild(style);
+    }
+    
+    // Keyboard navigation support
+    metricsCards.forEach((card, index) => {
+        card.setAttribute('tabindex', '0');
+        card.setAttribute('role', 'article');
+        card.setAttribute('aria-label', `Metric ${index + 1}`);
+        
+        card.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                this.click();
+            }
+        });
+        
+        card.addEventListener('focus', function() {
+            this.style.outline = '2px solid var(--color-industrial-orange)';
+            this.style.outlineOffset = '4px';
+        });
+        
+        card.addEventListener('blur', function() {
+            this.style.outline = 'none';
+        });
+    });
+    
+    // ===== DYNAMIC CONTENT LOADING =====
+    
+    // Add loading states
+    const counters = document.querySelectorAll('.counter');
+    counters.forEach(counter => {
+        counter.setAttribute('aria-live', 'polite');
+        counter.setAttribute('aria-label', 'Loading metric value');
+    });
+    
+    // Update ARIA labels after animation
+    setTimeout(() => {
+        counters.forEach(counter => {
+            const value = counter.textContent;
+            const label = counter.closest('.metrics-card').querySelector('.metrics-label').textContent;
+            counter.setAttribute('aria-label', `${label}: ${value}`);
+        });
+    }, 4000);
 });
+
+// ===== FALLBACK FOR OLDER BROWSERS =====
+if (!window.IntersectionObserver) {
+    // Fallback for browsers without IntersectionObserver
+    document.addEventListener('DOMContentLoaded', function() {
+        const counters = document.querySelectorAll('.counter');
+        counters.forEach((counter, index) => {
+            const target = parseInt(counter.getAttribute('data-target'));
+            setTimeout(() => {
+                animateCounter(counter, target);
+            }, index * 300);
+        });
+    });
+}
 </script>
 
 <?php include 'includes/footer.php'; ?>
