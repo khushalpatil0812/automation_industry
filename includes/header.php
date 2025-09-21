@@ -64,7 +64,7 @@
         
         /* Enhanced Professional Navbar */
         .navbar {
-            background: linear-gradient(135deg, #1a1d2e 0%, #2D3142 50%, #16213e 100%) !important;
+            background: linear-gradient(135deg, #242c26ff 0%, #1f241fff 50%, #252e26ff 100%) !important;
             backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(216, 213, 219, 0.1);
             transition: all var(--transition-normal);
@@ -97,7 +97,7 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             animation: rotate-gears 3s linear infinite;
-            filter: drop-shadow(0 0 5px rgba(255, 107, 53, 0.3));
+            filter: drop-shadow(0 0 5px rgba(49, 54, 39, 0.3));
         }
         
         @keyframes rotate-gears {
@@ -213,7 +213,7 @@
         
         .navbar-toggler:hover {
             border-color: var(--color-industrial-orange);
-            box-shadow: 0 0 10px rgba(255, 107, 53, 0.3);
+            box-shadow: 0 0 10px rgba(35, 33, 32, 0.3);
         }
         
         .navbar-toggler-icon {
@@ -268,6 +268,10 @@
             pointer-events: none;
             z-index: -1;
         }
+
+        /* hi */
+        
+        /* hi */
     </style>
 </head>
 <body>
