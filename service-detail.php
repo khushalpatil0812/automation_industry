@@ -29,7 +29,7 @@ include 'includes/header.php';
 
 <main class="pt-5">
     <!-- Breadcrumb -->
-    <section class="py-3" style="background-color: #212529;">
+    <!-- <section class="py-3" style="background-color: #212529;">
         <div class="container">
             <nav aria-label="breadcrumb" data-aos="fade-right">
                 <ol class="breadcrumb mb-0">
@@ -40,7 +40,7 @@ include 'includes/header.php';
                 </ol>
             </nav>
         </div>
-    </section>
+    </section> -->
 
     <!-- Service Hero Section -->
     <section class="py-5" style="background-color: #212529;">
