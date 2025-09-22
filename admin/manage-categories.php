@@ -99,15 +99,27 @@ if ($_POST) {
     }
     
     elseif ($action === 'delete') {
+        // Log for debugging
+        error_log("Delete action called with ID: " . ($_POST['id'] ?? 'not set'));
+        
         $id = intval($_POST['id'] ?? 0);
         
+        if ($id <= 0) {
+            echo json_encode(['success' => false, 'message' => 'Invalid category ID']);
+            exit;
+        }
+        
         try {
-            if ($category->deleteCategory($id)) {
-                echo json_encode(['success' => true]);
+            $result = $category->deleteCategory($id);
+            error_log("Delete result: " . ($result ? 'true' : 'false'));
+            
+            if ($result) {
+                echo json_encode(['success' => true, 'message' => 'Category deleted successfully']);
             } else {
                 echo json_encode(['success' => false, 'message' => 'Failed to delete category']);
             }
         } catch (Exception $e) {
+            error_log("Delete error: " . $e->getMessage());
             echo json_encode(['success' => false, 'message' => $e->getMessage()]);
         }
         exit;
@@ -327,8 +339,9 @@ include 'includes/admin-header.php';
                                                             data-bs-toggle="tooltip" title="Toggle Status">
                                                         <i class="fas fa-toggle-<?php echo ($cat['is_active'] ?? 1) ? 'on' : 'off'; ?>"></i>
                                                     </button>
-                                                    <button type="button" class="btn btn-sm btn-outline-danger" 
-                                                            onclick="confirmDelete(<?php echo $cat['id']; ?>, '<?php echo addslashes($cat['name']); ?>')"
+                                                    <button type="button" class="btn btn-sm btn-outline-danger category-delete-btn" 
+                                                            data-category-id="<?php echo $cat['id']; ?>" 
+                                                            data-category-name="<?php echo htmlspecialchars($cat['name']); ?>"
                                                             data-bs-toggle="tooltip" title="Delete">
                                                         <i class="fas fa-trash"></i>
                                                     </button>
@@ -445,94 +458,312 @@ include 'includes/admin-header.php';
     </div>
 </div>
 
+<!-- DataTables CSS -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
+
+<!-- jQuery and DataTables JS -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+
 <script>
-$(document).ready(function() {
-    // Initialize DataTable
-    $('#categoriesTable').DataTable({
-        responsive: true,
-        pageLength: 10,
-        order: [[0, 'asc']],
-        columnDefs: [
-            { orderable: false, targets: [6] }
-        ]
-    });
+// Simple, reliable delete function without jQuery complications
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Page loaded');
     
-    // Initialize tooltips
-    $('[data-bs-toggle="tooltip"]').tooltip();
+    // Initialize tooltips if Bootstrap is available
+    if (typeof bootstrap !== 'undefined') {
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+    }
+    
+    // Add event listeners to delete buttons
+    console.log('=== SETTING UP DELETE BUTTON LISTENERS ===');
+    var deleteButtons = document.querySelectorAll('.category-delete-btn');
+    console.log('Found delete buttons:', deleteButtons.length);
+    
+    deleteButtons.forEach(function(button, index) {
+        console.log('Setting up button', index, ':', button);
+        button.addEventListener('click', function() {
+            var id = this.getAttribute('data-category-id');
+            var name = this.getAttribute('data-category-name');
+            console.log('Delete button clicked - ID:', id, 'Name:', name);
+            console.log('About to call confirmCategoryDelete...');
+            confirmCategoryDelete(id, name);
+            console.log('confirmCategoryDelete called');
+        });
+    });
+});
+
+// Global variable for delete ID
+var deleteId = null;
+
+// Simple confirm delete function for categories
+function confirmCategoryDelete(id, name) {
+    try {
+        console.log('=== CONFIRM DELETE CALLED ===');
+        console.log('ID:', id, '(type:', typeof id, ')');
+        console.log('Name:', name, '(type:', typeof name, ')');
+        
+        deleteId = id;
+        console.log('deleteId set to:', deleteId);
+        
+        // Set the message in the modal
+        var messageElement = document.getElementById('deleteMessage');
+        console.log('Message element found:', messageElement !== null);
+        if (messageElement) {
+            messageElement.textContent = 'Category: "' + name + '"';
+            console.log('Message set to:', messageElement.textContent);
+        } else {
+            console.error('deleteMessage element not found!');
+        }
+        
+        // Show the modal
+        var modalElement = document.getElementById('deleteModal');
+        console.log('Modal element found:', modalElement !== null);
+        console.log('Bootstrap available:', typeof bootstrap !== 'undefined');
+        
+        if (modalElement && typeof bootstrap !== 'undefined') {
+            try {
+                console.log('Creating Bootstrap modal...');
+                var deleteModal = new bootstrap.Modal(modalElement);
+                console.log('Modal created, showing...');
+                deleteModal.show();
+                console.log('=== MODAL SHOWN SUCCESSFULLY ===');
+            } catch (error) {
+                console.error('Error creating/showing modal:', error);
+                console.error('Modal element:', modalElement);
+                // Fallback to simple confirm
+                if (confirm('Are you sure you want to delete category "' + name + '"?')) {
+                    // Call delete directly
+                    performDelete(id);
+                }
+            }
+        } else {
+            console.error('Modal element not found or Bootstrap not loaded');
+            console.error('modalElement:', modalElement);
+            console.error('bootstrap:', typeof bootstrap);
+            // Fallback to simple confirm
+            if (confirm('Are you sure you want to delete category "' + name + '"?')) {
+                // Call delete directly
+                performDelete(id);
+            }
+        }
+    } catch (error) {
+        console.error('Error in confirmDelete function:', error);
+        console.error('Stack trace:', error.stack);
+        // Fallback to simple confirm
+        if (confirm('Are you sure you want to delete category "' + name + '"?')) {
+            performDelete(id);
+        }
+    }
+}
+
+// Helper function to perform the actual delete
+function performDelete(id) {
+    console.log('=== PERFORMING DELETE ===');
+    console.log('Delete ID:', id);
+    
+    var formData = new FormData();
+    formData.append('action', 'delete');
+    formData.append('id', id);
+    
+    fetch(window.location.href, {
+        method: 'POST',
+        body: formData
+    })
+    .then(function(response) {
+        console.log('Response received:', response.status);
+        return response.text();
+    })
+    .then(function(text) {
+        console.log('Response text:', text);
+        try {
+            var result = JSON.parse(text);
+            if (result.success) {
+                console.log('Delete successful, reloading...');
+                window.location.reload();
+            } else {
+                alert('Error: ' + (result.message || 'Failed to delete'));
+            }
+        } catch (e) {
+            console.error('JSON parse error:', e);
+            alert('Server error. Check console for details.');
+        }
+    })
+    .catch(function(error) {
+        console.error('Delete error:', error);
+        alert('Network error: ' + error.message);
+    });
+}
+
+// Handle the actual delete when confirm button is clicked
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('=== SETTING UP DELETE HANDLER ===');
+    var confirmBtn = document.getElementById('confirmDeleteBtn');
+    console.log('Confirm button found:', confirmBtn !== null);
+    
+    if (confirmBtn) {
+        confirmBtn.addEventListener('click', function() {
+            console.log('=== DELETE PROCESS STARTED ===');
+            console.log('Confirm delete clicked, ID:', deleteId);
+            console.log('Button element:', this);
+            
+            if (!deleteId) {
+                console.error('No deleteId set!');
+                alert('No category selected');
+                return;
+            }
+            
+            // Disable button
+            this.disabled = true;
+            this.textContent = 'Deleting...';
+            console.log('Button disabled, text changed');
+            
+            // Create form data
+            var formData = new FormData();
+            formData.append('action', 'delete');
+            formData.append('id', deleteId);
+            
+            console.log('=== FORM DATA CREATED ===');
+            console.log('Action:', formData.get('action'));
+            console.log('ID:', formData.get('id'));
+            console.log('Request URL:', window.location.href);
+            
+            // Send the request
+            console.log('=== SENDING FETCH REQUEST ===');
+            fetch(window.location.href, {
+                method: 'POST',
+                body: formData
+            })
+            .then(function(response) {
+                console.log('=== RESPONSE RECEIVED ===');
+                console.log('Response status:', response.status);
+                console.log('Response ok:', response.ok);
+                console.log('Response statusText:', response.statusText);
+                return response.text();
+            })
+            .then(function(text) {
+                console.log('=== RESPONSE TEXT RECEIVED ===');
+                console.log('Raw response text:', text);
+                console.log('Response length:', text.length);
+                console.log('Response type:', typeof text);
+                
+                // Check if response is empty
+                if (!text || text.trim() === '') {
+                    console.error('Empty response received');
+                    alert('Server returned empty response');
+                    confirmBtn.disabled = false;
+                    confirmBtn.textContent = 'Delete';
+                    return;
+                }
+                
+                try {
+                    console.log('=== PARSING JSON ===');
+                    var result = JSON.parse(text);
+                    console.log('Parsed result:', result);
+                    console.log('Success property:', result.success);
+                    console.log('Message property:', result.message);
+                    
+                    if (result.success) {
+                        console.log('=== DELETE SUCCESSFUL ===');
+                        console.log('Reloading page...');
+                        window.location.reload();
+                    } else {
+                        console.error('=== DELETE FAILED ===');
+                        console.error('Error message:', result.message);
+                        alert('Error: ' + (result.message || 'Failed to delete'));
+                        // Re-enable button
+                        confirmBtn.disabled = false;
+                        confirmBtn.textContent = 'Delete';
+                    }
+                } catch (e) {
+                    console.error('=== JSON PARSE ERROR ===');
+                    console.error('Parse error:', e);
+                    console.error('Raw response was:', text);
+                    alert('Server error. Check console for details.');
+                    // Re-enable button
+                    confirmBtn.disabled = false;
+                    confirmBtn.textContent = 'Delete';
+                }
+            })
+            .catch(function(error) {
+                console.error('=== NETWORK ERROR ===');
+                console.error('Fetch error:', error);
+                console.error('Error name:', error.name);
+                console.error('Error message:', error.message);
+                alert('Network error: ' + error.message);
+                // Re-enable button
+                confirmBtn.disabled = false;
+                confirmBtn.textContent = 'Delete';
+            });
+        });
+    } else {
+        console.error('=== ERROR: confirmDeleteBtn not found! ===');
+    }
 });
 
 // Edit category function
 function editCategory(category) {
-    $('#editCategoryId').val(category.id);
-    $('#editCategoryName').val(category.name);
-    $('#editCategoryDescription').val(category.description || '');
-    $('#editCategoryIcon').val(category.icon || '');
-    $('#editCategoryModal').modal('show');
+    console.log('Edit category:', category);
+    
+    // Fill the form
+    var fields = {
+        'editCategoryId': category.id,
+        'editCategoryName': category.name,
+        'editCategoryDescription': category.description || '',
+        'editCategoryIcon': category.icon || ''
+    };
+    
+    for (var fieldId in fields) {
+        var element = document.getElementById(fieldId);
+        if (element) {
+            element.value = fields[fieldId];
+        }
+    }
+    
+    // Show modal
+    var modalElement = document.getElementById('editCategoryModal');
+    if (modalElement && typeof bootstrap !== 'undefined') {
+        var editModal = new bootstrap.Modal(modalElement);
+        editModal.show();
+    }
 }
 
 // Toggle status function
-async function toggleStatus(id, currentStatus) {
-    try {
-        const formData = new FormData();
-        formData.append('action', 'toggle_status');
-        formData.append('id', id);
-        formData.append('current_status', currentStatus);
-        
-        const response = await fetch(window.location.href, {
-            method: 'POST',
-            body: formData
-        });
-        
-        const result = await response.json();
-        
-        if (result.success) {
-            location.reload();
-        } else {
-            alert('Error: ' + result.message);
-        }
-    } catch (error) {
-        alert('An error occurred: ' + error.message);
-    }
-}
-
-// Confirm delete function
-let deleteId = null;
-function confirmDelete(id, name) {
-    deleteId = id;
-    $('#deleteMessage').text(`Category: "${name}"`);
-    $('#deleteModal').modal('show');
-}
-
-// Handle delete confirmation
-$('#confirmDeleteBtn').click(async function() {
-    if (!deleteId) return;
+function toggleStatus(id, currentStatus) {
+    console.log('Toggle status for ID:', id);
     
-    try {
-        const formData = new FormData();
-        formData.append('action', 'delete');
-        formData.append('id', deleteId);
-        
-        const response = await fetch(window.location.href, {
-            method: 'POST',
-            body: formData
-        });
-        
-        const result = await response.json();
-        
+    var formData = new FormData();
+    formData.append('action', 'toggle_status');
+    formData.append('id', id);
+    formData.append('current_status', currentStatus);
+    
+    fetch(window.location.href, {
+        method: 'POST',
+        body: formData
+    })
+    .then(function(response) {
+        return response.json();
+    })
+    .then(function(result) {
         if (result.success) {
-            $('#deleteModal').modal('hide');
-            location.reload();
+            window.location.reload();
         } else {
             alert('Error: ' + result.message);
         }
-    } catch (error) {
-        alert('An error occurred: ' + error.message);
-    }
-});
+    })
+    .catch(function(error) {
+        console.error('Toggle error:', error);
+        alert('Error: ' + error.message);
+    });
+}
 
-// Refresh table function
+// Refresh function
 function refreshTable() {
-    location.reload();
+    window.location.reload();
 }
 </script>
 
