@@ -659,6 +659,11 @@ include 'includes/admin-header.php';
 
             <!-- Header Action Buttons -->
             <div class="header-actions">
+                <a href="dashboard.php" class="action-btn-header" style="background-color: #6f42c1; border-color: #6f42c1; color: white;">
+                    <i class="fas fa-arrow-left"></i>
+                    Back to Dashboard
+                </a>
+                
                 <a href="edit-service.php?id=<?php echo $service_id; ?>" class="action-btn-header">
                     <i class="fas fa-edit"></i>
                     Edit Service

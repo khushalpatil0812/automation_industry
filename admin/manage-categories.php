@@ -147,20 +147,315 @@ $page_title = "Manage Categories";
 include 'includes/admin-header.php';
 ?>
 
+<!-- Responsive CSS for Admin Panel -->
+<style>
+/* Mobile-First Responsive Design */
+@media (max-width: 575.98px) {
+    /* Extra small devices (phones, less than 576px) */
+    .container-fluid {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+    
+    .d-flex.justify-content-between {
+        flex-direction: column !important;
+        gap: 15px;
+    }
+    
+    .breadcrumb {
+        font-size: 0.875rem;
+        margin-bottom: 10px !important;
+    }
+    
+    .h3 {
+        font-size: 1.5rem !important;
+    }
+    
+    .btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    
+    .btn.me-2 {
+        margin-right: 0 !important;
+        margin-bottom: 10px;
+    }
+    
+    .card {
+        margin-bottom: 15px;
+    }
+    
+    .table-responsive {
+        font-size: 0.875rem;
+    }
+    
+    .btn-group {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .btn-group .btn {
+        margin-bottom: 5px;
+        border-radius: 0.25rem !important;
+    }
+    
+    .btn-group-mobile {
+        display: flex !important;
+        flex-direction: column;
+        gap: 5px;
+        width: 100%;
+    }
+    
+    .btn-group-mobile .btn {
+        width: 100%;
+        text-align: left;
+        justify-content: flex-start;
+        padding: 8px 12px !important;
+        margin-bottom: 3px;
+        border-radius: 0.25rem !important;
+    }
+    
+    .table td {
+        padding: 8px 6px;
+        vertical-align: top;
+    }
+    
+    .table th {
+        padding: 10px 6px;
+        font-size: 0.85rem;
+    }
+    
+    .badge {
+        font-size: 0.7rem;
+        padding: 3px 6px;
+    }
+    
+    .modal-dialog {
+        margin: 10px;
+        max-width: calc(100% - 20px);
+    }
+    
+    .modal-body {
+        padding: 15px;
+    }
+    
+    .form-control, .form-select {
+        font-size: 14px;
+        padding: 8px 12px;
+        margin-bottom: 10px;
+    }
+    
+    .form-label {
+        font-size: 0.9rem;
+        margin-bottom: 5px;
+    }
+    
+    .modal-footer {
+        padding: 10px 15px;
+        gap: 10px;
+    }
+    
+    .modal-footer .btn {
+        flex: 1;
+        margin: 0;
+    }
+    
+    .stats-row .col-xl-3 {
+        margin-bottom: 15px;
+    }
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+    /* Small devices (landscape phones, 576px and up) */
+    .container-fluid {
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+    }
+    
+    .d-flex.justify-content-between {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    
+    .btn-group {
+        flex-wrap: wrap;
+    }
+    
+    .table-responsive {
+        font-size: 0.9rem;
+    }
+    
+    .stats-row .col-xl-3 {
+        margin-bottom: 20px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+    /* Medium devices (tablets, 768px and up) */
+    .h3 {
+        font-size: 1.75rem;
+    }
+    
+    .table-responsive {
+        font-size: 0.95rem;
+    }
+    
+    .btn-group .btn {
+        padding: 0.375rem 0.5rem;
+        font-size: 0.875rem;
+    }
+    
+    .stats-row .col-xl-3 {
+        margin-bottom: 20px;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    /* Large devices (desktops, 992px and up) */
+    .container-fluid {
+        max-width: 95%;
+    }
+}
+
+@media (min-width: 1200px) {
+    /* Extra large devices (large desktops, 1200px and up) */
+    .container-fluid {
+        max-width: 90%;
+    }
+}
+
+/* Universal Mobile Improvements */
+@media (max-width: 991.98px) {
+    .table th,
+    .table td {
+        padding: 0.5rem 0.25rem;
+        font-size: 0.875rem;
+    }
+    
+    .btn-sm {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.75rem;
+    }
+    
+    .modal-body {
+        padding: 1rem;
+    }
+    
+    .form-control {
+        font-size: 16px; /* Prevents zoom on iOS */
+    }
+    
+    .alert {
+        padding: 0.5rem;
+        font-size: 0.875rem;
+    }
+    
+    /* Hide less important columns on mobile */
+    .d-none-mobile {
+        display: none !important;
+    }
+    
+    /* Stack action buttons vertically on mobile */
+    .btn-group-mobile {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+    
+    .btn-group-mobile .btn {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* Tablet specific adjustments */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .table-responsive {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .btn-group {
+        flex-wrap: nowrap;
+    }
+    
+    .modal-lg {
+        max-width: 90%;
+    }
+}
+
+/* Touch-friendly improvements */
+@media (hover: none) and (pointer: coarse) {
+    .btn {
+        min-height: 44px; /* Apple's recommended touch target size */
+        padding: 0.5rem 1rem;
+    }
+    
+    .btn-sm {
+        min-height: 38px;
+        padding: 0.375rem 0.75rem;
+    }
+    
+    .table th,
+    .table td {
+        padding: 0.75rem 0.5rem;
+    }
+}
+
+/* Print styles */
+@media print {
+    .btn,
+    .breadcrumb,
+    .modal,
+    .alert {
+        display: none !important;
+    }
+    
+    .table {
+        font-size: 12px;
+    }
+    
+    .card {
+        border: 1px solid #000;
+        break-inside: avoid;
+    }
+}
+</style>
+
 <div class="container-fluid py-4">
     <!-- Page Header -->
     <div class="row">
         <div class="col-12">
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <div>
+            <div class="d-flex justify-content-between align-items-start mb-4 flex-wrap">
+                <div class="flex-grow-1 mb-3 mb-md-0">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb mb-2">
+                            <li class="breadcrumb-item">
+                                <a href="dashboard.php" class="text-decoration-none">
+                                    <i class="fas fa-tachometer-alt me-1"></i><span class="d-none d-sm-inline">Dashboard</span>
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">
+                                <span class="d-none d-sm-inline">Manage </span>Categories
+                            </li>
+                        </ol>
+                    </nav>
                     <h1 class="h3 mb-0 text-gray-800">
-                        <i class="fas fa-tags text-primary me-2"></i>Manage Categories
+                        <i class="fas fa-tags text-primary me-2"></i>
+                        <span class="d-none d-sm-inline">Manage </span>Categories
                     </h1>
-                    <p class="text-muted mb-0">Organize and manage your service categories</p>
+                    <p class="text-muted mb-0 d-none d-md-block">Organize and manage your service categories</p>
                 </div>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCategoryModal">
-                    <i class="fas fa-plus me-1"></i>Add Category
-                </button>
+                <div class="d-flex flex-column flex-sm-row gap-2 w-100 w-md-auto">
+                    <a href="dashboard.php" class="btn btn-purple" style="background-color: #6f42c1; border-color: #6f42c1; color: white;">
+                        <i class="fas fa-arrow-left me-1"></i>
+                        <span class="d-none d-sm-inline">Back to </span>Dashboard
+                    </a>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCategoryModal">
+                        <i class="fas fa-plus me-1"></i>
+                        <span class="d-none d-sm-inline">Add </span>Category
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -175,16 +470,17 @@ include 'includes/admin-header.php';
     <?php endif; ?>
 
     <!-- Statistics Cards -->
-    <div class="row mb-4">
-        <div class="col-xl-3 col-md-6 mb-4">
+    <div class="row mb-4 stats-row">
+        <div class="col-6 col-md-3 mb-3 mb-md-4">
             <div class="card border-left-primary shadow h-100 py-2">
-                <div class="card-body">
+                <div class="card-body p-3">
                     <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Categories</div>
+                        <div class="col">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1 d-none d-sm-block">Total Categories</div>
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1 d-sm-none">Total</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo count($categories); ?></div>
                         </div>
-                        <div class="col-auto">
+                        <div class="col-auto d-none d-sm-block">
                             <i class="fas fa-layer-group fa-2x text-gray-300"></i>
                         </div>
                     </div>
@@ -192,17 +488,18 @@ include 'includes/admin-header.php';
             </div>
         </div>
 
-        <div class="col-xl-3 col-md-6 mb-4">
+        <div class="col-6 col-md-3 mb-3 mb-md-4">
             <div class="card border-left-success shadow h-100 py-2">
-                <div class="card-body">
+                <div class="card-body p-3">
                     <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Active Categories</div>
+                        <div class="col">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1 d-none d-sm-block">Active Categories</div>
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1 d-sm-none">Active</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">
                                 <?php echo array_reduce($categories, function($count, $cat) { return ($cat['is_active'] ?? 1) ? $count + 1 : $count; }, 0); ?>
                             </div>
                         </div>
-                        <div class="col-auto">
+                        <div class="col-auto d-none d-sm-block">
                             <i class="fas fa-check-circle fa-2x text-gray-300"></i>
                         </div>
                     </div>
@@ -210,17 +507,18 @@ include 'includes/admin-header.php';
             </div>
         </div>
 
-        <div class="col-xl-3 col-md-6 mb-4">
+        <div class="col-6 col-md-3 mb-3 mb-md-4">
             <div class="card border-left-info shadow h-100 py-2">
-                <div class="card-body">
+                <div class="card-body p-3">
                     <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">With Services</div>
+                        <div class="col">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1 d-none d-sm-block">With Services</div>
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1 d-sm-none">Used</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">
                                 <?php echo array_reduce($categories, function($count, $cat) { return ($cat['service_count'] ?? 0) > 0 ? $count + 1 : $count; }, 0); ?>
                             </div>
                         </div>
-                        <div class="col-auto">
+                        <div class="col-auto d-none d-sm-block">
                             <i class="fas fa-cogs fa-2x text-gray-300"></i>
                         </div>
                     </div>
@@ -228,17 +526,18 @@ include 'includes/admin-header.php';
             </div>
         </div>
 
-        <div class="col-xl-3 col-md-6 mb-4">
+        <div class="col-6 col-md-3 mb-3 mb-md-4">
             <div class="card border-left-warning shadow h-100 py-2">
-                <div class="card-body">
+                <div class="card-body p-3">
                     <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Total Services</div>
+                        <div class="col">
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1 d-none d-sm-block">Total Services</div>
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1 d-sm-none">Services</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">
                                 <?php echo array_sum(array_column($categories, 'service_count')); ?>
                             </div>
                         </div>
-                        <div class="col-auto">
+                        <div class="col-auto d-none d-sm-block">
                             <i class="fas fa-th-list fa-2x text-gray-300"></i>
                         </div>
                     </div>
@@ -280,34 +579,52 @@ include 'includes/admin-header.php';
                             <table class="table table-bordered" id="categoriesTable" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
+                                        <th class="d-none d-lg-table-cell">ID</th>
                                         <th>Name</th>
-                                        <th>Description</th>
-                                        <th>Icon</th>
+                                        <th class="d-none d-md-table-cell">Description</th>
+                                        <th class="d-none d-xl-table-cell">Icon</th>
                                         <th>Services</th>
-                                        <th>Status</th>
+                                        <th class="d-none d-sm-table-cell">Status</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php foreach ($categories as $cat): ?>
                                         <tr>
-                                            <td><?php echo $cat['id']; ?></td>
+                                            <td class="d-none d-lg-table-cell"><?php echo $cat['id']; ?></td>
                                             <td>
-                                                <div class="d-flex align-items-center">
+                                                <div class="d-flex align-items-center flex-wrap">
                                                     <?php if (!empty($cat['icon'])): ?>
                                                         <i class="fas fa-<?php echo htmlspecialchars($cat['icon']); ?> text-primary me-2"></i>
                                                     <?php endif; ?>
                                                     <strong><?php echo htmlspecialchars($cat['name']); ?></strong>
                                                 </div>
+                                                <!-- Mobile-only status and ID -->
+                                                <div class="d-sm-none mt-1">
+                                                    <small class="text-muted">ID: <?php echo $cat['id']; ?></small>
+                                                    <?php if (($cat['is_active'] ?? 1)): ?>
+                                                        <span class="badge bg-success ms-2">Active</span>
+                                                    <?php else: ?>
+                                                        <span class="badge bg-danger ms-2">Inactive</span>
+                                                    <?php endif; ?>
+                                                </div>
+                                                <!-- Mobile-only description -->
+                                                <div class="d-md-none mt-1">
+                                                    <small class="text-muted">
+                                                        <?php 
+                                                        $desc = $cat['description'] ?? '';
+                                                        echo !empty($desc) ? htmlspecialchars(substr($desc, 0, 30)) . '...' : 'No description'; 
+                                                        ?>
+                                                    </small>
+                                                </div>
                                             </td>
-                                            <td>
+                                            <td class="d-none d-md-table-cell">
                                                 <?php 
                                                 $desc = $cat['description'] ?? '';
                                                 echo !empty($desc) ? htmlspecialchars(substr($desc, 0, 50)) . (strlen($desc) > 50 ? '...' : '') : '<em class="text-muted">No description</em>'; 
                                                 ?>
                                             </td>
-                                            <td>
+                                            <td class="d-none d-xl-table-cell">
                                                 <?php if (!empty($cat['icon'])): ?>
                                                     <span class="badge bg-light text-dark">
                                                         <i class="fas fa-<?php echo htmlspecialchars($cat['icon']); ?>"></i>
@@ -320,7 +637,7 @@ include 'includes/admin-header.php';
                                             <td>
                                                 <span class="badge bg-primary"><?php echo $cat['service_count'] ?? 0; ?></span>
                                             </td>
-                                            <td>
+                                            <td class="d-none d-sm-table-cell">
                                                 <?php if (($cat['is_active'] ?? 1)): ?>
                                                     <span class="badge bg-success">Active</span>
                                                 <?php else: ?>
@@ -328,7 +645,7 @@ include 'includes/admin-header.php';
                                                 <?php endif; ?>
                                             </td>
                                             <td>
-                                                <div class="btn-group" role="group">
+                                                <div class="btn-group d-none d-md-flex" role="group">
                                                     <button type="button" class="btn btn-sm btn-outline-primary" 
                                                             onclick="editCategory(<?php echo htmlspecialchars(json_encode($cat)); ?>)"
                                                             data-bs-toggle="tooltip" title="Edit">
@@ -344,6 +661,22 @@ include 'includes/admin-header.php';
                                                             data-category-name="<?php echo htmlspecialchars($cat['name']); ?>"
                                                             data-bs-toggle="tooltip" title="Delete">
                                                         <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </div>
+                                                <!-- Mobile stacked buttons -->
+                                                <div class="btn-group-mobile d-md-none">
+                                                    <button type="button" class="btn btn-sm btn-outline-primary mb-1" 
+                                                            onclick="editCategory(<?php echo htmlspecialchars(json_encode($cat)); ?>)">
+                                                        <i class="fas fa-edit me-1"></i>Edit
+                                                    </button>
+                                                    <button type="button" class="btn btn-sm btn-outline-warning mb-1" 
+                                                            onclick="toggleStatus(<?php echo $cat['id']; ?>, <?php echo $cat['is_active'] ?? 1; ?>)">
+                                                        <i class="fas fa-toggle-<?php echo ($cat['is_active'] ?? 1) ? 'on' : 'off'; ?> me-1"></i>Toggle
+                                                    </button>
+                                                    <button type="button" class="btn btn-sm btn-outline-danger category-delete-btn mb-1" 
+                                                            data-category-id="<?php echo $cat['id']; ?>" 
+                                                            data-category-name="<?php echo htmlspecialchars($cat['name']); ?>">
+                                                        <i class="fas fa-trash me-1"></i>Delete
                                                     </button>
                                                 </div>
                                             </td>

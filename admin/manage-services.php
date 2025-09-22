@@ -71,25 +71,6 @@ if (isset($_POST['toggle_service'])) {
     }
 }
 
-// Handle add/delete category
-if (isset($_POST['add_category'])) {
-    $name = trim($_POST['new_category_name']);
-    $desc = trim($_POST['new_category_desc']);
-    if ($category->createCategory($name, $desc, null)) {
-        $message = '<div class="alert alert-success">Category added successfully!</div>';
-    } else {
-        $message = '<div class="alert alert-error">Error adding category.</div>';
-    }
-}
-if (isset($_POST['delete_category'])) {
-    $id = $_POST['category_id'];
-    if ($category->deleteCategory($id)) {
-        $message = '<div class="alert alert-success">Category deleted successfully!</div>';
-    } else {
-        $message = '<div class="alert alert-error">Error deleting category.</div>';
-    }
-}
-
 // Get all services and categories
 $services = $service->getAllServices();
 $categories = $service->getCategoriesWithDetails();
@@ -551,6 +532,556 @@ $categories = $service->getCategoriesWithDetails();
 .empty-state p {
     margin-bottom: 1.5rem;
 }
+
+/* Responsive Design - Mobile First Approach */
+@media (max-width: 575.98px) {
+    /* Extra small devices (phones, less than 576px) */
+    .manage-container {
+        padding: 1rem 0;
+    }
+    
+    .page-header {
+        margin: -1rem -10px 1rem -10px;
+        padding: 1.5rem 0;
+        border-radius: 0 0 1rem 1rem;
+    }
+    
+    .page-title {
+        font-size: 1.5rem !important;
+        margin-bottom: 0.5rem;
+    }
+    
+    .page-subtitle {
+        font-size: 0.875rem;
+        display: none;
+    }
+    
+    .header-stats {
+        display: none !important;
+    }
+    
+    .back-btn-container {
+        text-align: center;
+        margin: 10px 0;
+    }
+    
+    .back-btn {
+        width: 100%;
+        max-width: 200px;
+        padding: 10px 16px;
+        font-size: 0.9rem;
+    }
+    
+    .controls-section {
+        flex-direction: column !important;
+        gap: 10px;
+    }
+    
+    .search-controls {
+        flex-direction: column !important;
+        gap: 8px;
+        width: 100%;
+    }
+    
+    .search-controls .form-control,
+    .search-controls .form-select,
+    .search-controls .filter-select {
+        width: 100% !important;
+        margin-bottom: 8px;
+        padding: 10px 12px;
+        font-size: 14px;
+        border-radius: 6px;
+        min-height: 44px;
+    }
+    
+    .search-controls .search-input {
+        position: relative;
+    }
+    
+    .search-controls .search-input .fas {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #64748b;
+        z-index: 1;
+    }
+    
+    .search-controls .search-input input {
+        padding-left: 40px;
+    }
+    
+    .action-buttons {
+        flex-direction: column !important;
+        width: 100%;
+        gap: 8px;
+        align-items: stretch;
+    }
+    
+    .action-buttons .btn,
+    .action-buttons .btn-professional {
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 12px 16px !important;
+        font-size: 0.9rem !important;
+        text-align: center;
+        justify-content: center;
+        display: flex;
+        align-items: center;
+        min-height: 44px;
+        border-radius: 8px !important;
+    }
+    
+    .action-buttons .btn i,
+    .action-buttons .btn-professional i {
+        margin-right: 8px;
+    }
+    
+    /* Specific styling for category management buttons */
+    .btn-professional.btn-outline-pro {
+        background-color: #f8fafc !important;
+        border: 2px solid #e2e8f0 !important;
+        color: #4f46e5 !important;
+    }
+    
+    .btn-professional.btn-primary-pro {
+        background-color: #4f46e5 !important;
+        border: 2px solid #4f46e5 !important;
+        color: white !important;
+    }
+    
+    .services-grid {
+        grid-template-columns: 1fr !important;
+        gap: 15px;
+    }
+    
+    .service-card {
+        margin-bottom: 15px;
+    }
+    
+    .service-actions {
+        flex-direction: column !important;
+        gap: 8px;
+    }
+    
+    .service-actions .btn {
+        width: 100%;
+        justify-content: center;
+        padding: 8px 12px;
+    }
+    
+    .table-responsive {
+        font-size: 0.8rem;
+    }
+    
+    .table th {
+        padding: 8px 4px;
+        font-size: 0.75rem;
+    }
+    
+    .table td {
+        padding: 8px 4px;
+        vertical-align: top;
+    }
+    
+    .btn-group-mobile {
+        display: flex !important;
+        flex-direction: column;
+        gap: 5px;
+        width: 100%;
+    }
+    
+    .btn-group-mobile .btn {
+        width: 100%;
+        text-align: left;
+        justify-content: flex-start;
+        padding: 8px 12px !important;
+        margin-bottom: 3px;
+        border-radius: 0.25rem !important;
+    }
+    
+    .badge {
+        font-size: 0.7rem;
+        padding: 3px 6px;
+    }
+    
+    .modal-dialog {
+        margin: 10px;
+        max-width: calc(100% - 20px);
+    }
+    
+    .modal-body {
+        padding: 15px;
+    }
+    
+    .form-control, .form-select {
+        font-size: 14px;
+        padding: 8px 12px;
+        margin-bottom: 10px;
+    }
+    
+    .modal-footer {
+        padding: 10px 15px;
+        gap: 10px;
+    }
+    
+    .modal-footer .btn {
+        flex: 1;
+        margin: 0;
+    }
+    
+    .stats-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+    
+    .stat-card {
+        padding: 15px;
+        min-height: auto;
+    }
+    
+    .stat-card h3 {
+        font-size: 1.2rem;
+        margin-bottom: 5px;
+    }
+    
+    .stat-card .small {
+        font-size: 0.75rem;
+    }
+    
+    .category-search-section {
+        margin-bottom: 20px;
+    }
+    
+    .category-search-section .form-control {
+        margin-bottom: 10px;
+        font-size: 14px;
+        padding: 12px 15px;
+        padding-left: 3rem;
+    }
+    
+    /* Action bar mobile responsive fixes */
+    .action-bar {
+        margin-bottom: 20px;
+    }
+    
+    .action-bar .row {
+        margin: 0;
+    }
+    
+    .action-bar .col-lg-6 {
+        padding: 0 5px;
+        margin-bottom: 15px;
+    }
+    
+    /* Search section mobile */
+    .search-section {
+        margin-bottom: 15px;
+    }
+    
+    .search-input {
+        width: 100%;
+        padding: 12px 16px;
+        padding-left: 3rem !important;
+        font-size: 14px;
+        border: 2px solid #e2e8f0;
+        border-radius: 8px;
+        min-height: 44px;
+    }
+    
+    /* Button container mobile fixes */
+    .d-flex.gap-3 {
+        flex-direction: column !important;
+        gap: 8px !important;
+        width: 100%;
+        align-items: stretch;
+    }
+    
+    .filter-select {
+        width: 100% !important;
+        padding: 10px 12px;
+        font-size: 14px;
+        border: 2px solid #e2e8f0;
+        border-radius: 6px;
+        margin-bottom: 8px;
+        min-height: 44px;
+    }
+    
+    .btn-professional {
+        width: 100% !important;
+        padding: 12px 16px !important;
+        font-size: 0.9rem !important;
+        text-align: center !important;
+        justify-content: center !important;
+        display: flex !important;
+        align-items: center !important;
+        min-height: 44px !important;
+        border-radius: 8px !important;
+        text-decoration: none;
+        margin-bottom: 8px;
+    }
+    
+    .btn-professional i {
+        margin-right: 8px;
+    }
+    
+    .btn-professional.btn-outline-pro {
+        background-color: #f8fafc !important;
+        border: 2px solid #e2e8f0 !important;
+        color: #4f46e5 !important;
+    }
+    
+    .btn-professional.btn-primary-pro {
+        background-color: #4f46e5 !important;
+        border: 2px solid #4f46e5 !important;
+        color: white !important;
+    }
+
+    /* Category management modal mobile styling */
+    #categoryManagement {
+        margin: 10px;
+        border-radius: 12px;
+    }
+    
+    #categoryManagement .card-header-pro {
+        padding: 15px;
+        text-align: center;
+    }
+    
+    #categoryManagement .card-header-pro h2 {
+        font-size: 1.3rem;
+        margin-bottom: 8px;
+    }
+    
+    #categoryManagement .card-header-pro .card-subtitle {
+        font-size: 0.85rem;
+    }
+    
+    #categoryManagement .p-4 {
+        padding: 15px !important;
+    }
+    
+    #categoryManagement .row.g-3 {
+        gap: 10px !important;
+    }
+    
+    #categoryManagement .col-md-8,
+    #categoryManagement .col-md-4 {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    
+    #categoryManagement .position-relative .fas.fa-search {
+        font-size: 0.9rem;
+    }
+    
+    #categoryManagement .table-responsive {
+        margin-top: 15px;
+    }
+    
+    #categoryManagement .table th,
+    #categoryManagement .table td {
+        padding: 8px;
+        font-size: 0.85rem;
+    }
+    
+    #categoryManagement .btn-professional {
+        padding: 10px 16px;
+        font-size: 0.9rem;
+        min-height: 44px;
+    }
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+    /* Small devices (landscape phones, 576px and up) */
+    .page-title {
+        font-size: 1.8rem;
+    }
+    
+    .controls-section {
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+    
+    .search-controls {
+        flex-direction: row !important;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    
+    .search-controls .form-control,
+    .search-controls .form-select {
+        width: calc(50% - 5px) !important;
+        margin-bottom: 10px;
+    }
+    
+    /* Button container for small devices */
+    .d-flex.gap-3 {
+        flex-direction: row !important;
+        flex-wrap: wrap;
+        gap: 10px !important;
+        justify-content: flex-start;
+    }
+    
+    .filter-select {
+        width: calc(50% - 5px) !important;
+        margin-bottom: 10px;
+    }
+    
+    .btn-professional {
+        width: calc(50% - 5px) !important;
+        padding: 10px 12px !important;
+        margin-bottom: 8px;
+    }
+    
+    .action-buttons {
+        flex-direction: row !important;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    
+    .action-buttons .btn,
+    .action-buttons .btn-professional {
+        width: calc(50% - 5px) !important;
+        margin: 0;
+        padding: 10px 12px;
+    }
+    
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 20px;
+    }
+    
+    .table-responsive {
+        font-size: 0.875rem;
+    }
+    
+    .stats-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+    
+    #categoryManagement .col-md-8,
+    #categoryManagement .col-md-4 {
+        width: calc(70% - 5px);
+        display: inline-block;
+    }
+    
+    #categoryManagement .col-md-4 {
+        width: calc(30% - 5px);
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+    /* Medium devices (tablets, 768px and up) */
+    .page-title {
+        font-size: 2rem;
+    }
+    
+    .controls-section {
+        flex-direction: row;
+        justify-content: start;
+        align-items: start;
+        gap: 20px;
+    }
+    
+    .search-controls {
+        flex-direction: row !important;
+        gap: 15px;
+        flex: 1;
+    }
+    
+    /* Button container for medium devices */
+    .d-flex.gap-3 {
+        flex-direction: row !important;
+        gap: 12px !important;
+        justify-content: flex-end;
+        flex-wrap: wrap;
+    }
+    
+    .filter-select {
+        width: auto !important;
+        min-width: 140px;
+        margin-bottom: 0;
+    }
+    
+    .btn-professional {
+        width: auto !important;
+        min-width: 140px;
+        padding: 10px 16px !important;
+        margin-bottom: 0;
+    }
+    
+    .action-buttons {
+        flex-direction: row !important;
+        gap: 12px;
+        flex-shrink: 0;
+    }
+    
+    .action-buttons .btn,
+    .action-buttons .btn-professional {
+        width: auto !important;
+        min-width: 140px;
+        padding: 10px 16px;
+    }
+    
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+    
+    .table-responsive {
+        font-size: 0.9rem;
+    }
+    
+    .btn-group .btn {
+        padding: 0.375rem 0.5rem;
+        font-size: 0.875rem;
+    }
+    
+    .stats-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+    
+    #categoryManagement .row.g-3 {
+        gap: 15px !important;
+    }
+    
+    #categoryManagement .col-md-8,
+    #categoryManagement .col-md-4 {
+        width: auto;
+        flex: 1;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    /* Large devices (desktops, 992px and up) */
+    .services-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+    }
+    
+    .stats-container {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+    }
+}
+
+@media (min-width: 1200px) {
+    /* Extra large devices (large desktops, 1200px and up) */
+    .services-grid {
+        grid-template-columns: repeat(4, 1fr) !important;
+    }
+    
+    .manage-container {
+        max-width: 95%;
+        margin: 0 auto;
+    }
+}
 </style>
 
 <div class="manage-container">
@@ -582,6 +1113,10 @@ $categories = $service->getCategoriesWithDetails();
                     </div>
                 </div>
                 <div class="col-md-4 text-end">
+                    <a href="dashboard.php" class="btn-professional" style="background: #6f42c1; color: white; margin-right: 0.5rem;">
+                        <i class="fas fa-arrow-left"></i>
+                        Back to Dashboard
+                    </a>
                     <a href="add-service.php" class="btn-professional btn-success-pro">
                         <i class="fas fa-plus"></i>
                         Add New Service
@@ -628,6 +1163,10 @@ $categories = $service->getCategoriesWithDetails();
                             <i class="fas fa-tags"></i>
                             Categories
                         </button>
+                        <a href="manage-categories.php" class="btn-professional btn-primary-pro">
+                            <i class="fas fa-cog"></i>
+                            Manage Categories
+                        </a>
                     </div>
                 </div>
             </div>
@@ -641,6 +1180,8 @@ $categories = $service->getCategoriesWithDetails();
             </div>
         <?php endif; ?>
 
+
+
         <!-- Category Management Modal -->
         <div class="data-card" id="categoryManagement" style="display: none;">
             <div class="card-header-pro">
@@ -648,34 +1189,38 @@ $categories = $service->getCategoriesWithDetails();
                     <i class="fas fa-tags text-primary"></i>
                     Category Management
                 </h2>
-                <p class="card-subtitle">Add, edit, and organize your service categories</p>
+                <p class="card-subtitle">Add and organize your service categories</p>
             </div>
             <div class="card-body-pro">
-                <!-- Add New Category Form -->
+                <!-- Category Search Section -->
                 <div class="p-4 bg-light">
-                    <form method="POST" class="row g-3" id="addCategoryForm">
+                    <div class="row g-3">
+                        <div class="col-md-8">
+                            <div class="position-relative">
+                                <i class="fas fa-search position-absolute" style="left: 1rem; top: 50%; transform: translateY(-50%); color: #64748b;"></i>
+                                <input type="text" 
+                                       id="categorySearch" 
+                                       class="form-control" 
+                                       placeholder="Search categories by name or description..."
+                                       style="border-radius: 0.5rem; border: 2px solid var(--manage-border); padding-left: 3rem;">
+                            </div>
+                        </div>
                         <div class="col-md-4">
-                            <input type="text" 
-                                   name="new_category_name" 
-                                   class="form-control" 
-                                   placeholder="Category name" 
-                                   required
-                                   style="border-radius: 0.5rem; border: 2px solid var(--manage-border);">
+                            <select id="categoryServiceFilter" class="form-control" style="border-radius: 0.5rem; border: 2px solid var(--manage-border);">
+                                <option value="">All Categories</option>
+                                <option value="with-services">With Services</option>
+                                <option value="without-services">Without Services</option>
+                            </select>
                         </div>
-                        <div class="col-md-6">
-                            <input type="text" 
-                                   name="new_category_desc" 
-                                   class="form-control" 
-                                   placeholder="Category description"
-                                   style="border-radius: 0.5rem; border: 2px solid var(--manage-border);">
-                        </div>
-                        <div class="col-md-2">
-                            <button type="submit" name="add_category" class="btn-professional btn-success-pro w-100">
-                                <i class="fas fa-plus"></i>
-                                Add
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-12 text-center">
+                            <button type="button" onclick="clearCategoryFilters()" class="btn btn-outline-secondary btn-sm">
+                                <i class="fas fa-times me-1"></i>
+                                Clear Filters
                             </button>
                         </div>
-                    </form>
+                    </div>
                 </div>
 
                 <!-- Categories Table -->
@@ -687,7 +1232,6 @@ $categories = $service->getCategoriesWithDetails();
                                     <th>Category Name</th>
                                     <th>Description</th>
                                     <th>Services Count</th>
-                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -703,21 +1247,20 @@ $categories = $service->getCategoriesWithDetails();
                                         <td>
                                             <span class="category-tag"><?php echo $serviceCount; ?> services</span>
                                         </td>
-                                        <td>
-                                            <form method="POST" 
-                                                  onsubmit="return confirm('Delete this category? Services in this category will become uncategorized.')" 
-                                                  style="display: inline;">
-                                                <input type="hidden" name="category_id" value="<?php echo $cat['id']; ?>">
-                                                <button type="submit" name="delete_category" class="action-btn action-delete">
-                                                    <i class="fas fa-trash-alt"></i>
-                                                    Delete
-                                                </button>
-                                            </form>
-                                        </td>
                                     </tr>
                                 <?php endforeach; ?>
                             </tbody>
                         </table>
+                    </div>
+                    <div class="p-3 bg-light text-center">
+                        <p class="text-muted mb-2">
+                            <i class="fas fa-info-circle me-1"></i>
+                            To edit or delete categories, use the dedicated management page
+                        </p>
+                        <a href="manage-categories.php" class="btn-professional btn-primary-pro">
+                            <i class="fas fa-external-link-alt me-1"></i>
+                            Manage Categories
+                        </a>
                     </div>
                 <?php else: ?>
                     <div class="empty-state">
@@ -1132,35 +1675,7 @@ function showSuccessMessage(message) {
     }, 5000);
 }
 
-// Enhanced form validation
-document.getElementById('addCategoryForm')?.addEventListener('submit', function(e) {
-    const nameInput = this.querySelector('input[name="new_category_name"]');
-    const name = nameInput.value.trim();
-    
-    if (name.length < 2) {
-        e.preventDefault();
-        alert('Category name must be at least 2 characters long.');
-        nameInput.focus();
-        return;
-    }
-    
-    if (name.length > 50) {
-        e.preventDefault();
-        alert('Category name must be less than 50 characters.');
-        nameInput.focus();
-        return;
-    }
-    
-    // Check for duplicate names
-    const existingCategories = Array.from(document.querySelectorAll('.category-tag')).map(el => el.textContent.toLowerCase());
-    if (existingCategories.some(cat => cat.includes(name.toLowerCase()))) {
-        e.preventDefault();
-        if (!confirm('A similar category name already exists. Continue anyway?')) {
-            nameInput.focus();
-            return;
-        }
-    }
-});
+
 
 // Auto-hide alerts
 setTimeout(() => {
@@ -1191,6 +1706,109 @@ document.addEventListener('keydown', function(e) {
         $('#servicesTable').DataTable().search('').draw();
     }
 });
+
+// Category search and filter functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const categorySearch = document.getElementById('categorySearch');
+    const categoryServiceFilter = document.getElementById('categoryServiceFilter');
+    const categoryTable = document.querySelector('#categoryManagement .table-professional');
+    
+    if (categorySearch && categoryTable) {
+        // Search functionality
+        categorySearch.addEventListener('keyup', function() {
+            filterCategories();
+        });
+        
+        // Service filter functionality
+        if (categoryServiceFilter) {
+            categoryServiceFilter.addEventListener('change', function() {
+                filterCategories();
+            });
+        }
+        
+        function filterCategories() {
+            const searchTerm = categorySearch.value.toLowerCase();
+            const serviceFilter = categoryServiceFilter ? categoryServiceFilter.value : '';
+            const rows = categoryTable.querySelectorAll('tbody tr');
+            
+            rows.forEach(row => {
+                const name = row.querySelector('td:first-child .fw-bold').textContent.toLowerCase();
+                const description = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
+                const serviceCountText = row.querySelector('.category-tag').textContent;
+                const serviceCount = parseInt(serviceCountText.match(/\d+/)[0]);
+                
+                // Check search match
+                const searchMatch = name.includes(searchTerm) || description.includes(searchTerm);
+                
+                // Check service filter
+                let serviceMatch = true;
+                if (serviceFilter === 'with-services') {
+                    serviceMatch = serviceCount > 0;
+                } else if (serviceFilter === 'without-services') {
+                    serviceMatch = serviceCount === 0;
+                }
+                
+                // Show/hide row
+                if (searchMatch && serviceMatch) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+            
+            // Update empty state
+            updateCategoryEmptyState();
+        }
+        
+        function updateCategoryEmptyState() {
+            const visibleRows = Array.from(categoryTable.querySelectorAll('tbody tr')).filter(row => row.style.display !== 'none');
+            const emptyMessage = document.getElementById('categoryEmptyMessage');
+            
+            if (visibleRows.length === 0) {
+                if (!emptyMessage) {
+                    const tbody = categoryTable.querySelector('tbody');
+                    const emptyRow = document.createElement('tr');
+                    emptyRow.id = 'categoryEmptyMessage';
+                    emptyRow.innerHTML = `
+                        <td colspan="3" class="text-center py-4">
+                            <i class="fas fa-search text-muted fa-2x mb-2"></i>
+                            <p class="text-muted mb-0">No categories match your search criteria</p>
+                        </td>
+                    `;
+                    tbody.appendChild(emptyRow);
+                }
+            } else {
+                if (emptyMessage) {
+                    emptyMessage.remove();
+                }
+            }
+        }
+    }
+});
+
+// Clear category filters
+function clearCategoryFilters() {
+    const categorySearch = document.getElementById('categorySearch');
+    const categoryServiceFilter = document.getElementById('categoryServiceFilter');
+    
+    if (categorySearch) categorySearch.value = '';
+    if (categoryServiceFilter) categoryServiceFilter.value = '';
+    
+    // Reset all rows to visible
+    const categoryTable = document.querySelector('#categoryManagement .table-professional');
+    if (categoryTable) {
+        const rows = categoryTable.querySelectorAll('tbody tr');
+        rows.forEach(row => {
+            row.style.display = '';
+        });
+        
+        // Remove empty state message
+        const emptyMessage = document.getElementById('categoryEmptyMessage');
+        if (emptyMessage) {
+            emptyMessage.remove();
+        }
+    }
+}
 
 // Smooth scrolling for internal links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
