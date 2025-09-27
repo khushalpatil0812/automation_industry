@@ -3,9 +3,9 @@ class Database {
     private $host = 'localhost';
     private $db_name = 'automation_industry';
     private $username = 'root';
-    private $password = 'KHUSHAL#0812';
+    private $password = '';
 
-    private $port = '3306';
+    private $port = '3307';
     private $conn;
     public function getConnection() {
         $this->conn = null;

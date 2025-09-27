@@ -47,6 +47,19 @@ class Service {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    // 🔹 Get services by category ID (only active)
+    public function getServicesByCategoryId($category_id) {
+        $query = "SELECT s.*, c.name as category_name 
+                  FROM " . $this->table . " s 
+                  JOIN categories c ON s.category_id = c.id 
+                  WHERE s.category_id = ? AND s.is_active = 1 
+                  ORDER BY s.created_at DESC";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $category_id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     // 🔹 Get a single service by ID (only active on frontend)
     public function getServiceById($id) {
         $query = "SELECT s.*, c.name as category_name 

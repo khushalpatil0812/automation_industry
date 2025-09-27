@@ -23,8 +23,8 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="public/icons/favicon.svg">
-    <link rel="icon" type="image/png" href="public/icons/favicon.png">
+    <link rel="icon" type="image/svg+xml" href="public/icons/logo_300_250.png">
+    <link rel="icon" type="image/png" href="public/icons/logo_300_250.png">
     
     <style>
         :root {
@@ -184,21 +184,17 @@
             border-radius: 8px;
         }
         
-        .brand-icon {
-            background: var(--gradient-accent);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-size: 2rem;
-            margin-right: 0.75rem;
-            animation: rotate-pulse 4s ease-in-out infinite;
-            filter: drop-shadow(0 2px 4px rgba(255, 107, 53, 0.3));
+        .brand-logo {
+            height: 3.5rem;
+            width: auto;
+            margin-right: 0.5rem;
             transition: all var(--transition-normal);
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
         }
         
-        .navbar-brand:hover .brand-icon {
-            animation-duration: 1s;
-            filter: drop-shadow(0 4px 8px rgba(255, 107, 53, 0.5));
+        .navbar-brand:hover .brand-logo {
+            transform: scale(1.05);
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5));
         }
         
         @keyframes rotate-pulse {
@@ -370,7 +366,7 @@
         
         /* Enhanced Mobile Navigation for Transparency */
         @media (max-width: 991.98px) {
-            .navbar-collapse {
+            .navbar-collapse.show {
                 background: linear-gradient(135deg, rgba(26, 29, 46, 0.85) 0%, rgba(33, 37, 41, 0.85) 100%);
                 border-radius: 16px;
                 margin-top: 1rem;
@@ -379,6 +375,11 @@
                 border: 1px solid rgba(255, 255, 255, 0.08);
                 box-shadow: var(--shadow-xl);
                 animation: slideDown var(--transition-normal) ease-out;
+            }
+            
+            /* Ensure collapsed state is properly hidden */
+            .navbar-collapse:not(.show) {
+                display: none !important;
             }
             
             .navbar-nav .nav-link {
@@ -394,7 +395,78 @@
                 transform: translateX(10px);
                 background: rgba(255, 255, 255, 0.05);
             }
+            
+            /* Enhanced mobile menu button */
+            .navbar-toggler {
+                border: 2px solid rgba(255, 255, 255, 0.3);
+                border-radius: 12px;
+                padding: 0.5rem 0.75rem;
+                transition: all var(--transition-normal);
+                background: rgba(255, 255, 255, 0.05);
+                backdrop-filter: blur(5px);
+                position: relative;
+                overflow: hidden;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            }
+            
+            .navbar-toggler::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background: var(--gradient-accent);
+                transition: left var(--transition-normal);
+                z-index: -1;
+            }
+            
+            .navbar-toggler:hover::before {
+                left: 0;
+            }
+            
+            .navbar-toggler:hover {
+                border-color: var(--color-industrial-orange);
+                box-shadow: var(--shadow-glow-orange);
+                transform: scale(1.05);
+            }
+            
+            .navbar-toggler:focus {
+                outline: 2px solid var(--color-industrial-orange);
+                outline-offset: 4px;
+                box-shadow: none;
+            }
+            
+            .navbar-toggler-icon {
+                background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.9%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2.5' d='m4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+                width: 1.5em;
+                height: 1.5em;
+                transition: all var(--transition-normal);
+            }
+            
+            /* Transform hamburger to X when menu is open */
+            .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
+                background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.9%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2.5' d='M6 6l18 18M6 24L24 6'/%3e%3c/svg%3e");
+                transform: rotate(90deg);
+            }
+            
+            .navbar-toggler:hover .navbar-toggler-icon {
+                transform: rotate(90deg);
+            }
+            
+            .navbar-toggler[aria-expanded="true"]:hover .navbar-toggler-icon {
+                transform: rotate(180deg);
+            }
         }
+        
+        @keyframes slideInFromLeft {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+
         
         @keyframes slideDown {
             from {
@@ -516,8 +588,8 @@
         <div class="container">
             <!-- Professional Brand -->
             <a class="navbar-brand" href="index.php" aria-label="AutomationPro - Industrial Solutions Homepage">
-                <i class="fas fa-industry brand-icon" aria-hidden="true"></i>
-                <span class="brand-text">AutomationPro</span>
+                <img src="public/icons/LOGO_SILVER.png" alt="AutomationPro Logo" class="brand-logo" aria-hidden="true">
+
             </a>
             
             <!-- Mobile Menu Toggle -->
@@ -576,7 +648,7 @@
     </nav>
     
     <!-- Main Content Wrapper -->
-    <div id="main-content" role="main">
+  
     
     <!-- Bootstrap JavaScript Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
@@ -616,33 +688,6 @@
             
             window.addEventListener('scroll', handleScroll, { passive: true });
             
-            // Enhanced Mobile Menu Management
-            const navbarCollapse = document.querySelector('.navbar-collapse');
-            const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
-            
-            // Auto-close mobile menu on link click
-            navLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    // Close mobile menu if open
-                    if (window.innerWidth < 992 && navbarCollapse.classList.contains('show')) {
-                        const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
-                            toggle: false
-                        });
-                        bsCollapse.hide();
-                    }
-                    
-                    // Add loading state for external links
-                    if (!this.getAttribute('href').startsWith('#')) {
-                        this.classList.add('loading');
-                        
-                        // Remove loading state after timeout (fallback)
-                        setTimeout(() => {
-                            this.classList.remove('loading');
-                        }, 2000);
-                    }
-                });
-            });
-            
             // Smooth scroll for anchor links with offset for fixed navbar
             const anchorLinks = document.querySelectorAll('a[href^="#"]');
             anchorLinks.forEach(link => {
@@ -663,35 +708,68 @@
                 });
             });
             
-            // Enhanced keyboard navigation
-            navLinks.forEach((link, index) => {
-                link.addEventListener('keydown', function(e) {
-                    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
-                        e.preventDefault();
-                        const nextIndex = (index + 1) % navLinks.length;
-                        navLinks[nextIndex].focus();
-                    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
-                        e.preventDefault();
-                        const prevIndex = (index - 1 + navLinks.length) % navLinks.length;
-                        navLinks[prevIndex].focus();
-                    } else if (e.key === 'Escape') {
-                        link.blur();
+            // Mobile menu toggle functionality
+            const navbarCollapse = document.querySelector('.navbar-collapse');
+            const navbarToggler = document.querySelector('.navbar-toggler');
+            const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+            let isMenuOpen = false;
+            
+            if (navbarCollapse && navbarToggler) {
+                // Disable Bootstrap's default behavior for manual control
+                navbarToggler.removeAttribute('data-bs-toggle');
+                navbarToggler.removeAttribute('data-bs-target');
+                
+                // Toggle menu function
+                function toggleMenu() {
+                    if (window.innerWidth >= 992) return;
+                    
+                    isMenuOpen = !isMenuOpen;
+                    navbarCollapse.classList.toggle('show', isMenuOpen);
+                    navbarToggler.setAttribute('aria-expanded', isMenuOpen);
+                }
+                
+                // Close menu function
+                function closeMenu() {
+                    if (isMenuOpen) {
+                        isMenuOpen = false;
+                        navbarCollapse.classList.remove('show');
+                        navbarToggler.setAttribute('aria-expanded', 'false');
+                    }
+                }
+                
+                // Toggle button click
+                navbarToggler.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    toggleMenu();
+                });
+                
+                // Auto-close on nav link click
+                navLinks.forEach(link => {
+                    link.addEventListener('click', function() {
+                        if (window.innerWidth < 992) closeMenu();
+                    });
+                });
+                
+                // Auto-close on window resize to desktop
+                window.addEventListener('resize', function() {
+                    if (window.innerWidth >= 992) closeMenu();
+                });
+                
+                // Auto-close on outside click
+                document.addEventListener('click', function(e) {
+                    if (window.innerWidth < 992 && isMenuOpen) {
+                        const isClickInsideNav = navbarCollapse.contains(e.target);
+                        const isToggleButton = navbarToggler.contains(e.target);
+                        
+                        if (!isClickInsideNav && !isToggleButton) {
+                            closeMenu();
+                        }
                     }
                 });
-            });
+            }
             
-            // Handle mobile menu keyboard navigation
-            const navbarToggler = document.querySelector('.navbar-toggler');
-            navbarToggler.addEventListener('keydown', function(e) {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    this.click();
-                }
-            });
-            
-            // Preload critical pages for better performance
-            const criticalPages = ['services.php', 'about.php', 'contact.php'];
-            criticalPages.forEach(page => {
+            // Preload critical pages
+            ['services.php', 'about.php', 'contact.php'].forEach(page => {
                 const link = document.createElement('link');
                 link.rel = 'prefetch';
                 link.href = page;
@@ -700,7 +778,6 @@
             
             // Handle reduced motion preferences
             if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                // Disable AOS animations
                 AOS.init({
                     duration: 0,
                     once: true,
@@ -708,7 +785,6 @@
                     disable: true
                 });
                 
-                // Remove CSS animations for users who prefer reduced motion
                 const style = document.createElement('style');
                 style.textContent = `
                     *, *::before, *::after {
@@ -719,33 +795,8 @@
                 `;
                 document.head.appendChild(style);
             }
-            
-            // Enhanced error handling for failed page loads
-            window.addEventListener('error', function(e) {
-                console.warn('Resource failed to load:', e.target.src || e.target.href);
-            });
-            
-            // Performance monitoring
-            if ('performance' in window) {
-                window.addEventListener('load', function() {
-                    const perfData = performance.getEntriesByType('navigation')[0];
-                    if (perfData.loadEventEnd - perfData.loadEventStart > 3000) {
-                        console.warn('Page load took longer than expected');
-                    }
-                });
-            }
         });
         
-        // Service Worker for offline functionality (optional)
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function() {
-                navigator.serviceWorker.register('/sw.js')
-                    .then(function(registration) {
-                        console.log('SW registered: ', registration);
-                    })
-                    .catch(function(registrationError) {
-                        console.log('SW registration failed: ', registrationError);
-                    });
-            });
-        }
+        // Service Worker removed - not needed for this project
+        // You can add it back later if you create a sw.js file for offline functionality
     </script>

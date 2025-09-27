@@ -1,9 +1,11 @@
 <?php
 require_once 'config/config.php';
+require_once 'config/email.php';
 $page_title = 'Contact';
 
 $message = '';
 $message_type = '';
+$form_data = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = trim($_POST['name'] ?? '');
@@ -11,11 +13,61 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $subject = trim($_POST['subject'] ?? '');
     $message_text = trim($_POST['message'] ?? '');
     
-    if ($name && $email && $subject && $message_text) {
-        $message = 'Thank you for your message! We will get back to you soon.';
-        $message_type = 'success';
+    // Store form data for repopulation if needed
+    $form_data = [
+        'name' => $name,
+        'email' => $email,
+        'subject' => $subject,
+        'message' => $message_text
+    ];
+    
+    // Validation
+    $errors = [];
+    
+    if (!$name) {
+        $errors[] = 'Name is required.';
+    } elseif (strlen($name) < 2) {
+        $errors[] = 'Name must be at least 2 characters long.';
+    }
+    
+    if (!$email) {
+        $errors[] = 'Email is required.';
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $errors[] = 'Please enter a valid email address.';
+    }
+    
+    if (!$subject) {
+        $errors[] = 'Project type is required.';
+    }
+    
+    if (!$message_text) {
+        $errors[] = 'Project details are required.';
+    } elseif (strlen($message_text) < 10) {
+        $errors[] = 'Please provide more details about your project (at least 10 characters).';
+    }
+    
+    // If no errors, attempt to send email
+    if (empty($errors)) {
+        try {
+            $email_sent = EmailService::sendContactEmail($name, $email, $subject, $message_text);
+            
+            if ($email_sent) {
+                $message = '<i class="fas fa-check-circle me-2"></i><strong>Success!</strong> Your message has been sent successfully. We\'ll contact you within 24 hours to discuss your automation needs.';
+                $message_type = 'success';
+                $form_data = []; // Clear form data on success
+            } else {
+                $message = '<i class="fas fa-exclamation-triangle me-2"></i><strong>Email Error:</strong> There was a problem sending your message. Please try again or contact us directly at <a href="tel:+15551234567" class="text-decoration-none"><strong>+1 (555) 123-4567</strong></a>.';
+                $message_type = 'error';
+            }
+        } catch (Exception $e) {
+            $message = '<i class="fas fa-exclamation-triangle me-2"></i><strong>System Error:</strong> Unable to process your request. Please contact us directly at <a href="mailto:info@automationpro.com" class="text-decoration-none"><strong>info@automationpro.com</strong></a>.';
+            $message_type = 'error';
+            
+            // Log error for debugging (in production, use proper logging)
+            error_log("Contact form error: " . $e->getMessage());
+        }
     } else {
-        $message = 'Please fill in all required fields.';
+        $message = '<i class="fas fa-exclamation-triangle me-2"></i><strong>Please fix the following issues:</strong><ul class="mb-0 mt-2"><li>' . implode('</li><li>', $errors) . '</li></ul>';
         $message_type = 'error';
     }
 }
@@ -360,6 +412,71 @@ body {
     .contact-section {
         padding: 60px 0;
     }
+    
+    .contact-card {
+        margin: 0 1rem;
+    }
+    
+    .info-card {
+        margin-bottom: 1.5rem;
+        padding: 1.5rem;
+    }
+    
+    .quick-contact-card {
+        margin-bottom: 1.5rem;
+        padding: 2rem 1.5rem;
+    }
+    
+    .form-control-modern {
+        font-size: 16px; /* Prevents zoom on iOS */
+    }
+    
+    .btn-modern {
+        font-size: 1rem;
+        padding: 1rem 2rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .contact-hero {
+        min-height: 50vh;
+        padding: 2rem 0;
+    }
+    
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+    
+    .contact-card .p-5 {
+        padding: 2rem !important;
+    }
+    
+    .info-card {
+        padding: 1.5rem 1rem;
+    }
+    
+    .info-icon, .contact-icon {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 1rem;
+    }
+    
+    .quick-contact-card {
+        padding: 1.5rem 1rem;
+    }
+    
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+    
+    .alert-modern {
+        padding: 1rem;
+        font-size: 0.9rem;
+    }
 }
 </style>
 
@@ -452,7 +569,7 @@ body {
                                             <label class="form-label">Full Name <span style="color: var(--contact-danger);">*</span></label>
                                             <input type="text" name="name" class="form-control-modern" 
                                                    placeholder="Enter your full name" required
-                                                   value="<?php echo isset($_POST['name']) ? htmlspecialchars($_POST['name']) : ''; ?>">
+                                                   value="<?php echo htmlspecialchars($form_data['name'] ?? ''); ?>">
                                             <i class="fas fa-user input-icon"></i>
                                         </div>
                                     </div>
@@ -462,7 +579,7 @@ body {
                                             <label class="form-label">Email Address <span style="color: var(--contact-danger);">*</span></label>
                                             <input type="email" name="email" class="form-control-modern" 
                                                    placeholder="your.email@company.com" required
-                                                   value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>">
+                                                   value="<?php echo htmlspecialchars($form_data['email'] ?? ''); ?>">
                                             <i class="fas fa-envelope input-icon"></i>
                                         </div>
                                     </div>
@@ -470,14 +587,14 @@ body {
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label class="form-label">Project Type <span style="color: var(--contact-danger);">*</span></label>
-                                            <select name="subject" class="form-control-modern" required style="appearance: none; background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTQgNkw4IDEwTDEyIDYiIHN0cm9rZT0iIzk5OTk5OSIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8L3N2Zz4K'); background-repeat: no-repeat; background-position: right 1.5rem center;">
+                                            <select name="subject" class="form-control-modern" required style="appearance: none; background-color: black; background-repeat: no-repeat; background-position: right 1.5rem center;">
                                                 <option value="">Select your project type...</option>
-                                                <option value="Industrial Automation" <?php echo (isset($_POST['subject']) && $_POST['subject'] === 'Industrial Automation') ? 'selected' : ''; ?>>Industrial Automation</option>
-                                                <option value="Smart Manufacturing" <?php echo (isset($_POST['subject']) && $_POST['subject'] === 'Smart Manufacturing') ? 'selected' : ''; ?>>Smart Manufacturing</option>
-                                                <option value="Process Control" <?php echo (isset($_POST['subject']) && $_POST['subject'] === 'Process Control') ? 'selected' : ''; ?>>Process Control Systems</option>
-                                                <option value="Robotics Integration" <?php echo (isset($_POST['subject']) && $_POST['subject'] === 'Robotics Integration') ? 'selected' : ''; ?>>Robotics Integration</option>
-                                                <option value="Custom Solutions" <?php echo (isset($_POST['subject']) && $_POST['subject'] === 'Custom Solutions') ? 'selected' : ''; ?>>Custom Solutions</option>
-                                                <option value="Technical Support" <?php echo (isset($_POST['subject']) && $_POST['subject'] === 'Technical Support') ? 'selected' : ''; ?>>Technical Support</option>
+                                                <option value="Industrial Automation" <?php echo (($form_data['subject'] ?? '') === 'Industrial Automation') ? 'selected' : ''; ?>>Industrial Automation</option>
+                                                <option value="Smart Manufacturing" <?php echo (($form_data['subject'] ?? '') === 'Smart Manufacturing') ? 'selected' : ''; ?>>Smart Manufacturing</option>
+                                                <option value="Process Control" <?php echo (($form_data['subject'] ?? '') === 'Process Control') ? 'selected' : ''; ?>>Process Control Systems</option>
+                                                <option value="Robotics Integration" <?php echo (($form_data['subject'] ?? '') === 'Robotics Integration') ? 'selected' : ''; ?>>Robotics Integration</option>
+                                                <option value="Custom Solutions" <?php echo (($form_data['subject'] ?? '') === 'Custom Solutions') ? 'selected' : ''; ?>>Custom Solutions</option>
+                                                <option value="Technical Support" <?php echo (($form_data['subject'] ?? '') === 'Technical Support') ? 'selected' : ''; ?>>Technical Support</option>
                                             </select>
                                             <i class="fas fa-cog input-icon"></i>
                                         </div>
@@ -488,7 +605,7 @@ body {
                                             <label class="form-label">Project Details <span style="color: var(--contact-danger);">*</span></label>
                                             <textarea name="message" class="form-control-modern" rows="6" 
                                                       placeholder="Tell us about your automation needs, current challenges, expected outcomes, timeline, and budget range..." 
-                                                      required style="resize: vertical; min-height: 150px;"><?php echo isset($_POST['message']) ? htmlspecialchars($_POST['message']) : ''; ?></textarea>
+                                                      required style="resize: vertical; min-height: 150px;"><?php echo htmlspecialchars($form_data['message'] ?? ''); ?></textarea>
                                             <i class="fas fa-comment-dots input-icon" style="top: 2rem;"></i>
                                         </div>
                                     </div>
