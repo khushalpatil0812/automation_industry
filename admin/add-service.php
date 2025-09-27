@@ -22,40 +22,121 @@ if ($_POST) {
     ini_set('display_errors', 1);
 
     $title       = trim($_POST['title'] ?? '');
-    $category_id = $_POST['category_id'] ?? '';
+    $category_id = intval($_POST['category_id'] ?? 0);
     $description = trim($_POST['description'] ?? '');
     $features    = trim($_POST['features'] ?? '');
+    
+    $errors = [];
 
-    if (empty($title) || empty($category_id) || empty($description)) {
-        $message = '<div class="alert alert-error">Please fill in all required fields.</div>';
+    // Validation
+    if (empty($title)) {
+        $errors[] = "Service title is required.";
+    } elseif (strlen($title) < 3) {
+        $errors[] = "Service title must be at least 3 characters long.";
+    } elseif (strlen($title) > 255) {
+        $errors[] = "Service title must be less than 255 characters.";
+    }
+
+    if ($category_id <= 0) {
+        $errors[] = "Please select a valid category.";
+    }
+
+    if (empty($description)) {
+        $errors[] = "Service description is required.";
+    } elseif (strlen($description) < 10) {
+        $errors[] = "Description must be at least 10 characters long.";
+    }
+
+    // Validate category exists
+    $validCategories = $service->getCategoriesWithDetails();
+    $categoryExists = false;
+    foreach($validCategories as $cat) {
+        if ($cat['id'] == $category_id) {
+            $categoryExists = true;
+            break;
+        }
+    }
+    if (!$categoryExists) {
+        $errors[] = "Selected category does not exist.";
+    }
+
+    if (!empty($errors)) {
+        $message = '<div class="alert alert-error"><strong>Please fix the following errors:</strong><ul>';
+        foreach($errors as $error) {
+            $message .= '<li>' . htmlspecialchars($error) . '</li>';
+        }
+        $message .= '</ul></div>';
     } else {
-        // Handle file upload
+        // Handle file upload with better validation
         $image_path = '';
         if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
-            $upload_dir = '../uploads/services/';
+            $upload_dir = '../public/services/';
             if (!is_dir($upload_dir)) {
                 mkdir($upload_dir, 0755, true);
             }
 
-            $file_extension = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
-            $filename       = uniqid() . '.' . $file_extension;
-            $upload_path    = $upload_dir . $filename;
+            $allowed_types = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+            $max_size = 5 * 1024 * 1024; // 5MB
 
-            if (move_uploaded_file($_FILES['image']['tmp_name'], $upload_path)) {
-                $image_path = 'uploads/services/' . $filename;
+            if (!in_array($_FILES['image']['type'], $allowed_types)) {
+                $errors[] = "Invalid file type. Please upload JPG, PNG, GIF, or WebP images.";
+            } elseif ($_FILES['image']['size'] > $max_size) {
+                $errors[] = "File too large. Maximum size is 5MB.";
+            } else {
+                // Use original filename with some sanitization
+                $original_name = $_FILES['image']['name'];
+                $file_extension = pathinfo($original_name, PATHINFO_EXTENSION);
+                $base_name = pathinfo($original_name, PATHINFO_FILENAME);
+                
+                // Sanitize filename: remove special characters, spaces to hyphens
+                $safe_name = preg_replace('/[^a-zA-Z0-9\-_]/', '-', $base_name);
+                $safe_name = preg_replace('/-+/', '-', $safe_name); // Remove multiple hyphens
+                $safe_name = trim($safe_name, '-'); // Remove leading/trailing hyphens
+                
+                // Create final filename
+                $filename = $safe_name . '.' . strtolower($file_extension);
+                
+                // Check if file already exists, if so add timestamp
+                $upload_path = $upload_dir . $filename;
+                if (file_exists($upload_path)) {
+                    $filename = $safe_name . '-' . time() . '.' . strtolower($file_extension);
+                    $upload_path = $upload_dir . $filename;
+                }
+
+                if (move_uploaded_file($_FILES['image']['tmp_name'], $upload_path)) {
+                    $image_path = 'public/services/' . $filename;
+                } else {
+                    $errors[] = "Failed to upload image. Please try again.";
+                }
             }
+        } elseif (isset($_FILES['image']) && $_FILES['image']['error'] !== UPLOAD_ERR_NO_FILE) {
+            $errors[] = "Image upload error: " . $_FILES['image']['error'];
         }
 
-        if ($service->createService($title, $category_id, $description, $image_path, $features)) {
-            header('Location: manage-services.php');
-            exit;
+        if (empty($errors)) {
+            try {
+                if ($service->createService($title, $category_id, $description, $image_path, $features)) {
+                    $message = '<div class="alert alert-success"><strong>Success!</strong> Service "' . htmlspecialchars($title) . '" has been added successfully! <a href="manage-services.php">View all services</a></div>';
+                    // Clear form data after successful submission
+                    $_POST = [];
+                } else {
+                    $message = '<div class="alert alert-error"><strong>Database Error:</strong> Failed to add service. Please check your database connection and try again.</div>';
+                }
+            } catch (Exception $e) {
+                $message = '<div class="alert alert-error"><strong>Error:</strong> ' . htmlspecialchars($e->getMessage()) . '</div>';
+                error_log("Service creation error: " . $e->getMessage());
+            }
         } else {
-            $message = '<div class="alert alert-error">Error adding service. Please check your inputs and database connection.</div>';
+            $message = '<div class="alert alert-error"><strong>Upload Error:</strong><ul>';
+            foreach($errors as $error) {
+                $message .= '<li>' . htmlspecialchars($error) . '</li>';
+            }
+            $message .= '</ul></div>';
         }
     }
 }
 
-$categories = $category->getAllCategories();
+$categories = $service->getCategoriesWithDetails();
 ?>
 
 <?php include 'includes/admin-header.php'; ?>
@@ -300,6 +381,27 @@ $categories = $category->getAllCategories();
             border: 1px solid #ef9a9a;
         }
         
+        .alert-success {
+            background-color: #e8f5e8;
+            color: #2e7d32;
+            border: 1px solid #a5d6a7;
+        }
+        
+        .alert ul {
+            margin: 10px 0 0 20px;
+            padding: 0;
+        }
+        
+        .alert li {
+            margin-bottom: 5px;
+        }
+        
+        .alert a {
+            color: inherit;
+            text-decoration: underline;
+            font-weight: bold;
+        }
+        
         @media (max-width: 768px) {
             .form-grid {
                 grid-template-columns: 1fr;
@@ -313,6 +415,211 @@ $categories = $category->getAllCategories();
                 padding: 20px;
             }
         }
+
+        /* Enhanced Responsive Design - Mobile First Approach */
+        @media (max-width: 575.98px) {
+            /* Extra small devices (phones, less than 576px) */
+            .admin-content {
+                padding: 10px;
+            }
+            
+            .form-container {
+                padding: 15px;
+                margin: 10px auto;
+                border-radius: 8px;
+            }
+            
+            .content-header {
+                text-align: center;
+                margin-bottom: 20px;
+            }
+            
+            .content-header h1 {
+                font-size: 1.5rem;
+                margin-bottom: 10px;
+            }
+            
+            .breadcrumb {
+                justify-content: center;
+                font-size: 0.8rem;
+                padding: 5px 10px;
+                margin-bottom: 15px;
+            }
+            
+            .back-btn-container {
+                text-align: center;
+                margin: 15px 0;
+            }
+            
+            .back-btn {
+                width: 100%;
+                max-width: 200px;
+                padding: 10px 16px;
+                font-size: 0.9rem;
+            }
+            
+            .form-group {
+                margin-bottom: 20px;
+            }
+            
+            .form-label {
+                font-size: 0.9rem;
+                margin-bottom: 8px;
+                font-weight: 600;
+            }
+            
+            .form-control, .form-select {
+                font-size: 14px;
+                padding: 12px 15px;
+                border-radius: 6px;
+                margin-bottom: 5px;
+            }
+            
+            .form-control:focus, .form-select:focus {
+                box-shadow: 0 0 0 0.2rem rgba(79, 70, 229, 0.25);
+            }
+            
+            textarea.form-control {
+                min-height: 100px;
+                resize: vertical;
+            }
+            
+            .btn {
+                font-size: 0.9rem;
+                padding: 12px 20px;
+                border-radius: 6px;
+                margin-bottom: 10px;
+            }
+            
+            .btn-group {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                margin-top: 20px;
+            }
+            
+            .btn-primary, .btn-secondary {
+                width: 100%;
+                margin: 0;
+            }
+            
+            .alert {
+                padding: 12px 15px;
+                font-size: 0.85rem;
+                margin-bottom: 20px;
+                border-radius: 6px;
+            }
+            
+            .invalid-feedback {
+                font-size: 0.8rem;
+                margin-top: 5px;
+            }
+            
+            .form-text {
+                font-size: 0.75rem;
+                margin-top: 5px;
+            }
+            
+            /* File upload styling for mobile */
+            input[type="file"] {
+                padding: 10px;
+                font-size: 0.85rem;
+            }
+            
+            /* Better spacing for checkboxes/radios on mobile */
+            .form-check {
+                margin-bottom: 15px;
+            }
+            
+            .form-check-input {
+                margin-top: 0.25rem;
+            }
+            
+            .form-check-label {
+                font-size: 0.9rem;
+                padding-left: 5px;
+            }
+        }
+
+        @media (min-width: 576px) and (max-width: 767.98px) {
+            /* Small devices (landscape phones, 576px and up) */
+            .form-container {
+                padding: 25px;
+                max-width: 90%;
+            }
+            
+            .content-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .btn-group {
+                flex-direction: row;
+                justify-content: space-between;
+                gap: 15px;
+            }
+            
+            .btn-primary, .btn-secondary {
+                flex: 1;
+                margin: 0;
+            }
+            
+            .form-control, .form-select {
+                padding: 10px 12px;
+            }
+        }
+
+        @media (min-width: 768px) and (max-width: 991.98px) {
+            /* Medium devices (tablets, 768px and up) */
+            .form-container {
+                padding: 30px;
+                max-width: 85%;
+            }
+            
+            .content-header h1 {
+                font-size: 2rem;
+            }
+            
+            .btn-group {
+                justify-content: flex-end;
+                gap: 15px;
+            }
+            
+            .btn-primary, .btn-secondary {
+                width: auto;
+                min-width: 120px;
+            }
+        }
+
+        @media (min-width: 992px) and (max-width: 1199.98px) {
+            /* Large devices (desktops, 992px and up) */
+            .form-container {
+                max-width: 80%;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            /* Extra large devices (large desktops, 1200px and up) */
+            .form-container {
+                max-width: 75%;
+            }
+            
+            .admin-content {
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+        }
+
+        /* Touch-friendly improvements for all devices */
+        @media (hover: none) and (pointer: coarse) {
+            .btn, .form-control, .form-select {
+                min-height: 44px; /* Apple's recommended touch target size */
+            }
+            
+            .form-check-input {
+                transform: scale(1.2);
+                margin-right: 8px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -321,8 +628,33 @@ $categories = $category->getAllCategories();
         <div class="form-container">
             
             <div class="content-header">
-                <h1>Add New Service</h1>
-                <p>Create a new automation service</p>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-2">
+                        <li class="breadcrumb-item">
+                            <a href="dashboard.php" class="text-decoration-none">
+                                <i class="fas fa-tachometer-alt me-1"></i>Dashboard
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="manage-services.php" class="text-decoration-none">Manage Services</a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">Add New Service</li>
+                    </ol>
+                </nav>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h1>Add New Service</h1>
+                        <p>Create a new automation service</p>
+                    </div>
+                    <div>
+                        <a href="dashboard.php" class="btn me-2" style="background-color: #6f42c1; border-color: #6f42c1; color: white;">
+                            <i class="fas fa-arrow-left me-1"></i>Back to Dashboard
+                        </a>
+                        <a href="manage-services.php" class="btn btn-outline-primary">
+                            <i class="fas fa-list me-1"></i>View All Services
+                        </a>
+                    </div>
+                </div>
             </div>
 
             <?php echo $message; ?>
@@ -335,7 +667,13 @@ $categories = $category->getAllCategories();
                             <!-- Service Title -->
                             <div class="form-group">
                                 <label for="title">Service Title *</label>
-                                <input type="text" id="title" name="title" required class="form-input">
+                                <input type="text" 
+                                       id="title" 
+                                       name="title" 
+                                       required 
+                                       class="form-input"
+                                       value="<?php echo isset($_POST['title']) ? htmlspecialchars($_POST['title']) : ''; ?>"
+                                       placeholder="Enter a descriptive service title">
                             </div>
                             
                             <!-- Category -->
@@ -344,7 +682,8 @@ $categories = $category->getAllCategories();
                                 <select id="category_id" name="category_id" required class="form-input">
                                     <option value="">Select Category</option>
                                     <?php foreach ($categories as $cat): ?>
-                                        <option value="<?php echo $cat['id']; ?>">
+                                        <option value="<?php echo $cat['id']; ?>" 
+                                                <?php echo (isset($_POST['category_id']) && $_POST['category_id'] == $cat['id']) ? 'selected' : ''; ?>>
                                             <?php echo htmlspecialchars($cat['name']); ?>
                                         </option>
                                     <?php endforeach; ?>
@@ -354,13 +693,22 @@ $categories = $category->getAllCategories();
                             <!-- Description -->
                             <div class="form-group full-width">
                                 <label for="description">Description *</label>
-                                <textarea id="description" name="description" rows="6" required class="form-input" placeholder="Provide a detailed description of the service..."></textarea>
+                                <textarea id="description" 
+                                         name="description" 
+                                         rows="6" 
+                                         required 
+                                         class="form-input" 
+                                         placeholder="Provide a detailed description of the service..."><?php echo isset($_POST['description']) ? htmlspecialchars($_POST['description']) : ''; ?></textarea>
                             </div>
                             
                             <!-- Features -->
                             <div class="form-group full-width">
                                 <label for="features">Features (one per line)</label>
-                                <textarea id="features" name="features" rows="8" placeholder="Enter each feature on a new line&#10;Example:&#10;Feature 1&#10;Feature 2&#10;Feature 3" class="form-input"></textarea>
+                                <textarea id="features" 
+                                         name="features" 
+                                         rows="8" 
+                                         placeholder="Enter each feature on a new line&#10;Example:&#10;Feature 1&#10;Feature 2&#10;Feature 3" 
+                                         class="form-input"><?php echo isset($_POST['features']) ? htmlspecialchars($_POST['features']) : ''; ?></textarea>
                             </div>
                             
                             <!-- Image Upload -->
@@ -383,6 +731,7 @@ $categories = $category->getAllCategories();
                         <div class="form-actions">
                             <button type="submit" class="btn btn-primary">Add Service</button>
                             <a href="manage-services.php" class="btn btn-secondary">Cancel</a>
+                            <a href="test-database.php" class="btn btn-secondary" style="background: #17a2b8; color: white;">Test Database</a>
                         </div>
                     </form>
                 </div>

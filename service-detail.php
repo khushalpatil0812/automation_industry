@@ -12,7 +12,6 @@ if (!$service_id) {
 
 $service_data = $service_class->getServiceById($service_id);
 
-// Redirect if service is inactive or not found
 if (!$service_data || !is_array($service_data)) {
     header('Location: services.php');
     exit;
@@ -30,7 +29,7 @@ include 'includes/header.php';
 
 <main class="pt-5">
     <!-- Breadcrumb -->
-    <section class="py-3" style="background-color: #212529;">
+    <!-- <section class="py-3" style="background-color: #212529;">
         <div class="container">
             <nav aria-label="breadcrumb" data-aos="fade-right">
                 <ol class="breadcrumb mb-0">
@@ -41,7 +40,7 @@ include 'includes/header.php';
                 </ol>
             </nav>
         </div>
-    </section>
+    </section> -->
 
     <!-- Service Hero Section -->
     <section class="py-5" style="background-color: #212529;">

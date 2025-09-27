@@ -49,5 +49,14 @@ class Category {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    
+    public function getCategoriesWithServiceCount() {
+        return $this->getCategoryWithServiceCount();
+    }
+    
+    public function toggleStatus($id, $status) {
+        $stmt = $this->db->prepare("UPDATE categories SET is_active = ? WHERE id = ?");
+        return $stmt->execute([$status, $id]);
+    }
 }
 ?>
