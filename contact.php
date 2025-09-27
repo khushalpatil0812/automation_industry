@@ -1,11 +1,42 @@
 <?php
 require_once 'config/config.php';
+<<<<<<< HEAD
 require_once 'config/email.php';
+=======
+require_once 'config/database.php';
+require_once 'classes/Category.php';
+
+>>>>>>> 16ef633cf137cad3091e28c8c87e33e0c73dbd35
 $page_title = 'Contact';
 
+// Initialize database connection and Category class
+$db = $pdo; // Use the $pdo connection from database.php
+$categories = [];
+
+try {
+    if ($db) {
+        $category = new Category($db);
+        $categories = $category->getAllCategories();
+    }
+} catch (Exception $e) {
+    // If there's an error fetching categories, use fallback options
+    error_log("Error fetching categories: " . $e->getMessage());
+}
+
+// Handle URL parameters for messages (from redirect)
 $message = '';
 $message_type = '';
 $form_data = [];
+
+if (isset($_GET['status'])) {
+    if ($_GET['status'] === 'success') {
+        $message = 'Thank you for your message! We will get back to you soon.';
+        $message_type = 'success';
+    } elseif ($_GET['status'] === 'error') {
+        $message = 'Please fill in all required fields.';
+        $message_type = 'error';
+    }
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = trim($_POST['name'] ?? '');
@@ -13,6 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $subject = trim($_POST['subject'] ?? '');
     $message_text = trim($_POST['message'] ?? '');
     
+<<<<<<< HEAD
     // Store form data for repopulation if needed
     $form_data = [
         'name' => $name,
@@ -69,6 +101,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         $message = '<i class="fas fa-exclamation-triangle me-2"></i><strong>Please fix the following issues:</strong><ul class="mb-0 mt-2"><li>' . implode('</li><li>', $errors) . '</li></ul>';
         $message_type = 'error';
+=======
+    if ($name && $email && $subject && $message_text) {
+        // Here you can add code to save the message to database or send email
+        
+        // Redirect to prevent form resubmission
+        header('Location: contact.php?status=success');
+        exit();
+    } else {
+        // Redirect with error status
+        header('Location: contact.php?status=error');
+        exit();
+>>>>>>> 16ef633cf137cad3091e28c8c87e33e0c73dbd35
     }
 }
 
@@ -250,6 +294,63 @@ body {
     color: rgba(255,255,255,0.5);
 }
 
+/* Enhanced Select Dropdown Styling */
+.form-control-modern select,
+select.form-control-modern {
+    background-color: rgba(255,255,255,0.05) !important;
+    color: var(--contact-white) !important;
+    cursor: pointer;
+}
+
+.form-control-modern option {
+    background-color: var(--contact-light) !important;
+    color: var(--contact-white) !important;
+    padding: 0.75rem !important;
+    border: none !important;
+}
+
+.form-control-modern option:hover,
+.form-control-modern option:focus,
+.form-control-modern option:checked {
+    background-color: var(--contact-primary) !important;
+    color: white !important;
+}
+
+.form-control-modern option:disabled {
+    background-color: rgba(255,255,255,0.1) !important;
+    color: rgba(255,255,255,0.3) !important;
+}
+
+/* Dropdown arrow styling */
+select.form-control-modern {
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTQgNkw4IDEwTDEyIDYiIHN0cm9rZT0iI2ZmZmZmZiIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KPHN2Zz4K') !important;
+    background-repeat: no-repeat !important;
+    background-position: right 1.5rem center !important;
+    background-size: 16px 16px !important;
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+}
+
+/* Focus states for select */
+select.form-control-modern:focus {
+    background-color: rgba(255,255,255,0.08) !important;
+    border-color: var(--contact-primary) !important;
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1) !important;
+}
+
+/* Mobile Safari specific fixes */
+@supports (-webkit-touch-callout: none) {
+    select.form-control-modern {
+        background-color: rgba(255,255,255,0.05) !important;
+    }
+    
+    select.form-control-modern option {
+        background-color: #1a1a2e !important;
+        color: white !important;
+    }
+}
+
 .input-icon {
     position: absolute;
     right: 1.5rem;
@@ -386,6 +487,66 @@ body {
     margin-bottom: 2rem;
     font-weight: 500;
     box-shadow: var(--shadow-soft);
+    position: relative;
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 0.5s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.alert-modern.fade-out {
+    opacity: 0;
+    transform: translateY(-20px);
+    max-height: 0;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+}
+
+.alert-modern .alert-content {
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+.alert-modern .alert-close {
+    background: none;
+    border: none;
+    color: inherit;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0;
+    margin-left: 1rem;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.alert-modern .alert-close:hover {
+    opacity: 1;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.alert-countdown {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 0 0 16px 16px;
+    animation: countdown 5s linear forwards;
+}
+
+@keyframes countdown {
+    from { width: 100%; }
+    to { width: 0%; }
 }
 
 .alert-success-modern {
@@ -413,6 +574,7 @@ body {
         padding: 60px 0;
     }
     
+<<<<<<< HEAD
     .contact-card {
         margin: 0 1rem;
     }
@@ -476,6 +638,33 @@ body {
     .alert-modern {
         padding: 1rem;
         font-size: 0.9rem;
+=======
+    /* Enhanced mobile dropdown styling */
+    select.form-control-modern {
+        font-size: 16px; /* Prevent zoom on iOS */
+    }
+    
+    select.form-control-modern option {
+        padding: 0.5rem !important;
+        font-size: 14px !important;
+    }
+}
+
+/* Additional fixes for better dropdown visibility */
+@media (max-width: 480px) {
+    select.form-control-modern {
+        padding: 0.875rem 3rem 0.875rem 1rem;
+        background-size: 14px 14px !important;
+        background-position: right 1rem center !important;
+    }
+}
+
+/* Dark theme specific enhancements */
+@media (prefers-color-scheme: dark) {
+    select.form-control-modern option {
+        background-color: #1a1a2e !important;
+        color: #ffffff !important;
+>>>>>>> 16ef633cf137cad3091e28c8c87e33e0c73dbd35
     }
 }
 </style>
@@ -556,9 +745,15 @@ body {
                             </h3>
                             
                             <?php if ($message): ?>
-                                <div class="alert-modern <?php echo $message_type === 'success' ? 'alert-success-modern' : 'alert-danger-modern'; ?>">
-                                    <i class="fas fa-<?php echo $message_type === 'success' ? 'check-circle' : 'exclamation-triangle'; ?> me-2"></i>
-                                    <?php echo htmlspecialchars($message); ?>
+                                <div id="alertMessage" class="alert-modern <?php echo $message_type === 'success' ? 'alert-success-modern' : 'alert-danger-modern'; ?>">
+                                    <div class="alert-content">
+                                        <i class="fas fa-<?php echo $message_type === 'success' ? 'check-circle' : 'exclamation-triangle'; ?> me-2"></i>
+                                        <?php echo htmlspecialchars($message); ?>
+                                    </div>
+                                    <button type="button" class="alert-close" onclick="dismissAlert()" aria-label="Close">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                    <div class="alert-countdown"></div>
                                 </div>
                             <?php endif; ?>
 
@@ -568,8 +763,12 @@ body {
                                         <div class="form-group">
                                             <label class="form-label">Full Name <span style="color: var(--contact-danger);">*</span></label>
                                             <input type="text" name="name" class="form-control-modern" 
+<<<<<<< HEAD
                                                    placeholder="Enter your full name" required
                                                    value="<?php echo htmlspecialchars($form_data['name'] ?? ''); ?>">
+=======
+                                                   placeholder="Enter your full name" required>
+>>>>>>> 16ef633cf137cad3091e28c8c87e33e0c73dbd35
                                             <i class="fas fa-user input-icon"></i>
                                         </div>
                                     </div>
@@ -578,8 +777,12 @@ body {
                                         <div class="form-group">
                                             <label class="form-label">Email Address <span style="color: var(--contact-danger);">*</span></label>
                                             <input type="email" name="email" class="form-control-modern" 
+<<<<<<< HEAD
                                                    placeholder="your.email@company.com" required
                                                    value="<?php echo htmlspecialchars($form_data['email'] ?? ''); ?>">
+=======
+                                                   placeholder="your.email@company.com" required>
+>>>>>>> 16ef633cf137cad3091e28c8c87e33e0c73dbd35
                                             <i class="fas fa-envelope input-icon"></i>
                                         </div>
                                     </div>
@@ -587,6 +790,7 @@ body {
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label class="form-label">Project Type <span style="color: var(--contact-danger);">*</span></label>
+<<<<<<< HEAD
                                             <select name="subject" class="form-control-modern" required style="appearance: none; background-color: black; background-repeat: no-repeat; background-position: right 1.5rem center;">
                                                 <option value="">Select your project type...</option>
                                                 <option value="Industrial Automation" <?php echo (($form_data['subject'] ?? '') === 'Industrial Automation') ? 'selected' : ''; ?>>Industrial Automation</option>
@@ -595,6 +799,25 @@ body {
                                                 <option value="Robotics Integration" <?php echo (($form_data['subject'] ?? '') === 'Robotics Integration') ? 'selected' : ''; ?>>Robotics Integration</option>
                                                 <option value="Custom Solutions" <?php echo (($form_data['subject'] ?? '') === 'Custom Solutions') ? 'selected' : ''; ?>>Custom Solutions</option>
                                                 <option value="Technical Support" <?php echo (($form_data['subject'] ?? '') === 'Technical Support') ? 'selected' : ''; ?>>Technical Support</option>
+=======
+                                            <select name="subject" class="form-control-modern" required>
+                                                <option value="">Select your project type...</option>
+                                                <?php if (!empty($categories)): ?>
+                                                    <?php foreach ($categories as $cat): ?>
+                                                        <option value="<?php echo htmlspecialchars($cat['name']); ?>">
+                                                            <?php echo htmlspecialchars($cat['name']); ?>
+                                                        </option>
+                                                    <?php endforeach; ?>
+                                                <?php else: ?>
+                                                    <!-- Fallback options if no categories are found -->
+                                                    <option value="Industrial Automation">Industrial Automation</option>
+                                                    <option value="Smart Manufacturing">Smart Manufacturing</option>
+                                                    <option value="Process Control">Process Control Systems</option>
+                                                    <option value="Robotics Integration">Robotics Integration</option>
+                                                    <option value="Custom Solutions">Custom Solutions</option>
+                                                    <option value="Technical Support">Technical Support</option>
+                                                <?php endif; ?>
+>>>>>>> 16ef633cf137cad3091e28c8c87e33e0c73dbd35
                                             </select>
                                             <i class="fas fa-cog input-icon"></i>
                                         </div>
@@ -605,7 +828,11 @@ body {
                                             <label class="form-label">Project Details <span style="color: var(--contact-danger);">*</span></label>
                                             <textarea name="message" class="form-control-modern" rows="6" 
                                                       placeholder="Tell us about your automation needs, current challenges, expected outcomes, timeline, and budget range..." 
+<<<<<<< HEAD
                                                       required style="resize: vertical; min-height: 150px;"><?php echo htmlspecialchars($form_data['message'] ?? ''); ?></textarea>
+=======
+                                                      required style="resize: vertical; min-height: 150px;"></textarea>
+>>>>>>> 16ef633cf137cad3091e28c8c87e33e0c73dbd35
                                             <i class="fas fa-comment-dots input-icon" style="top: 2rem;"></i>
                                         </div>
                                     </div>
@@ -691,6 +918,28 @@ body {
 </main>
 
 <script>
+// Alert auto-dismiss functionality
+function dismissAlert() {
+    const alert = document.getElementById('alertMessage');
+    if (alert) {
+        alert.classList.add('fade-out');
+        setTimeout(() => {
+            alert.style.display = 'none';
+        }, 500);
+    }
+}
+
+// Auto-dismiss alert after 5 seconds
+document.addEventListener('DOMContentLoaded', function() {
+    const alert = document.getElementById('alertMessage');
+    if (alert) {
+        // Auto-dismiss after 5 seconds
+        setTimeout(function() {
+            dismissAlert();
+        }, 5000);
+    }
+});
+
 // Bootstrap form validation
 (function() {
     'use strict';

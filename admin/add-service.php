@@ -415,6 +415,211 @@ $categories = $service->getCategoriesWithDetails();
                 padding: 20px;
             }
         }
+
+        /* Enhanced Responsive Design - Mobile First Approach */
+        @media (max-width: 575.98px) {
+            /* Extra small devices (phones, less than 576px) */
+            .admin-content {
+                padding: 10px;
+            }
+            
+            .form-container {
+                padding: 15px;
+                margin: 10px auto;
+                border-radius: 8px;
+            }
+            
+            .content-header {
+                text-align: center;
+                margin-bottom: 20px;
+            }
+            
+            .content-header h1 {
+                font-size: 1.5rem;
+                margin-bottom: 10px;
+            }
+            
+            .breadcrumb {
+                justify-content: center;
+                font-size: 0.8rem;
+                padding: 5px 10px;
+                margin-bottom: 15px;
+            }
+            
+            .back-btn-container {
+                text-align: center;
+                margin: 15px 0;
+            }
+            
+            .back-btn {
+                width: 100%;
+                max-width: 200px;
+                padding: 10px 16px;
+                font-size: 0.9rem;
+            }
+            
+            .form-group {
+                margin-bottom: 20px;
+            }
+            
+            .form-label {
+                font-size: 0.9rem;
+                margin-bottom: 8px;
+                font-weight: 600;
+            }
+            
+            .form-control, .form-select {
+                font-size: 14px;
+                padding: 12px 15px;
+                border-radius: 6px;
+                margin-bottom: 5px;
+            }
+            
+            .form-control:focus, .form-select:focus {
+                box-shadow: 0 0 0 0.2rem rgba(79, 70, 229, 0.25);
+            }
+            
+            textarea.form-control {
+                min-height: 100px;
+                resize: vertical;
+            }
+            
+            .btn {
+                font-size: 0.9rem;
+                padding: 12px 20px;
+                border-radius: 6px;
+                margin-bottom: 10px;
+            }
+            
+            .btn-group {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                margin-top: 20px;
+            }
+            
+            .btn-primary, .btn-secondary {
+                width: 100%;
+                margin: 0;
+            }
+            
+            .alert {
+                padding: 12px 15px;
+                font-size: 0.85rem;
+                margin-bottom: 20px;
+                border-radius: 6px;
+            }
+            
+            .invalid-feedback {
+                font-size: 0.8rem;
+                margin-top: 5px;
+            }
+            
+            .form-text {
+                font-size: 0.75rem;
+                margin-top: 5px;
+            }
+            
+            /* File upload styling for mobile */
+            input[type="file"] {
+                padding: 10px;
+                font-size: 0.85rem;
+            }
+            
+            /* Better spacing for checkboxes/radios on mobile */
+            .form-check {
+                margin-bottom: 15px;
+            }
+            
+            .form-check-input {
+                margin-top: 0.25rem;
+            }
+            
+            .form-check-label {
+                font-size: 0.9rem;
+                padding-left: 5px;
+            }
+        }
+
+        @media (min-width: 576px) and (max-width: 767.98px) {
+            /* Small devices (landscape phones, 576px and up) */
+            .form-container {
+                padding: 25px;
+                max-width: 90%;
+            }
+            
+            .content-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .btn-group {
+                flex-direction: row;
+                justify-content: space-between;
+                gap: 15px;
+            }
+            
+            .btn-primary, .btn-secondary {
+                flex: 1;
+                margin: 0;
+            }
+            
+            .form-control, .form-select {
+                padding: 10px 12px;
+            }
+        }
+
+        @media (min-width: 768px) and (max-width: 991.98px) {
+            /* Medium devices (tablets, 768px and up) */
+            .form-container {
+                padding: 30px;
+                max-width: 85%;
+            }
+            
+            .content-header h1 {
+                font-size: 2rem;
+            }
+            
+            .btn-group {
+                justify-content: flex-end;
+                gap: 15px;
+            }
+            
+            .btn-primary, .btn-secondary {
+                width: auto;
+                min-width: 120px;
+            }
+        }
+
+        @media (min-width: 992px) and (max-width: 1199.98px) {
+            /* Large devices (desktops, 992px and up) */
+            .form-container {
+                max-width: 80%;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            /* Extra large devices (large desktops, 1200px and up) */
+            .form-container {
+                max-width: 75%;
+            }
+            
+            .admin-content {
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+        }
+
+        /* Touch-friendly improvements for all devices */
+        @media (hover: none) and (pointer: coarse) {
+            .btn, .form-control, .form-select {
+                min-height: 44px; /* Apple's recommended touch target size */
+            }
+            
+            .form-check-input {
+                transform: scale(1.2);
+                margin-right: 8px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -423,8 +628,33 @@ $categories = $service->getCategoriesWithDetails();
         <div class="form-container">
             
             <div class="content-header">
-                <h1>Add New Service</h1>
-                <p>Create a new automation service</p>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-2">
+                        <li class="breadcrumb-item">
+                            <a href="dashboard.php" class="text-decoration-none">
+                                <i class="fas fa-tachometer-alt me-1"></i>Dashboard
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="manage-services.php" class="text-decoration-none">Manage Services</a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">Add New Service</li>
+                    </ol>
+                </nav>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h1>Add New Service</h1>
+                        <p>Create a new automation service</p>
+                    </div>
+                    <div>
+                        <a href="dashboard.php" class="btn me-2" style="background-color: #6f42c1; border-color: #6f42c1; color: white;">
+                            <i class="fas fa-arrow-left me-1"></i>Back to Dashboard
+                        </a>
+                        <a href="manage-services.php" class="btn btn-outline-primary">
+                            <i class="fas fa-list me-1"></i>View All Services
+                        </a>
+                    </div>
+                </div>
             </div>
 
             <?php echo $message; ?>
